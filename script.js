@@ -1,54 +1,65 @@
 // Effetto scroll per far scomparire le auto una alla volta dal basso
 document.addEventListener('DOMContentLoaded', function() {
     const carsImage = document.getElementById('carsImage');
-    let lastScrollY = 0;
     let ticking = false;
 
-    // Configurazione dell'effetto
+    // Configurazione dell'effetto - regola questi valori per cambiare la velocità
     const config = {
-        startScroll: 100, // Inizia l'effetto dopo 100px di scroll
-        scrollRange: 2000, // Completa l'effetto in 2000px di scroll
-        minClip: 0, // Percentuale minima visibile (0%)
-        maxClip: 100 // Percentuale massima visibile (100%)
+        startScroll: 0, // Inizia subito
+        scrollMultiplier: 0.4 // Quanto velocemente scompaiono le auto (0.4 = più lento, 0.8 = più veloce)
     };
 
-    function updateCarsVisibility(scrollY) {
-        // Calcola la percentuale di scroll nell'intervallo definito
-        const scrollProgress = Math.max(0, Math.min(1, 
-            (scrollY - config.startScroll) / config.scrollRange
-        ));
-
-        // Calcola quanto dell'immagine rimane visibile (dal basso verso l'alto)
-        // 100% = tutto visibile, 0% = tutto nascosto
-        const visiblePercentage = config.maxClip - (scrollProgress * (config.maxClip - config.minClip));
-
-        // Applica il clip-path per mostrare solo la parte superiore dell'immagine
+    function updateCarsVisibility() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        
+        // Calcola quanto scrollare prima che le auto scompaiano completamente
+        // Più alto il valore, più lento l'effetto
+        const totalScrollRange = windowHeight * 3;
+        
+        // Calcola la percentuale di scroll (0 = inizio, 1 = auto completamente scomparse)
+        let scrollProgress = (scrollY * config.scrollMultiplier) / windowHeight;
+        scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+        
+        // Calcola quanto dell'immagine è ancora visibile (100% all'inizio, 0% alla fine)
+        const visiblePercentage = 100 - (scrollProgress * 100);
+        
+        // Applica il clip-path per nascondere l'immagine dal basso verso l'alto
         // inset(top right bottom left)
-        const bottomClip = 100 - visiblePercentage;
-        carsImage.style.clipPath = `inset(0% 0% ${bottomClip}% 0%)`;
-
-        // Opzionale: aggiungi un leggero effetto di scala per maggiore dinamismo
-        const scale = 1 + (scrollProgress * 0.1);
+        carsImage.style.clipPath = `inset(0% 0% ${100 - visiblePercentage}% 0%)`;
+        
+        // Opzionale: leggero zoom per dare profondità
+        const scale = 1 + (scrollProgress * 0.05);
         carsImage.style.transform = `scale(${scale})`;
+        
+        // Fade out graduale quando scompaiono del tutto
+        if (visiblePercentage < 20) {
+            carsImage.style.opacity = visiblePercentage / 20;
+        } else {
+            carsImage.style.opacity = 1;
+        }
     }
 
     function onScroll() {
-        lastScrollY = window.scrollY;
-        
         if (!ticking) {
             window.requestAnimationFrame(function() {
-                updateCarsVisibility(lastScrollY);
+                updateCarsVisibility();
                 ticking = false;
             });
             ticking = true;
         }
     }
 
-    // Inizializza l'effetto
-    updateCarsVisibility(window.scrollY);
+    // Inizializza
+    updateCarsVisibility();
 
     // Listener per lo scroll
     window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Aggiorna anche al resize
+    window.addEventListener('resize', function() {
+        updateCarsVisibility();
+    });
 
     // Smooth scroll per eventuali link interni
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -93,31 +104,4 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Form di iscrizione in arrivo! Torna presto per maggiori informazioni.');
         });
     });
-});
-
-// Gestione del resize per mantenere l'effetto corretto
-let resizeTimer;
-window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-        const carsImage = document.getElementById('carsImage');
-        const scrollY = window.scrollY;
-        
-        // Ricrea l'effetto con le nuove dimensioni
-        const config = {
-            startScroll: 100,
-            scrollRange: 2000,
-            minClip: 0,
-            maxClip: 100
-        };
-
-        const scrollProgress = Math.max(0, Math.min(1, 
-            (scrollY - config.startScroll) / config.scrollRange
-        ));
-
-        const visiblePercentage = config.maxClip - (scrollProgress * (config.maxClip - config.minClip));
-        const bottomClip = 100 - visiblePercentage;
-        
-        carsImage.style.clipPath = `inset(0% 0% ${bottomClip}% 0%)`;
-    }, 250);
 });

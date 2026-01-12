@@ -37,7 +37,6 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #e0e0e0;
 }
 
 .cars-container {
@@ -45,8 +44,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    z-index: 1;
+    height: 100%;
+    z-index: 0;
     overflow: hidden;
 }
 
@@ -54,8 +53,8 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    transition: clip-path 0.3s ease-out;
+    object-position: center bottom;
+    transition: clip-path 0.1s linear;
     will-change: clip-path;
 }
 
@@ -124,10 +123,18 @@ body {
 
 /* Intro Section */
 .intro {
-    background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+    background: transparent;
     padding: 120px 0;
     position: relative;
-    z-index: 2;
+    z-index: 1;
+    min-height: 100vh;
+}
+
+.intro .container {
+    background: rgba(248, 249, 250, 0.95);
+    padding: 60px 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
 }
 
 .intro h2 {
@@ -154,10 +161,18 @@ body {
 
 /* Events Section */
 .events {
-    background: #ffffff;
+    background: transparent;
     padding: 100px 0;
     position: relative;
-    z-index: 2;
+    z-index: 1;
+    min-height: 100vh;
+}
+
+.events .container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 60px 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
 }
 
 .section-title {
@@ -293,7 +308,7 @@ body {
     padding: 100px 0;
     text-align: center;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .cta h2 {
@@ -349,7 +364,7 @@ footer {
     padding: 40px 0;
     text-align: center;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 footer p {
