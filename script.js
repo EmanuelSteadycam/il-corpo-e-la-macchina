@@ -1,49 +1,33 @@
-// Effetto scroll - Le auto scompaiono fila per fila dal basso
+// Effetto scroll - Le auto scompaiono dal basso rivelando l'asfalto
 (function() {
     'use strict';
     
     const carsImage = document.getElementById('carsImage');
     
     if (!carsImage) {
-        console.error('Immagine auto non trovata!');
+        console.error('Layer auto non trovato!');
         return;
     }
 
-    console.log('Immagine caricata. Effetto attivo.');
+    console.log('Effetto due livelli attivo: auto sopra, asfalto sotto');
 
     function updateCars() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const windowHeight = window.innerHeight;
         
-        // Configurazione: le auto scompaiono in 3-4 schermate di scroll
+        // Le auto scompaiono progressivamente in 3-4 schermate
         const scrollDuration = windowHeight * 3.5;
         const scrollPercent = Math.min(scrollY / scrollDuration, 1);
         
-        // Calcola quanto dell'immagine rimane visibile
-        // 100% = tutta visibile, 0% = tutta invisibile
+        // Percentuale di immagine ancora visibile (dall'alto)
         const visibleFromTop = 100 * (1 - scrollPercent);
         
-        // Crea una maschera sfumata che nasconde le auto dal basso verso l'alto
-        // Usiamo un gradiente che parte da trasparente (in basso) a opaco (in alto)
-        const fadeHeight = 15; // Altezza della zona di dissolvenza (in %)
-        const fadeStart = Math.max(0, visibleFromTop - fadeHeight);
-        const fadeEnd = visibleFromTop;
+        // Usa clip-path per nascondere progressivamente dal basso
+        // inset(top right bottom left)
+        carsImage.style.clipPath = `inset(0% 0% ${100 - visibleFromTop}% 0%)`;
         
-        // Crea il gradiente: 
-        // - Da 0% a fadeStart: completamente visibile (bianco)
-        // - Da fadeStart a fadeEnd: dissolvenza 
-        // - Da fadeEnd in poi: completamente nascosto (trasparente)
-        const gradient = `linear-gradient(to bottom, 
-            rgba(255,255,255,1) 0%, 
-            rgba(255,255,255,1) ${fadeStart}%, 
-            rgba(255,255,255,0) ${fadeEnd}%,
-            rgba(255,255,255,0) 100%)`;
-        
-        carsImage.style.maskImage = gradient;
-        carsImage.style.webkitMaskImage = gradient;
-        
-        // Opacità globale dell'immagine (opzionale per effetto extra)
-        carsImage.style.opacity = Math.max(0.2, 1 - (scrollPercent * 0.3));
+        // Opacità progressiva per transizione più morbida
+        carsImage.style.opacity = Math.max(0, 1 - (scrollPercent * 1.2));
     }
 
     // Esegui all'avvio
