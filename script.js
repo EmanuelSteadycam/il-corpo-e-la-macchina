@@ -1,11 +1,12 @@
-// Effetto scroll con sequenza di immagini - Le auto scompaiono progressivamente
+// Effetto scroll con sequenza di immagini - CROSSFADE
 (function() {
     'use strict';
     
-    const sequenceImage = document.getElementById('carsSequence');
+    const img1 = document.getElementById('carsSequence1');
+    const img2 = document.getElementById('carsSequence2');
     
-    if (!sequenceImage) {
-        console.error('Elemento immagine non trovato!');
+    if (!img1 || !img2) {
+        console.error('Elementi immagine non trovati!');
         return;
     }
 
@@ -19,7 +20,7 @@
         '01.png'   // Frame 5: Solo asfalto e persona
     ];
 
-    // Precarica tutte le immagini per transizioni fluide
+    // Precarica tutte le immagini
     const preloadedImages = [];
     imageSequence.forEach(function(src) {
         const img = new Image();
@@ -28,33 +29,42 @@
     });
 
     console.log('Sequenza caricata:', imageSequence.length, 'frame');
+    console.log('Pixel di scroll per frame:', window.innerHeight * 5 / (imageSequence.length - 1), 'px');
 
     let currentFrame = 0;
+    let activeLayer = 1; // Quale layer sta mostrando (1 o 2)
 
     function updateSequence() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const windowHeight = window.innerHeight;
         
-        // Calcola quale frame mostrare in base allo scroll
-        // RALLENTATO: Le auto scompaiono in 5 schermate invece di 3
+        // Le auto scompaiono in 5 schermate
         const scrollDuration = windowHeight * 5;
         const scrollPercent = Math.min(scrollY / scrollDuration, 1);
         
-        // Mappa la percentuale di scroll ai frame (0-5)
+        // Mappa ai frame (0-5)
         const targetFrame = Math.floor(scrollPercent * (imageSequence.length - 1));
         
-        // Cambia immagine solo se necessario (per performance)
+        // Cambia immagine con crossfade
         if (targetFrame !== currentFrame && targetFrame >= 0 && targetFrame < imageSequence.length) {
-            // Fade out
-            sequenceImage.style.opacity = '0';
+            currentFrame = targetFrame;
             
-            // Aspetta la fine del fade out, poi cambia immagine e fade in
-            setTimeout(function() {
-                currentFrame = targetFrame;
-                sequenceImage.src = imageSequence[currentFrame];
-                sequenceImage.style.opacity = '1';
-                console.log('Scroll:', Math.round(scrollPercent * 100) + '% - Frame:', currentFrame, '- Immagine:', imageSequence[currentFrame]);
-            }, 150); // Metà della durata della transizione CSS (300ms / 2)
+            // CROSSFADE: carica nuova immagine nel layer nascosto, poi fai apparire
+            if (activeLayer === 1) {
+                // Layer 2 diventa visibile con nuova immagine
+                img2.src = imageSequence[currentFrame];
+                img2.style.opacity = '1';
+                img1.style.opacity = '0';
+                activeLayer = 2;
+            } else {
+                // Layer 1 diventa visibile con nuova immagine
+                img1.src = imageSequence[currentFrame];
+                img1.style.opacity = '1';
+                img2.style.opacity = '0';
+                activeLayer = 1;
+            }
+            
+            console.log('Frame:', currentFrame, '/', imageSequence.length - 1, '- Scroll:', Math.round(scrollPercent * 100) + '%');
         }
     }
 
@@ -76,44 +86,6 @@
     // Esegui al resize
     window.addEventListener('resize', updateSequence);
 
-    // Smooth scroll per link interni
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-
-    // Animazione event cards quando entrano nel viewport
-    const cards = document.querySelectorAll('.event-card');
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-
-    cards.forEach(function(card) {
-        observer.observe(card);
-    });
-
-    // Button placeholder
-    document.querySelectorAll('.btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            alert('Form di iscrizione in arrivo! Torna presto per maggiori informazioni.');
-        });
-    });
-
-    console.log('✓ Effetto sequenza attivato!');
+    console.log('✓ Effetto crossfade attivato!');
 
 })();

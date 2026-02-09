@@ -54,12 +54,15 @@ body {
 }
 
 .cars-sequence {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: auto;
     height: 100vh;
     max-width: 100vw;
     object-fit: contain;
     display: block;
-    transition: opacity 0.3s ease-in-out; /* Dissolvenza fluida */
+    transition: opacity 0.5s ease-in-out; /* Dissolvenza incrociata */
 }
 
 /* Hero Section */
