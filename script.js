@@ -45,9 +45,16 @@
         
         // Cambia immagine solo se necessario (per performance)
         if (targetFrame !== currentFrame && targetFrame >= 0 && targetFrame < imageSequence.length) {
-            currentFrame = targetFrame;
-            sequenceImage.src = imageSequence[currentFrame];
-            console.log('Scroll:', Math.round(scrollPercent * 100) + '% - Frame:', currentFrame, '- Immagine:', imageSequence[currentFrame]);
+            // Fade out
+            sequenceImage.style.opacity = '0';
+            
+            // Aspetta la fine del fade out, poi cambia immagine e fade in
+            setTimeout(function() {
+                currentFrame = targetFrame;
+                sequenceImage.src = imageSequence[currentFrame];
+                sequenceImage.style.opacity = '1';
+                console.log('Scroll:', Math.round(scrollPercent * 100) + '% - Frame:', currentFrame, '- Immagine:', imageSequence[currentFrame]);
+            }, 150); // Metà della durata della transizione CSS (300ms / 2)
         }
     }
 
