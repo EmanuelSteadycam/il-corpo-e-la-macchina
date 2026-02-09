@@ -36,8 +36,8 @@
         const windowHeight = window.innerHeight;
         
         // Calcola quale frame mostrare in base allo scroll
-        // Le auto scompaiono completamente in circa 3 schermate
-        const scrollDuration = windowHeight * 3;
+        // RALLENTATO: Le auto scompaiono in 5 schermate invece di 3
+        const scrollDuration = windowHeight * 5;
         const scrollPercent = Math.min(scrollY / scrollDuration, 1);
         
         // Mappa la percentuale di scroll ai frame (0-5)
@@ -47,7 +47,7 @@
         if (targetFrame !== currentFrame && targetFrame >= 0 && targetFrame < imageSequence.length) {
             currentFrame = targetFrame;
             sequenceImage.src = imageSequence[currentFrame];
-            console.log('Frame:', currentFrame, '- Immagine:', imageSequence[currentFrame]);
+            console.log('Scroll:', Math.round(scrollPercent * 100) + '% - Frame:', currentFrame, '- Immagine:', imageSequence[currentFrame]);
         }
     }
 
