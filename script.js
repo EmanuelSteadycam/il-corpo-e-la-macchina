@@ -49,18 +49,24 @@
         if (targetFrame !== currentFrame && targetFrame >= 0 && targetFrame < imageSequence.length) {
             currentFrame = targetFrame;
             
-            // CROSSFADE: carica nuova immagine nel layer nascosto, poi fai apparire
+            // CROSSFADE MIGLIORATO: carica nuova immagine nel layer nascosto PRIMA di iniziare il fade
             if (activeLayer === 1) {
-                // Layer 2 diventa visibile con nuova immagine
+                // Prepara layer 2 con nuova immagine (ancora invisibile)
                 img2.src = imageSequence[currentFrame];
-                img2.style.opacity = '1';
-                img1.style.opacity = '0';
+                // Forza il caricamento dell'immagine
+                img2.onload = function() {
+                    // Solo quando è caricata, fai il crossfade
+                    img2.style.opacity = '1';
+                    img1.style.opacity = '0';
+                };
                 activeLayer = 2;
             } else {
-                // Layer 1 diventa visibile con nuova immagine
+                // Prepara layer 1 con nuova immagine (ancora invisibile)
                 img1.src = imageSequence[currentFrame];
-                img1.style.opacity = '1';
-                img2.style.opacity = '0';
+                img1.onload = function() {
+                    img1.style.opacity = '1';
+                    img2.style.opacity = '0';
+                };
                 activeLayer = 1;
             }
             
