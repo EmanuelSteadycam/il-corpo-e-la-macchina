@@ -1,4 +1,4 @@
-// Effetto scroll con sequenza di immagini - CROSSFADE
+// Effetto scroll - CROSSFADE VELOCE A STEP (più naturale)
 (function() {
     'use strict';
     
@@ -10,74 +10,54 @@
         return;
     }
 
-    // Array delle immagini nella sequenza corretta: da pieno (06) a vuoto (01)
     const imageSequence = [
-        '06.png',  // Frame 0: Tutte le auto
-        '05.png',  // Frame 1: Poche auto rimosse
-        '04.png',  // Frame 2: Più auto rimosse
-        '03.png',  // Frame 3: Ancora meno auto
-        '02.png',  // Frame 4: Pochissime auto
-        '01.png'   // Frame 5: Solo asfalto e persona
+        '06.png', '05.png', '04.png', '03.png', '02.png', '01.png'
     ];
 
-    // Precarica tutte le immagini
-    const preloadedImages = [];
+    // Precarica
     imageSequence.forEach(function(src) {
         const img = new Image();
         img.src = src;
-        preloadedImages.push(img);
     });
 
-    console.log('Sequenza caricata:', imageSequence.length, 'frame');
-    console.log('Pixel di scroll per frame:', window.innerHeight * 5 / (imageSequence.length - 1), 'px');
+    console.log('✓ Crossfade a step attivato (più naturale)');
 
     let currentFrame = 0;
-    let activeLayer = 1; // Quale layer sta mostrando (1 o 2)
+    let activeLayer = 1;
 
     function updateSequence() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const windowHeight = window.innerHeight;
         
-        // Le auto scompaiono in 5 schermate
         const scrollDuration = windowHeight * 5;
-        const scrollPercent = Math.min(scrollY / scrollDuration, 1);
+        const scrollPercent = Math.min(Math.max(scrollY / scrollDuration, 0), 1);
         
-        // Mappa ai frame (0-5)
+        // Frame come numero intero (non decimale)
         const targetFrame = Math.floor(scrollPercent * (imageSequence.length - 1));
         
-        // Cambia immagine con crossfade
-        if (targetFrame !== currentFrame && targetFrame >= 0 && targetFrame < imageSequence.length) {
+        // Cambia SOLO quando passi a un frame diverso
+        if (targetFrame !== currentFrame) {
             currentFrame = targetFrame;
             
-            // CROSSFADE MIGLIORATO: carica nuova immagine nel layer nascosto PRIMA di iniziare il fade
+            // Crossfade veloce tra i due layer
             if (activeLayer === 1) {
-                // Prepara layer 2 con nuova immagine (ancora invisibile)
                 img2.src = imageSequence[currentFrame];
-                // Forza il caricamento dell'immagine
-                img2.onload = function() {
-                    // Solo quando è caricata, fai il crossfade
-                    img2.style.opacity = '1';
-                    img1.style.opacity = '0';
-                };
+                img2.style.opacity = '1';
+                img1.style.opacity = '0';
                 activeLayer = 2;
             } else {
-                // Prepara layer 1 con nuova immagine (ancora invisibile)
                 img1.src = imageSequence[currentFrame];
-                img1.onload = function() {
-                    img1.style.opacity = '1';
-                    img2.style.opacity = '0';
-                };
+                img1.style.opacity = '1';
+                img2.style.opacity = '0';
                 activeLayer = 1;
             }
             
-            console.log('Frame:', currentFrame, '/', imageSequence.length - 1, '- Scroll:', Math.round(scrollPercent * 100) + '%');
+            console.log('Frame:', currentFrame, '/', imageSequence.length - 1);
         }
     }
 
-    // Esegui all'avvio
     updateSequence();
 
-    // Esegui durante lo scroll
     let ticking = false;
     window.addEventListener('scroll', function() {
         if (!ticking) {
@@ -87,11 +67,8 @@
             });
             ticking = true;
         }
-    });
+    }, { passive: true });
 
-    // Esegui al resize
     window.addEventListener('resize', updateSequence);
-
-    console.log('✓ Effetto crossfade attivato!');
 
 })();
