@@ -1,54 +1,75 @@
-// Effetto scroll - Le auto scompaiono dal basso rivelando l'asfalto
+// Effetto scroll con sequenza di immagini - Le auto scompaiono progressivamente
 (function() {
     'use strict';
     
-    const carsImage = document.getElementById('carsImage');
+    const sequenceImage = document.getElementById('carsSequence');
     
-    if (!carsImage) {
-        console.error('Layer auto non trovato!');
+    if (!sequenceImage) {
+        console.error('Elemento immagine non trovato!');
         return;
     }
 
-    console.log('Effetto due livelli attivo: auto sopra, asfalto sotto');
+    // Array delle immagini nella sequenza corretta: da pieno (06) a vuoto (01)
+    const imageSequence = [
+        '06.png',  // Frame 0: Tutte le auto
+        '05.png',  // Frame 1: Poche auto rimosse
+        '04.png',  // Frame 2: Più auto rimosse
+        '03.png',  // Frame 3: Ancora meno auto
+        '02.png',  // Frame 4: Pochissime auto
+        '01.png'   // Frame 5: Solo asfalto e persona
+    ];
 
-    function updateCars() {
+    // Precarica tutte le immagini per transizioni fluide
+    const preloadedImages = [];
+    imageSequence.forEach(function(src) {
+        const img = new Image();
+        img.src = src;
+        preloadedImages.push(img);
+    });
+
+    console.log('Sequenza caricata:', imageSequence.length, 'frame');
+
+    let currentFrame = 0;
+
+    function updateSequence() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop;
         const windowHeight = window.innerHeight;
         
-        // Le auto scompaiono progressivamente in 3-4 schermate
-        const scrollDuration = windowHeight * 3.5;
+        // Calcola quale frame mostrare in base allo scroll
+        // Le auto scompaiono completamente in circa 3 schermate
+        const scrollDuration = windowHeight * 3;
         const scrollPercent = Math.min(scrollY / scrollDuration, 1);
         
-        // Percentuale di immagine ancora visibile (dall'alto)
-        const visibleFromTop = 100 * (1 - scrollPercent);
+        // Mappa la percentuale di scroll ai frame (0-5)
+        const targetFrame = Math.floor(scrollPercent * (imageSequence.length - 1));
         
-        // Usa clip-path per nascondere progressivamente dal basso
-        // inset(top right bottom left)
-        carsImage.style.clipPath = `inset(0% 0% ${100 - visibleFromTop}% 0%)`;
-        
-        // Opacità progressiva per transizione più morbida
-        carsImage.style.opacity = Math.max(0, 1 - (scrollPercent * 1.2));
+        // Cambia immagine solo se necessario (per performance)
+        if (targetFrame !== currentFrame && targetFrame >= 0 && targetFrame < imageSequence.length) {
+            currentFrame = targetFrame;
+            sequenceImage.src = imageSequence[currentFrame];
+            console.log('Frame:', currentFrame, '- Immagine:', imageSequence[currentFrame]);
+        }
     }
 
     // Esegui all'avvio
-    updateCars();
+    updateSequence();
 
-    // Esegui quando si scrolla
+    // Esegui durante lo scroll
     let ticking = false;
     window.addEventListener('scroll', function() {
         if (!ticking) {
             window.requestAnimationFrame(function() {
-                updateCars();
+                updateSequence();
                 ticking = false;
             });
             ticking = true;
         }
     });
 
-    // Esegui quando si ridimensiona
-    window.addEventListener('resize', updateCars);
+    // Esegui al resize
+    window.addEventListener('resize', updateSequence);
 
-    // Smooth scroll
+    // Smooth scroll per link interni
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -59,7 +80,7 @@
         });
     });
 
-    // Animazione event cards
+    // Animazione event cards quando entrano nel viewport
     const cards = document.querySelectorAll('.event-card');
     
     const observerOptions = {
@@ -85,5 +106,7 @@
             alert('Form di iscrizione in arrivo! Torna presto per maggiori informazioni.');
         });
     });
+
+    console.log('✓ Effetto sequenza attivato!');
 
 })();

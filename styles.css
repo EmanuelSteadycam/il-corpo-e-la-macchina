@@ -30,7 +30,7 @@ body {
     padding: 0 20px;
 }
 
-/* Fixed Background con due livelli */
+/* Fixed Background con sequenza di immagini */
 .fixed-background {
     position: fixed;
     top: 0;
@@ -41,7 +41,7 @@ body {
     overflow: hidden;
 }
 
-.fixed-background img {
+.cars-sequence {
     position: absolute;
     top: 0;
     left: 0;
@@ -50,14 +50,6 @@ body {
     object-fit: cover;
     object-position: center;
     display: block;
-}
-
-.asphalt-layer {
-    z-index: 1;
-}
-
-.cars-layer {
-    z-index: 2;
 }
 
 /* Hero Section */
