@@ -4,18 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il Corpo e la Macchina | STEADYCAM</title>
-    <meta name="description" content="Tre giornate su digitale, videogame e intelligenza artificiale. Un progetto STEADYCAM per la promozione della salute digitale.">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Immagine animata con sequenza scroll - DUE LAYER PER CROSSFADE -->
-    <div class="fixed-background">
-        <img src="06.png" alt="Il Corpo e la Macchina" class="cars-sequence" id="carsSequence1">
-        <img src="06.png" alt="Il Corpo e la Macchina" class="cars-sequence" id="carsSequence2" style="opacity: 0;">
+    <!-- Sfondo fisso -->
+    <div class="background-layer">
+        <img src="background.png" alt="Asfalto">
     </div>
 
-    <!-- Spazio per scrollare e vedere l'effetto -->
-    <div style="height: 600vh;"></div>
+    <!-- Testo sull'asfalto -->
+    <div class="text-layer" id="textLayer">
+        <h1 class="asphalt-text">IL CORPO E<br>LA MACCHINA</h1>
+    </div>
+
+    <!-- Uomo che entra da destra -->
+    <div class="man-layer" id="manLayer">
+        <img src="man.png" alt="Uomo">
+    </div>
+
+    <!-- Auto che scende dall'alto -->
+    <div class="car-layer" id="carLayer">
+        <img src="car.png" alt="Auto">
+    </div>
+
+    <!-- Spazio per scrollare -->
+    <div style="height: 300vh;"></div>
 
     <script src="script.js"></script>
 </body>
