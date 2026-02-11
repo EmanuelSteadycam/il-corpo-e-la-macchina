@@ -72,7 +72,7 @@ body {
 .car-layer {
     position: fixed;
     top: 0; /* Allineata al top dello sfondo */
-    right: 6%; /* Percentuale più bassa = più a destra */
+    right: 4.5%; /* Ancora più a destra per centrare nel parcheggio */
     transform: translateY(-150vh); /* Inizia fuori schermo in alto */
     z-index: 4;
     width: 15vw; /* Ridotta per stare dentro il parcheggio */
