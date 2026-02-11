@@ -18,22 +18,43 @@
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         const scrollPercent = scrollY / maxScroll;
         
-        // 1. TESTO - Appare per primo
-        if (scrollPercent >= triggers.text && !textLayer.classList.contains('visible')) {
-            textLayer.classList.add('visible');
-            console.log('✓ Testo apparso');
+        // 1. TESTO - Appare/scompare
+        if (scrollPercent >= triggers.text) {
+            if (!textLayer.classList.contains('visible')) {
+                textLayer.classList.add('visible');
+                console.log('✓ Testo apparso');
+            }
+        } else {
+            if (textLayer.classList.contains('visible')) {
+                textLayer.classList.remove('visible');
+                console.log('✗ Testo scomparso');
+            }
         }
         
-        // 2. UOMO - Entra da destra
-        if (scrollPercent >= triggers.man && !manLayer.classList.contains('visible')) {
-            manLayer.classList.add('visible');
-            console.log('✓ Uomo entrato');
+        // 2. UOMO - Entra/esce
+        if (scrollPercent >= triggers.man) {
+            if (!manLayer.classList.contains('visible')) {
+                manLayer.classList.add('visible');
+                console.log('✓ Uomo entrato');
+            }
+        } else {
+            if (manLayer.classList.contains('visible')) {
+                manLayer.classList.remove('visible');
+                console.log('✗ Uomo uscito');
+            }
         }
         
-        // 3. AUTO - Scende dall'alto
-        if (scrollPercent >= triggers.car && !carLayer.classList.contains('visible')) {
-            carLayer.classList.add('visible');
-            console.log('✓ Auto scesa');
+        // 3. AUTO - Scende/sale
+        if (scrollPercent >= triggers.car) {
+            if (!carLayer.classList.contains('visible')) {
+                carLayer.classList.add('visible');
+                console.log('✓ Auto scesa');
+            }
+        } else {
+            if (carLayer.classList.contains('visible')) {
+                carLayer.classList.remove('visible');
+                console.log('✗ Auto risalita');
+            }
         }
     }
     
