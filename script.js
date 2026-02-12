@@ -3,6 +3,7 @@
     'use strict';
     
     const presentaLayer = document.getElementById('presentaLayer');
+    const subtitleLayer = document.getElementById('subtitleLayer');
     const textLayer = document.getElementById('textLayer');
     const manLayer = document.getElementById('manLayer');
     const carLayer = document.getElementById('carLayer');
@@ -10,6 +11,7 @@
     // Thresholds di scroll in pixel fissi (più precisi per animazioni bidirezionali)
     const triggers = {
         presenta: 50,  // "PRESENTA" appare al primo scroll
+        subtitle: 50,  // Sottotitolo entra INSIEME a presenta
         man: 50,       // Uomo entra INSIEME a presenta (era 400px)
         car: 800       // Auto scende a 800px
     };
@@ -30,7 +32,20 @@
             }
         }
         
-        // 2. UOMO - Entra/esce
+        // 2. SOTTOTITOLO - Entra/esce da sinistra
+        if (scrollY >= triggers.subtitle) {
+            if (!subtitleLayer.classList.contains('visible')) {
+                subtitleLayer.classList.add('visible');
+                console.log('✓ Sottotitolo apparso');
+            }
+        } else {
+            if (subtitleLayer.classList.contains('visible')) {
+                subtitleLayer.classList.remove('visible');
+                console.log('✗ Sottotitolo scomparso');
+            }
+        }
+        
+        // 3. UOMO - Entra/esce
         if (scrollY >= triggers.man) {
             if (!manLayer.classList.contains('visible')) {
                 manLayer.classList.add('visible');
@@ -73,6 +88,6 @@
     }, { passive: true });
     
     console.log('✓ Animazioni sequenziali attive');
-    console.log('Sequenza: Presenta → Uomo → Auto');
+    console.log('Sequenza: Presenta + Sottotitolo + Uomo → Auto');
     
 })();

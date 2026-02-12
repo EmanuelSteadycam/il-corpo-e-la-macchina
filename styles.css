@@ -67,6 +67,33 @@ body {
     opacity: 1;
 }
 
+/* Sottotitolo - entra da sinistra con fade */
+.subtitle-layer {
+    position: fixed;
+    top: 60%; /* Sotto il titolo principale */
+    left: 10%;
+    transform: translateX(-100vw); /* Inizia fuori schermo a sinistra */
+    z-index: 2;
+    opacity: 0;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+.subtitle-text {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    font-weight: 400;
+    color: #e8e8e8;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    text-shadow: 
+        1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.subtitle-layer.visible {
+    transform: translateX(0); /* Posizione finale */
+    opacity: 1;
+}
+
 /* Testo sull'asfalto - sempre visibile */
 .text-layer {
     position: fixed;
