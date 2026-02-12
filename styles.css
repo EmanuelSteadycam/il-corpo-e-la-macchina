@@ -14,7 +14,7 @@ body {
 .header-logos {
     position: fixed;
     top: 20px;
-    left: 70px; /* Spostato 50px più a destra (era 20px) */
+    left: 10%; /* Allineato con il titolo */
     z-index: 100; /* Sopra tutto */
     background: transparent;
 }
