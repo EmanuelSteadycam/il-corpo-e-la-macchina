@@ -58,7 +58,7 @@ body {
     transform: translateX(150vw); /* Inizia fuori schermo a destra */
     z-index: 3;
     height: 40vh;
-    transition: transform 3s ease-out;
+    transition: transform 3s ease-in-out; /* Rallenta in entrata e uscita */
     filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7)); /* Ombra molto forte */
 }
 
@@ -77,7 +77,7 @@ body {
     z-index: 4;
     width: 15vw; /* Ridotta per stare dentro il parcheggio */
     min-width: 150px;
-    transition: transform 3s ease-out; /* Ancora più lenta: 3s */
+    transition: transform 3s ease-in-out; /* Rallenta in entrata e uscita */
     filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.6)); /* Ombra molto forte */
 }
 
