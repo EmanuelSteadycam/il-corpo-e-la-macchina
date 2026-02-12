@@ -39,11 +39,12 @@ body {
 }
 
 .presenta-text {
-    font-size: clamp(1.5rem, 4vw, 2.5rem); /* Più piccolo del titolo */
+    font-family: 'Source Sans 3', sans-serif; /* Font diverso dal titolo */
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 400;
     color: #e8e8e8;
-    letter-spacing: 0.1em;
-    text-transform: none; /* Forza nessuna trasformazione */
+    letter-spacing: 0.05em;
+    text-transform: none;
     text-shadow: 
         2px 2px 4px rgba(0,0,0,0.5),
         -1px -1px 2px rgba(255,255,255,0.1);
