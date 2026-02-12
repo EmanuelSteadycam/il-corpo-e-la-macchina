@@ -10,6 +10,26 @@ body {
     background: #000;
 }
 
+/* Header trasparente con loghi */
+.header-logos {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100; /* Sopra tutto */
+    background: transparent;
+}
+
+.logos-image {
+    height: 60px; /* Altezza loghi */
+    width: auto;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.logos-image:hover {
+    opacity: 1;
+}
+
 /* Sfondo fisso */
 .background-layer {
     position: fixed;
