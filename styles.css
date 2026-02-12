@@ -41,7 +41,7 @@ body {
 .presenta-text {
     font-family: 'Source Sans 3', sans-serif; /* Font diverso dal titolo */
     font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 400;
+    font-weight: 600; /* Più corposo (era 400) */
     color: #e8e8e8;
     letter-spacing: 0.05em;
     text-transform: none;
@@ -82,10 +82,10 @@ body {
     position: fixed;
     bottom: 28vh;
     right: 13%; /* Posizione finale richiesta */
-    transform: translateX(150vw); /* Inizia fuori schermo a destra */
+    transform: translateX(50vw); /* Inizia più vicino (era 150vw) */
     z-index: 3;
     height: 40vh;
-    transition: transform 3s ease-in-out; /* Rallenta in entrata e uscita */
+    transition: transform 1s ease-in-out; /* Sincronizzato con presenta (1s) */
     filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7)); /* Ombra molto forte */
 }
 
