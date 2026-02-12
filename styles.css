@@ -70,12 +70,13 @@ body {
 /* Sottotitolo - entra da sinistra con fade */
 .subtitle-layer {
     position: fixed;
-    top: 60%; /* Sotto il titolo principale */
+    top: calc(60% + 5px); /* Abbassato di 5px dal titolo */
     left: 10%;
+    width: 40%; /* Larghezza fino a metà pagina */
     transform: translateX(-100vw); /* Inizia fuori schermo a sinistra */
     z-index: 2;
     opacity: 0;
-    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    transition: transform 1s ease-out, opacity 1s ease-out; /* Same as presenta */
 }
 
 .subtitle-text {
@@ -83,7 +84,7 @@ body {
     font-size: clamp(0.9rem, 2.5vw, 1.2rem);
     font-weight: 400;
     color: #e8e8e8;
-    line-height: 1.6;
+    line-height: 1.8; /* Più spazio tra le righe per 4 linee */
     letter-spacing: 0.02em;
     text-shadow: 
         1px 1px 3px rgba(0,0,0,0.5);
