@@ -57,7 +57,7 @@ body {
     right: 10%; /* Percentuale invece di left/margin */
     transform: translateX(150vw); /* Inizia fuori schermo a destra */
     z-index: 3;
-    height: 42vh;
+    height: 40vh; /* Ridotto del 5% (era 42vh) */
     transition: transform 3s ease-out; /* Rallentato a 3s come l'auto */
 }
 
