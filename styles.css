@@ -51,9 +51,9 @@ body {
 }
 
 .presenta-text {
-    font-family: 'Source Sans 3', sans-serif; /* Font diverso dal titolo */
+    font-family: 'Poppins', sans-serif; /* Font stile Samsung */
     font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 600; /* Più corposo (era 400) */
+    font-weight: 600; /* Più corposo */
     color: #e8e8e8;
     letter-spacing: 0.05em;
     text-transform: none;
