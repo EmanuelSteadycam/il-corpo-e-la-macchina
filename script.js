@@ -6,20 +6,18 @@
     const manLayer = document.getElementById('manLayer');
     const carLayer = document.getElementById('carLayer');
     
-    // Thresholds di scroll per ogni animazione (in percentuale dello scroll totale)
+    // Thresholds di scroll in pixel fissi (più precisi per animazioni bidirezionali)
     const triggers = {
-        text: 0.05,  // Testo appare subito (5% scroll)
-        man: 0.25,   // Uomo entra dopo (25% scroll)
-        car: 0.50    // Auto scende per ultima (50% scroll)
+        text: 100,    // Testo appare a 100px di scroll
+        man: 400,     // Uomo entra a 400px
+        car: 800      // Auto scende a 800px
     };
     
     function updateAnimations() {
         const scrollY = window.pageYOffset;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = scrollY / maxScroll;
         
         // 1. TESTO - Appare/scompare
-        if (scrollPercent >= triggers.text) {
+        if (scrollY >= triggers.text) {
             if (!textLayer.classList.contains('visible')) {
                 textLayer.classList.add('visible');
                 console.log('✓ Testo apparso');
@@ -32,7 +30,7 @@
         }
         
         // 2. UOMO - Entra/esce
-        if (scrollPercent >= triggers.man) {
+        if (scrollY >= triggers.man) {
             if (!manLayer.classList.contains('visible')) {
                 manLayer.classList.add('visible');
                 console.log('✓ Uomo entrato');
@@ -45,7 +43,7 @@
         }
         
         // 3. AUTO - Scende/sale
-        if (scrollPercent >= triggers.car) {
+        if (scrollY >= triggers.car) {
             if (!carLayer.classList.contains('visible')) {
                 carLayer.classList.add('visible');
                 console.log('✓ Auto scesa');
