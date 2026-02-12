@@ -80,9 +80,9 @@ body {
 }
 
 .subtitle-text {
-    font-family: 'Source Sans 3', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Stesso font di presenta */
     font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-    font-weight: 400;
+    font-weight: 400; /* Normal weight */
     color: #e8e8e8;
     line-height: 1.8; /* Più spazio tra le righe per 4 linee */
     letter-spacing: 0.02em;
