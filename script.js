@@ -9,8 +9,8 @@
     
     // Thresholds di scroll in pixel fissi (più precisi per animazioni bidirezionali)
     const triggers = {
-        presenta: 50,  // "PRESENTA" appare subito al primo scroll
-        man: 400,      // Uomo entra a 400px
+        presenta: 50,  // "PRESENTA" appare al primo scroll
+        man: 50,       // Uomo entra INSIEME a presenta (era 400px)
         car: 800       // Auto scende a 800px
     };
     
