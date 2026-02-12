@@ -27,15 +27,41 @@ body {
     object-position: right center; /* Allineato a destra */
 }
 
-/* Testo sull'asfalto - a sinistra */
+/* Testo "STEADYCAM PRESENTA" - appare dall'alto */
+.presenta-layer {
+    position: fixed;
+    top: 20vh;
+    left: 10%;
+    transform: translateY(-200px); /* Inizia fuori schermo in alto */
+    z-index: 2;
+    opacity: 0;
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.presenta-text {
+    font-size: clamp(1.5rem, 4vw, 2.5rem); /* Più piccolo del titolo */
+    font-weight: 400;
+    color: #e8e8e8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.5),
+        -1px -1px 2px rgba(255,255,255,0.1);
+}
+
+.presenta-layer.visible {
+    transform: translateY(0); /* Scende nella posizione finale */
+    opacity: 1;
+}
+
+/* Testo sull'asfalto - sempre visibile */
 .text-layer {
     position: fixed;
     top: 50%;
     left: 10%;
     transform: translateY(-50%);
     z-index: 2;
-    opacity: 0;
-    transition: opacity 0.6s ease-out;
+    opacity: 1; /* Sempre visibile */
 }
 
 .asphalt-text {
@@ -88,10 +114,6 @@ body {
 }
 
 /* Stati animati controllati da JavaScript */
-.text-layer.visible {
-    opacity: 1;
-}
-
 .man-layer.visible {
     transform: translateX(0); /* Posizione finale: 10% da destra */
 }

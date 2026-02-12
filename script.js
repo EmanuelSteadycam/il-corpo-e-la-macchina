@@ -2,30 +2,31 @@
 (function() {
     'use strict';
     
+    const presentaLayer = document.getElementById('presentaLayer');
     const textLayer = document.getElementById('textLayer');
     const manLayer = document.getElementById('manLayer');
     const carLayer = document.getElementById('carLayer');
     
     // Thresholds di scroll in pixel fissi (più precisi per animazioni bidirezionali)
     const triggers = {
-        text: 100,    // Testo appare a 100px di scroll
-        man: 400,     // Uomo entra a 400px
-        car: 800      // Auto scende a 800px
+        presenta: 50,  // "PRESENTA" appare subito al primo scroll
+        man: 400,      // Uomo entra a 400px
+        car: 800       // Auto scende a 800px
     };
     
     function updateAnimations() {
         const scrollY = window.pageYOffset;
         
-        // 1. TESTO - Appare/scompare
-        if (scrollY >= triggers.text) {
-            if (!textLayer.classList.contains('visible')) {
-                textLayer.classList.add('visible');
-                console.log('✓ Testo apparso');
+        // 1. PRESENTA - Appare/scompare dall'alto
+        if (scrollY >= triggers.presenta) {
+            if (!presentaLayer.classList.contains('visible')) {
+                presentaLayer.classList.add('visible');
+                console.log('✓ Presenta apparso');
             }
         } else {
-            if (textLayer.classList.contains('visible')) {
-                textLayer.classList.remove('visible');
-                console.log('✗ Testo scomparso');
+            if (presentaLayer.classList.contains('visible')) {
+                presentaLayer.classList.remove('visible');
+                console.log('✗ Presenta scomparso');
             }
         }
         
@@ -72,6 +73,6 @@
     }, { passive: true });
     
     console.log('✓ Animazioni sequenziali attive');
-    console.log('Sequenza: Testo → Uomo → Auto');
+    console.log('Sequenza: Presenta → Uomo → Auto');
     
 })();
