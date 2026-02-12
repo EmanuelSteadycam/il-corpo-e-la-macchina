@@ -50,12 +50,12 @@ body {
         -1px -1px 2px rgba(255,255,255,0.1);
 }
 
-/* Uomo - posizionato con i piedi sulla linea bianca centrale */
+/* Uomo - posizionato a destra al 10% */
 .man-layer {
     position: fixed;
     bottom: 5vh;
-    left: 50%; /* Centrato */
-    transform: translate(-50%, 0) translateX(150vw); /* Centrato + inizia fuori schermo */
+    right: 10%; /* Percentuale invece di left/margin */
+    transform: translateX(150vw); /* Inizia fuori schermo a destra */
     z-index: 3;
     height: 42vh;
     transition: transform 3s ease-out; /* Rallentato a 3s come l'auto */
@@ -91,7 +91,7 @@ body {
 }
 
 .man-layer.visible {
-    transform: translate(-50%, 0) translateX(0); /* Centrato sulla linea bianca */
+    transform: translateX(0); /* Posizione finale: 10% da destra */
 }
 
 .car-layer.visible {
