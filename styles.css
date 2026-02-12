@@ -54,7 +54,7 @@ body {
 .man-layer {
     position: fixed;
     bottom: 28vh; /* Abbassato di 2vh (era 30vh) */
-    right: 10%; /* Percentuale invece di left/margin */
+    right: 15%; /* Spostato 5% a sinistra (era 10%) */
     transform: translateX(150vw); /* Inizia fuori schermo a destra */
     z-index: 3;
     height: 40vh; /* Ridotto del 5% (era 42vh) */
