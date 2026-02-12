@@ -53,7 +53,7 @@ body {
 /* Uomo - posizionato a destra al 10% */
 .man-layer {
     position: fixed;
-    bottom: 35vh; /* Alzato di altri 20vh (era 15vh) */
+    bottom: 30vh; /* Abbassato di 5vh (era 35vh) */
     right: 10%; /* Percentuale invece di left/margin */
     transform: translateX(150vw); /* Inizia fuori schermo a destra */
     z-index: 3;
