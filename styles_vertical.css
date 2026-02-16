@@ -7,17 +7,27 @@
 body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
+    background: #1a1a1a; /* Sfondo scuro desktop */
+    min-height: 100vh;
+}
+
+/* Contenitore principale - simula schermo mobile */
+.phone-container {
+    max-width: 480px;
+    margin: 0 auto;
     background: #000;
-    min-height: 300vh; /* Spazio per scrollare */
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
 /* Background images con crossfade */
 .background-container {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     z-index: 1;
 }
 
@@ -40,11 +50,11 @@ body {
 
 /* Overlay gradient per leggibilità testi */
 .overlay-gradient {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: linear-gradient(
         to bottom,
         rgba(0,0,0,0.3) 0%,
@@ -177,15 +187,10 @@ body {
     display: block;
 }
 
-/* Responsive adjustments */
-@media (min-width: 768px) {
-    .content-wrapper {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 80px 40px 140px 40px;
-    }
-    
-    .main-title {
-        font-size: clamp(4rem, 10vw, 6rem);
+/* Desktop: centra container mobile */
+@media (min-width: 769px) {
+    .phone-container {
+        box-shadow: 0 0 50px rgba(0,0,0,0.5);
     }
 }
+
