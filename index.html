@@ -10,30 +10,35 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Contenitore che simula schermo mobile anche su desktop -->
+    <!-- Contenitore principale -->
     <div class="phone-container">
-        <!-- Immagine di sfondo fissa -->
-        <div class="background-fixed">
-            <img src="landing01.jpg" alt="">
-        </div>
-
-        <!-- Overlay gradient -->
-        <div class="overlay-gradient"></div>
-
-        <!-- Content che scrolla -->
-        <div class="content-wrapper">
-            <!-- Testo "STEADYCAM PRESENTA" che scende dall'alto -->
-            <div class="presenta-layer" id="presentaLayer">
-                <h2 class="presenta-text">Il Centro Steadycam presenta</h2>
+        
+        <!-- SEZIONE 1: Landing con immagine -->
+        <section class="section-one">
+            <!-- Immagine di sfondo fissa -->
+            <div class="background-fixed">
+                <img src="landing01.jpg" alt="">
             </div>
 
-            <!-- Titolo principale sempre visibile -->
-            <div class="title-layer">
-                <h1 class="main-title">IL CORPO E<br>LA MACCHINA</h1>
+            <!-- Overlay gradient - scuro in basso, chiaro sopra -->
+            <div class="overlay-gradient"></div>
+
+            <!-- Content overlay -->
+            <div class="content-overlay">
+                <!-- "Il Centro Steadycam presenta" - entra da sinistra subito -->
+                <div class="presenta-layer" id="presentaLayer">
+                    <h2 class="presenta-text">Il Centro Steadycam presenta:</h2>
+                </div>
+
+                <!-- Titolo + Sottotitolo - basso a sinistra, appare scrollando 10px -->
+                <div class="title-group" id="titleGroup">
+                    <h1 class="main-title">IL CORPO<br>E LA MACCHINA</h1>
+                    <p class="subtitle">Mappe di cultura digitale</p>
+                </div>
             </div>
 
-            <!-- Schede eventi che appaiono scrollando -->
-            <div class="cards-container" id="cardsContainer">
+            <!-- Schede eventi - appaiono scrollando più giù -->
+            <div class="cards-section" id="cardsSection">
                 <div class="event-card">
                     <div class="card-date">12 MARZO 2026</div>
                     <div class="card-title">Social Media</div>
@@ -52,17 +57,33 @@
                     <div class="card-subtitle">Salute digitale e consapevolezza</div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Seconda sezione - sfondo nero -->
-        <div class="section-two">
+        <!-- SEZIONE 2: Bottoni iscrizioni (sfondo nero) -->
+        <section class="section-two">
             <div class="section-two-content">
-                <h2>Sezione 2</h2>
-                <p>Contenuto della seconda sezione</p>
+                <h2 class="section-title">Iscriviti agli eventi</h2>
+                
+                <div class="buttons-container">
+                    <a href="#" class="event-button">
+                        <span class="button-date">12 MARZO</span>
+                        <span class="button-title">Social Media</span>
+                    </a>
+                    
+                    <a href="#" class="event-button">
+                        <span class="button-date">9-10 APRILE</span>
+                        <span class="button-title">Intelligenza Artificiale</span>
+                    </a>
+                    
+                    <a href="#" class="event-button">
+                        <span class="button-date">12-13 MAGGIO</span>
+                        <span class="button-title">Gaming e benessere</span>
+                    </a>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Footer con loghi - sempre alla fine -->
+        <!-- FOOTER: Loghi -->
         <footer class="footer-logos">
             <img src="footer_loghi.png" alt="Partner logos" class="footer-image">
         </footer>

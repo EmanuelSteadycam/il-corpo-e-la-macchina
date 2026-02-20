@@ -11,7 +11,6 @@ body {
     min-height: 100vh;
 }
 
-/* Contenitore principale - simula schermo mobile */
 .phone-container {
     max-width: 480px;
     margin: 0 auto;
@@ -20,13 +19,20 @@ body {
     position: relative;
 }
 
-/* Background fisso - resta sempre visibile */
+/* ========== SEZIONE 1: LANDING ========== */
+
+.section-one {
+    position: relative;
+    min-height: 200vh; /* Spazio per scrollare */
+}
+
+/* Background fisso - alzato tagliando parte superiore */
 .background-fixed {
     position: fixed;
-    top: 0;
+    top: -15%; /* Alza immagine tagliando parte superiore */
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 115vh; /* Più alta per compensare il taglio */
     z-index: 1;
     overflow: hidden;
 }
@@ -38,7 +44,7 @@ body {
     object-position: center;
 }
 
-/* Overlay gradient per leggibilità testi */
+/* Overlay gradient - scuro in basso, chiaro sopra i testi */
 .overlay-gradient {
     position: fixed;
     top: 0;
@@ -47,81 +53,98 @@ body {
     height: 100vh;
     background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.3) 0%,
-        rgba(0,0,0,0.1) 40%,
-        rgba(0,0,0,0.5) 100%
+        rgba(0,0,0,0.1) 0%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.7) 80%,
+        rgba(0,0,0,0.85) 100%
     );
     z-index: 2;
     pointer-events: none;
 }
 
-/* Content che scrolla */
-.content-wrapper {
+/* Content overlay */
+.content-overlay {
     position: relative;
     z-index: 3;
     min-height: 100vh;
-    padding: 60px 20px 20px 20px;
+    padding: 40px 20px;
     display: flex;
     flex-direction: column;
 }
 
-/* Testo "STEADYCAM PRESENTA" - scende dall'alto */
+/* "Il Centro Steadycam presenta" - entra da sinistra */
 .presenta-layer {
-    text-align: center;
     margin-top: 40px;
-    transform: translateY(-200px);
+    transform: translateX(-100vw);
     opacity: 0;
-    transition: transform 1s ease-out, opacity 1s ease-out;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
 
 .presenta-layer.visible {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
 }
 
 .presenta-text {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(1rem, 4vw, 1.4rem);
-    font-weight: 600;
+    font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+    font-weight: 400;
     color: #ffffff;
-    letter-spacing: 0.1em;
-    text-transform: none;
-    text-shadow: 
-        2px 2px 8px rgba(0,0,0,0.8),
-        0 0 20px rgba(0,0,0,0.5);
+    letter-spacing: 0.03em;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
 }
 
-/* Titolo principale sempre visibile */
-.title-layer {
-    text-align: center;
-    margin-top: 30px;
+/* Titolo + Sottotitolo - basso a sinistra */
+.title-group {
+    position: absolute;
+    bottom: 80px;
+    left: 20px;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+.title-group.visible {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .main-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 12vw, 5rem);
+    font-size: clamp(3.5rem, 14vw, 6rem);
     font-weight: 400;
     color: #ffffff;
-    line-height: 0.95;
-    letter-spacing: 0.05em;
-    text-shadow: 
-        3px 3px 10px rgba(0,0,0,0.9),
-        0 0 30px rgba(0,0,0,0.7);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
+    margin-bottom: 12px;
 }
 
-/* Schede eventi */
-.cards-container {
-    margin-top: 60px;
+.subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+}
+
+/* Schede eventi - appaiono scrollando */
+.cards-section {
+    position: relative;
+    z-index: 3;
+    padding: 60px 20px;
+    margin-top: 100vh; /* Dopo la prima schermata */
     display: flex;
     flex-direction: column;
     gap: 20px;
-    transform: translateX(-100vw);
+    transform: translateY(50px);
     opacity: 0;
-    transition: transform 1s ease-out, opacity 1s ease-out;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 }
 
-.cards-container.visible {
-    transform: translateX(0);
+.cards-section.visible {
+    transform: translateY(0);
     opacity: 1;
 }
 
@@ -164,13 +187,78 @@ body {
     line-height: 1.5;
 }
 
-/* Footer con loghi */
+/* ========== SEZIONE 2: BOTTONI ISCRIZIONI ========== */
+
+.section-two {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #000000;
+    z-index: 4;
+    padding: 80px 20px 60px 20px;
+}
+
+.section-two-content {
+    position: relative;
+    z-index: 5;
+}
+
+.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 50px;
+    letter-spacing: 0.05em;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 100%);
+    border-radius: 16px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+}
+
+.event-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255,255,255,0.2);
+}
+
+.button-date {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    color: #ffd700;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+}
+
+.button-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
+    font-weight: 600;
+    color: #000000;
+    text-align: center;
+}
+
+/* ========== FOOTER ========== */
+
 .footer-logos {
     position: relative;
-    z-index: 3;
+    z-index: 5;
     background: #ffffff;
     padding: 15px 0;
-    margin-top: 60px;
 }
 
 .footer-image {
@@ -180,48 +268,20 @@ body {
     display: block;
 }
 
-/* Seconda sezione - sfondo nero */
-.section-two {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    background: #000000;
-    z-index: 4;
-    padding: 60px 20px;
-}
+/* ========== DESKTOP ========== */
 
-.section-two-content {
-    position: relative;
-    z-index: 5;
-    color: #ffffff;
-    text-align: center;
-}
-
-.section-two-content h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 10vw, 4rem);
-    margin-bottom: 20px;
-}
-
-.section-two-content p {
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(1rem, 4vw, 1.2rem);
-}
-
-/* Desktop: ombra sul container */
 @media (min-width: 769px) {
     .phone-container {
         box-shadow: 0 0 50px rgba(0,0,0,0.5);
     }
     
-    /* Background centrato su desktop */
     .background-fixed {
         left: 50%;
         transform: translateX(-50%);
         max-width: 480px;
+        top: -15%;
     }
     
-    /* Gradient centrato su desktop */
     .overlay-gradient {
         left: 50%;
         transform: translateX(-50%);

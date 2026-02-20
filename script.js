@@ -1,42 +1,47 @@
-// Animazioni scroll per testi
+// Animazioni scroll
 (function() {
     'use strict';
     
     const presentaLayer = document.getElementById('presentaLayer');
-    const cardsContainer = document.getElementById('cardsContainer');
+    const titleGroup = document.getElementById('titleGroup');
+    const cardsSection = document.getElementById('cardsSection');
     
-    // Thresholds di scroll in pixel
+    // Trigger thresholds
     const triggers = {
-        presenta: 50,   // "PRESENTA" appare al primo scroll
-        cards: 300      // Schede appaiono dopo un po' di scroll
+        presenta: 0,      // Subito visibile (appena la pagina si carica)
+        title: 10,        // Appare scrollando solo 10px
+        cards: 600        // Appaiono scrollando di più
     };
     
     function updateAnimations() {
         const scrollY = window.pageYOffset;
         
-        // PRESENTA - Scende dall'alto
+        // PRESENTA - Appare subito dalla sinistra
         if (scrollY >= triggers.presenta) {
             if (!presentaLayer.classList.contains('visible')) {
                 presentaLayer.classList.add('visible');
                 console.log('✓ Presenta apparso');
             }
+        }
+        
+        // TITOLO + SOTTOTITOLO - Appaiono a 10px scroll
+        if (scrollY >= triggers.title) {
+            if (!titleGroup.classList.contains('visible')) {
+                titleGroup.classList.add('visible');
+                console.log('✓ Titolo + sottotitolo apparsi');
+            }
         } else {
-            if (presentaLayer.classList.contains('visible')) {
-                presentaLayer.classList.remove('visible');
-                console.log('✗ Presenta scomparso');
+            if (titleGroup.classList.contains('visible')) {
+                titleGroup.classList.remove('visible');
+                console.log('✗ Titolo + sottotitolo scomparsi');
             }
         }
         
-        // SCHEDE - Entrano da sinistra
+        // SCHEDE - Appaiono scrollando di più
         if (scrollY >= triggers.cards) {
-            if (!cardsContainer.classList.contains('visible')) {
-                cardsContainer.classList.add('visible');
+            if (!cardsSection.classList.contains('visible')) {
+                cardsSection.classList.add('visible');
                 console.log('✓ Schede apparse');
-            }
-        } else {
-            if (cardsContainer.classList.contains('visible')) {
-                cardsContainer.classList.remove('visible');
-                console.log('✗ Schede scomparse');
             }
         }
     }
@@ -44,7 +49,7 @@
     // Esegui all'avvio
     updateAnimations();
     
-    // Esegui durante lo scroll
+    // Esegui durante lo scroll con requestAnimationFrame
     let ticking = false;
     window.addEventListener('scroll', function() {
         if (!ticking) {
@@ -57,5 +62,5 @@
     }, { passive: true });
     
     console.log('✓ Animazioni scroll attive');
-    console.log('Sequenza: Presenta (50px) → Schede (300px)');
+    console.log('Sequenza: Presenta (subito) → Titolo (10px) → Schede (600px)');
 })();
