@@ -7,7 +7,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
-    background: #1a1a1a; /* Sfondo scuro desktop */
+    background: #1a1a1a;
     min-height: 100vh;
 }
 
@@ -18,33 +18,37 @@ body {
     background: #000;
     min-height: 100vh;
     position: relative;
+}
+
+/* Background fisso - resta sempre visibile */
+.background-fixed {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    z-index: 1;
     overflow: hidden;
 }
 
-/* Background container - immagine statica singola */
-.background-container {
-    position: relative;
+.background-fixed img {
     width: 100%;
-    z-index: 1;
-}
-
-.background-image {
-    display: block;
-    width: 100%;
-    height: auto; /* Rispetta proporzioni originali */
-}
-
-.background-image.active {
-    opacity: 1;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* Overlay gradient per leggibilità testi */
 .overlay-gradient {
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
-    height: 100%;
+    max-width: 480px;
+    height: 100vh;
     background: linear-gradient(
         to bottom,
         rgba(0,0,0,0.3) 0%,
@@ -55,14 +59,14 @@ body {
     pointer-events: none;
 }
 
-/* Content wrapper - sovrapposto alle immagini */
+/* Content che scrolla */
 .content-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: relative;
     z-index: 3;
-    padding: 60px 20px 120px 20px;
+    min-height: 100vh;
+    padding: 60px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Testo "STEADYCAM PRESENTA" - scende dall'alto */
@@ -180,10 +184,9 @@ body {
     display: block;
 }
 
-/* Desktop: centra container mobile */
+/* Desktop: ombra sul container */
 @media (min-width: 769px) {
     .phone-container {
         box-shadow: 0 0 50px rgba(0,0,0,0.5);
     }
 }
-
