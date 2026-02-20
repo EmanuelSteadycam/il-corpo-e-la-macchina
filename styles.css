@@ -24,10 +24,8 @@ body {
 .background-fixed {
     position: fixed;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     width: 100%;
-    max-width: 480px;
     height: 100vh;
     z-index: 1;
     overflow: hidden;
@@ -44,10 +42,8 @@ body {
 .overlay-gradient {
     position: fixed;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     width: 100%;
-    max-width: 480px;
     height: 100vh;
     background: linear-gradient(
         to bottom,
@@ -188,5 +184,19 @@ body {
 @media (min-width: 769px) {
     .phone-container {
         box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    }
+    
+    /* Background centrato su desktop */
+    .background-fixed {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    /* Gradient centrato su desktop */
+    .overlay-gradient {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
     }
 }
