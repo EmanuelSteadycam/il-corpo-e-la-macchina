@@ -1,0 +1,281 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    background: #1a1a1a;
+    min-height: 100vh;
+}
+
+.phone-container {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #000;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* ========== SEZIONE 1: LANDING ========== */
+
+.section-one {
+    position: relative;
+    min-height: 100svh; /* Solo una schermata - usa svh per mobile */
+}
+
+/* Background fisso - alzato tagliando parte superiore */
+.background-fixed {
+    position: fixed;
+    top: -15%; /* Alza immagine tagliando parte superiore */
+    left: 0;
+    width: 100%;
+    height: 115svh; /* svh = small viewport height (esclude barra browser) */
+    z-index: 1;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.background-fixed.hidden {
+    opacity: 0;
+}
+
+.background-fixed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Overlay gradient - leggero solo in basso */
+.overlay-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) 60%,
+        rgba(0,0,0,0.4) 85%,
+        rgba(0,0,0,0.6) 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.overlay-gradient.hidden {
+    opacity: 0;
+}
+
+/* Content overlay */
+.content-overlay {
+    position: relative;
+    z-index: 3;
+    min-height: 100svh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* "Il Centro Steadycam presenta" - all'altezza della testa dell'uomo */
+.presenta-layer {
+    position: absolute;
+    bottom: 200px; /* All'altezza della fine della testa dell'uomo */
+    left: 20px;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+.presenta-layer.visible {
+    opacity: 1;
+}
+
+.presenta-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+}
+
+/* Titolo + Sottotitolo - basso a sinistra, entra da sinistra dopo 1s */
+.title-group {
+    position: absolute;
+    bottom: 60px; /* Abbassato di 20px (era 80px) */
+    left: 20px;
+    transform: translateX(-100vw);
+    opacity: 0;
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.title-group.visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.main-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 9vw, 3.5rem); /* Ancora più piccolo: era 2.8rem-11vw-4.5rem */
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+}
+
+/* ========== SEZIONE 2: DESCRIZIONE PROGETTO ========== */
+
+.section-two {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Ridotto a 400px (era 600px) */
+    background: #000000;
+    z-index: 4;
+    padding: 60px 30px 60px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-two-content {
+    position: relative;
+    z-index: 5;
+    max-width: 100%;
+}
+
+.description-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem); /* Più piccolo: era 1.1rem-4.5vw-1.4rem */
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.7;
+    text-align: center;
+    letter-spacing: 0.01em;
+}
+
+/* ========== SEZIONE 3: SECONDA IMMAGINE + BOTTONI ========== */
+
+.section-three {
+    position: relative;
+    min-height: 100svh;
+}
+
+/* Background immagine landing02 - fixed come landing01 */
+.background-three {
+    position: fixed;
+    top: 0; /* Nessun offset (era -15%) */
+    left: 0;
+    width: 100%;
+    height: 100svh; /* Altezza normale (era 115svh) */
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0; /* Nascosto inizialmente */
+    transition: opacity 0.5s ease;
+}
+
+.background-three.visible {
+    opacity: 1;
+}
+
+.background-three img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Overlay gradient per leggibilità */
+.overlay-three {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0.3) 50%,
+        rgba(0,0,0,0.7) 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.overlay-three.visible {
+    opacity: 1;
+}
+
+/* ========== FOOTER ========== */
+
+.footer-logos {
+    position: relative;
+    z-index: 5;
+    background: #ffffff;
+    padding: 15px 0;
+}
+
+.footer-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ========== DESKTOP ========== */
+
+@media (min-width: 769px) {
+    .phone-container {
+        box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    }
+    
+    .background-fixed {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+        top: -15%;
+    }
+    
+    .overlay-gradient {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    /* Sezione 3 backgrounds centrati */
+    .background-three {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    .overlay-three {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    /* Abbassa titolo su desktop */
+    .title-group {
+        bottom: 30px; /* Più basso su desktop (mobile resta 60px) */
+    }
+}
