@@ -229,4 +229,9 @@ body {
         transform: translateX(-50%);
         max-width: 480px;
     }
+    
+    /* Abbassa titolo su desktop */
+    .title-group {
+        bottom: 30px; /* Più basso su desktop (mobile resta 60px) */
+    }
 }
