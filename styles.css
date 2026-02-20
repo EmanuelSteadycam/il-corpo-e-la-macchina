@@ -303,7 +303,7 @@ body {
 
 .section-four {
     position: relative;
-    min-height: 100svh;
+    min-height: 200svh; /* Più alta per avere spazio scroll (era 100svh) */
 }
 
 /* Background immagine landing03 - fixed */
