@@ -9,6 +9,7 @@
     const backgroundFixed = document.querySelector('.background-fixed');
     const overlayGradient = document.querySelector('.overlay-gradient');
     const backgroundThree = document.querySelector('.background-three');
+    const asphaltButtons = document.querySelector('.asphalt-buttons');
     const sectionThree = document.querySelector('.section-three');
     
     // Animazioni automatiche dopo 1 secondo
@@ -27,15 +28,17 @@
         
         // Se sezione 3 sta per apparire (appena entra nello schermo)
         if (sectionThreeTop < windowHeight) {
-            // Nascondi landing01, mostra landing02
+            // Nascondi landing01, mostra landing02 + bottoni
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.add('visible');
+            if (asphaltButtons) asphaltButtons.classList.add('visible');
         } else {
-            // Mostra landing01, nascondi landing02
+            // Mostra landing01, nascondi landing02 + bottoni
             backgroundFixed.classList.remove('hidden');
             overlayGradient.classList.remove('hidden');
             backgroundThree.classList.remove('visible');
+            if (asphaltButtons) asphaltButtons.classList.remove('visible');
         }
     }
     

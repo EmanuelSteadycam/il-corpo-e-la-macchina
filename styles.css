@@ -248,9 +248,9 @@ body {
     object-position: center;
 }
 
-/* Bottoni sulla striscia di asfalto */
+/* Bottoni sulla striscia di asfalto - FISSI */
 .asphalt-buttons {
-    position: absolute;
+    position: fixed; /* Fissi anche scrollando */
     top: 48%; /* Posizionati sulla striscia di asfalto tra testa e auto */
     left: 50%;
     transform: translate(-50%, -50%);
@@ -259,6 +259,12 @@ body {
     display: flex;
     gap: 10px;
     z-index: 3;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.asphalt-buttons.visible {
+    opacity: 1;
 }
 
 .asphalt-btn {
@@ -267,11 +273,11 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 12px;
-    padding: 16px 8px;
+    padding: 12px 8px; /* Più bassi (era 16px) */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -281,22 +287,26 @@ body {
     transform: translateY(-3px);
 }
 
-.btn-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
-    color: #ffd700;
-    font-weight: 400;
-    line-height: 1;
-}
-
 .btn-text {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+    font-size: clamp(0.75rem, 2.8vw, 0.95rem);
     font-weight: 600;
-    color: #ffffff;
     text-align: center;
     line-height: 1.2;
     letter-spacing: 0.05em;
+}
+
+/* Colori specifici per ogni bottone */
+.btn-pubblici .btn-text {
+    color: #ffd364;
+}
+
+.btn-operatori .btn-text {
+    color: #88ea7a;
+}
+
+.btn-studenti .btn-text {
+    color: #ef9033;
 }
 
 /* ========== FOOTER ========== */
@@ -340,6 +350,11 @@ body {
         left: 50%;
         transform: translateX(-50%);
         max-width: 480px;
+    }
+    
+    /* Bottoni asfalto centrati su desktop */
+    .asphalt-buttons {
+        max-width: 440px;
     }
     
     /* Abbassa titolo su desktop */
