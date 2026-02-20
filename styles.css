@@ -180,6 +180,34 @@ body {
     display: block;
 }
 
+/* Seconda sezione - sfondo nero */
+.section-two {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #000000;
+    z-index: 4;
+    padding: 60px 20px;
+}
+
+.section-two-content {
+    position: relative;
+    z-index: 5;
+    color: #ffffff;
+    text-align: center;
+}
+
+.section-two-content h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    margin-bottom: 20px;
+}
+
+.section-two-content p {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+}
+
 /* Desktop: ombra sul container */
 @media (min-width: 769px) {
     .phone-container {
