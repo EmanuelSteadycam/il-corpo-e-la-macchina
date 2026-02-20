@@ -2,6 +2,14 @@
 (function() {
     'use strict';
     
+    // Scroll automatico di 1px all'apertura per nascondere barra browser
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            window.scrollTo(0, 1);
+            console.log('✓ Scroll automatico eseguito (1px) - barra browser nascosta');
+        }, 100);
+    });
+    
     const presentaLayer = document.getElementById('presentaLayer');
     const titleGroup = document.getElementById('titleGroup');
     
