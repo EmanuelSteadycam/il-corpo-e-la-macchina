@@ -26,8 +26,8 @@
         const sectionThreeTop = sectionThree.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
         
-        // Se sezione 3 è visibile (arrivata a metà schermo)
-        if (sectionThreeTop < windowHeight / 2) {
+        // Se sezione 3 sta per apparire (appena entra nello schermo)
+        if (sectionThreeTop < windowHeight) {
             // Nascondi landing01, mostra landing02
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
