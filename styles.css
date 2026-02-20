@@ -251,7 +251,7 @@ body {
 /* Bottoni sulla striscia di asfalto - FISSI */
 .asphalt-buttons {
     position: fixed; /* Fissi anche scrollando */
-    top: 48%; /* Posizionati sulla striscia di asfalto tra testa e auto */
+    top: calc(48% + 20px); /* Abbassati di 20px */
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
