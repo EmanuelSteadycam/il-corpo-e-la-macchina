@@ -23,7 +23,7 @@ body {
 
 .section-one {
     position: relative;
-    min-height: 100vh; /* Solo una schermata */
+    min-height: 100svh; /* Solo una schermata - usa svh per mobile */
 }
 
 /* Background fisso - alzato tagliando parte superiore */
@@ -32,7 +32,7 @@ body {
     top: -15%; /* Alza immagine tagliando parte superiore */
     left: 0;
     width: 100%;
-    height: 115vh; /* Più alta per compensare il taglio */
+    height: 115svh; /* svh = small viewport height (esclude barra browser) */
     z-index: 1;
     overflow: hidden;
 }
@@ -48,7 +48,7 @@ body {
 .content-overlay {
     position: relative;
     z-index: 3;
-    min-height: 100vh;
+    min-height: 100svh;
     padding: 40px 20px;
     display: flex;
     flex-direction: column;
@@ -116,7 +116,7 @@ body {
 .section-two {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100svh;
     background: #000000;
     z-index: 4;
     padding: 80px 20px 60px 20px;
