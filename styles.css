@@ -341,7 +341,7 @@ body {
     overflow: hidden;
     opacity: 0;
     clip-path: inset(0 100% 0 0); /* Nascosta inizialmente */
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease, clip-path 0.6s ease; /* Transizione fluida */
 }
 
 .background-four-green.visible {
@@ -366,7 +366,7 @@ body {
     overflow: hidden;
     opacity: 0;
     clip-path: inset(0 100% 0 0); /* Nascosta inizialmente */
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease, clip-path 0.6s ease; /* Transizione fluida */
 }
 
 .background-four-orange.visible {

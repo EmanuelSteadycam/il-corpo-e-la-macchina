@@ -50,20 +50,26 @@
             
             console.log('Scroll progress:', scrollProgress.toFixed(2));
             
-            // Verde si rivela da 0% a 50% scroll
-            const greenProgress = Math.min(1, scrollProgress * 2); // 0-0.5 → 0-1
-            const greenReveal = greenProgress * 100;
-            backgroundFourGreen.style.clipPath = `inset(0 ${100 - greenReveal}% 0 0)`;
-            console.log('Green reveal:', greenReveal.toFixed(0) + '%');
+            // STEP-BASED transitions:
+            // 0-33%: Azzurra
+            // 33-66%: Verde (completa)
+            // 66-100%: Arancione (completa)
             
-            // Arancione si rivela da 50% a 100% scroll
-            if (scrollProgress > 0.5) {
-                const orangeProgress = (scrollProgress - 0.5) * 2; // 0.5-1 → 0-1
-                const orangeReveal = orangeProgress * 100;
-                backgroundFourOrange.style.clipPath = `inset(0 ${100 - orangeReveal}% 0 0)`;
-                console.log('Orange reveal:', orangeReveal.toFixed(0) + '%');
-            } else {
+            if (scrollProgress < 0.33) {
+                // Azzurra - nascondi verde e arancione
+                backgroundFourGreen.style.clipPath = `inset(0 100% 0 0)`;
                 backgroundFourOrange.style.clipPath = `inset(0 100% 0 0)`;
+                console.log('Color: BLUE');
+            } else if (scrollProgress < 0.66) {
+                // Verde completa - mostra tutta verde
+                backgroundFourGreen.style.clipPath = `inset(0 0% 0 0)`;
+                backgroundFourOrange.style.clipPath = `inset(0 100% 0 0)`;
+                console.log('Color: GREEN');
+            } else {
+                // Arancione completa - mostra tutta arancione
+                backgroundFourGreen.style.clipPath = `inset(0 0% 0 0)`;
+                backgroundFourOrange.style.clipPath = `inset(0 0% 0 0)`;
+                console.log('Color: ORANGE');
             }
         } else if (sectionThreeTop < windowHeight) {
             // Sezione 3 visibile → mostra landing02 + bottoni
