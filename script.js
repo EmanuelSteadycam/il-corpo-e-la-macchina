@@ -4,13 +4,11 @@
     
     const presentaLayer = document.getElementById('presentaLayer');
     const titleGroup = document.getElementById('titleGroup');
-    const cardsSection = document.getElementById('cardsSection');
     
     // Trigger thresholds
     const triggers = {
         presenta: 0,      // Subito visibile (appena la pagina si carica)
-        title: 10,        // Appare scrollando solo 10px
-        cards: 600        // Appaiono scrollando di più
+        title: 10         // Appare scrollando solo 10px
     };
     
     function updateAnimations() {
@@ -36,14 +34,6 @@
                 console.log('✗ Titolo + sottotitolo scomparsi');
             }
         }
-        
-        // SCHEDE - Appaiono scrollando di più
-        if (scrollY >= triggers.cards) {
-            if (!cardsSection.classList.contains('visible')) {
-                cardsSection.classList.add('visible');
-                console.log('✓ Schede apparse');
-            }
-        }
     }
     
     // Esegui all'avvio
@@ -62,5 +52,5 @@
     }, { passive: true });
     
     console.log('✓ Animazioni scroll attive');
-    console.log('Sequenza: Presenta (subito) → Titolo (10px) → Schede (600px)');
+    console.log('Sequenza: Presenta (subito) → Titolo (10px)');
 })();
