@@ -33,10 +33,10 @@
         
         // Determina quale background mostrare
         if (sectionFourTop < windowHeight) {
-            // Sezione 4 visibile → mostra landing03 + color reveal
+            // Sezione 4 visibile → sez 3 scivola via, sez 4 entra
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
-            backgroundThree.classList.remove('visible');
+            backgroundThree.classList.add('slide-up'); // Scivola via verso l'alto
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
             backgroundFour.classList.add('visible');
             backgroundFourGreen.classList.add('visible');
@@ -76,6 +76,7 @@
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.add('visible');
+            backgroundThree.classList.remove('slide-up'); // Torna nella posizione
             if (asphaltButtons) asphaltButtons.classList.add('visible');
             backgroundFour.classList.remove('visible');
             backgroundFourGreen.classList.remove('visible');

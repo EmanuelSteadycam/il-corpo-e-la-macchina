@@ -234,11 +234,16 @@ body {
     z-index: 1;
     overflow: hidden;
     opacity: 0; /* Nascosto inizialmente */
-    transition: opacity 0.5s ease;
+    transform: translateY(0); /* Posizione normale */
+    transition: opacity 0.5s ease, transform 0.8s ease; /* Slide transition */
 }
 
 .background-three.visible {
     opacity: 1;
+}
+
+.background-three.slide-up {
+    transform: translateY(-100%); /* Scivola via verso l'alto */
 }
 
 .background-three img {
@@ -316,11 +321,13 @@ body {
     z-index: 1;
     overflow: hidden;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transform: translateY(100%); /* Parte da sotto */
+    transition: opacity 0.5s ease, transform 0.8s ease; /* Slide transition */
 }
 
 .background-four.visible {
     opacity: 1;
+    transform: translateY(0); /* Entra nella posizione normale */
 }
 
 .background-four img {
