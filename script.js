@@ -9,7 +9,6 @@
     const backgroundFixed = document.querySelector('.background-fixed');
     const overlayGradient = document.querySelector('.overlay-gradient');
     const backgroundThree = document.querySelector('.background-three');
-    const overlayThree = document.querySelector('.overlay-three');
     const sectionThree = document.querySelector('.section-three');
     
     // Animazioni automatiche dopo 1 secondo
@@ -32,13 +31,11 @@
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.add('visible');
-            overlayThree.classList.add('visible');
         } else {
             // Mostra landing01, nascondi landing02
             backgroundFixed.classList.remove('hidden');
             overlayGradient.classList.remove('hidden');
             backgroundThree.classList.remove('visible');
-            overlayThree.classList.remove('visible');
         }
     }
     
