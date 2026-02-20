@@ -178,6 +178,52 @@ body {
     min-height: 100svh;
 }
 
+/* Striscia bottoni - posizionata nella fascia di asfalto */
+.buttons-strip {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    margin-top: 45vh; /* Posizionata nella striscia di asfalto */
+}
+
+.info-button {
+    flex: 1;
+    max-width: 140px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px 12px;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+}
+
+.info-button:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.button-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 8vw, 3rem);
+    color: #ffd700;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.button-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.75rem, 3vw, 0.9rem);
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+}
+
 /* Background immagine landing02 - fixed come landing01 */
 .background-three {
     position: fixed;
@@ -200,6 +246,57 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+/* Bottoni sulla striscia di asfalto */
+.asphalt-buttons {
+    position: absolute;
+    top: 48%; /* Posizionati sulla striscia di asfalto tra testa e auto */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 440px;
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+}
+
+.asphalt-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.asphalt-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+}
+
+.btn-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    color: #ffd700;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.btn-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
 }
 
 /* ========== FOOTER ========== */
