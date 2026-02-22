@@ -56,10 +56,10 @@
             const sectionFourFullyScrolled = sectionFourTop <= -sectionFourHeight;
             
             if (sectionFourFullyScrolled) {
-                // Calcola progresso scroll nella sezione 5 - MOLTO PIÙ LENTO (3x)
+                // Calcola progresso scroll nella sezione 5 - MOLTO PIÙ LENTO (5x)
                 const sectionFiveHeight = sectionFive.offsetHeight;
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
-                const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / (sectionFiveHeight * 2.4))); // Era 0.8, ora 2.4 (3x più lento)
+                const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / (sectionFiveHeight * 4))); // Era 2.4 (3x), ora 4 (5x più lento)
                 
                 // Mostra titolo
                 if (scrollProgress > 0.01) {
