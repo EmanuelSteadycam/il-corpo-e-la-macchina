@@ -174,8 +174,8 @@
                     }
                 }
                 
-                // Bottone appare dopo scheda 3
-                if (scrollProgress > 0.82 && btnSubscribe) {
+                // Bottone appare alla fine
+                if (scrollProgress > 0.85 && btnSubscribe) {
                     btnSubscribe.classList.add('show');
                 } else if (btnSubscribe) {
                     btnSubscribe.classList.remove('show');
@@ -185,7 +185,8 @@
                 const card1Visible = scrollProgress >= 0.01 && scrollProgress < 0.30;
                 const card2Visible = scrollProgress >= 0.30 && scrollProgress < 0.55;
                 const card3Visible = scrollProgress >= 0.55 && scrollProgress < 0.80;
-                console.log(`Scroll: ${(scrollProgress * 100).toFixed(0)}% | Card1:${card1Visible} Card2:${card2Visible} Card3:${card3Visible}`);
+                const btnVisible = scrollProgress > 0.85;
+                console.log(`Scroll: ${(scrollProgress * 100).toFixed(0)}% | Card1:${card1Visible} Card2:${card2Visible} Card3:${card3Visible} BTN:${btnVisible}`);
             } else {
                 // Sezione 4 non ancora completamente salita → nascondi tutto
                 if (eventType) eventType.classList.remove('show');
