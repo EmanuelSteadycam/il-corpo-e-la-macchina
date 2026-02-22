@@ -157,8 +157,8 @@
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
                 const scrollProgress      = Math.max(0, Math.min(1.5, scrollInSectionFive / sectionFiveHeight));
 
-                const showGreen  = scrollProgress >= 0.65;
-                const showOrange = scrollProgress >= 0.95;
+                const showGreen  = scrollProgress >= 0.635;
+                const showOrange = scrollProgress >= 0.935;
 
                 // Visibility contenuti
                 if (showOrange) {
@@ -176,8 +176,8 @@
                 }
 
                 // Color reveal — SOLO style inline, mai .visible su green/orange
-                if (scrollProgress >= 0.65) {
-                    const p = Math.min(1, (scrollProgress - 0.65) / 0.30);
+                if (scrollProgress >= 0.635) {
+                    const p = Math.min(1, (scrollProgress - 0.635) / 0.30);
                     backgroundFiveGreen.style.opacity  = '1';
                     backgroundFiveGreen.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
                 } else {
@@ -185,8 +185,8 @@
                     backgroundFiveGreen.style.clipPath = 'inset(0 100% 0 0)';
                 }
 
-                if (scrollProgress >= 0.95) {
-                    const p = Math.min(1, (scrollProgress - 0.95) / 0.30);
+                if (scrollProgress >= 0.935) {
+                    const p = Math.min(1, (scrollProgress - 0.935) / 0.30);
                     backgroundFiveOrange.style.opacity  = '1';
                     backgroundFiveOrange.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
                 } else {
@@ -234,13 +234,13 @@
                 }
 
                 if (showGreen && !showOrange) {
-                    animateCarousel(eventCardsGreen, 0.65, scrollProgress);
+                    animateCarousel(eventCardsGreen, 0.635, scrollProgress);
                 } else {
                     hideCards(eventCardsGreen);
                 }
 
                 if (showOrange) {
-                    animateCarousel(eventCardsOrange, 0.95, scrollProgress);
+                    animateCarousel(eventCardsOrange, 0.935, scrollProgress);
                 } else {
                     hideCards(eventCardsOrange);
                 }
