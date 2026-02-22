@@ -75,21 +75,30 @@
                     if (btnSubscribe) btnSubscribe.classList.remove('show');
                 }
                 
-                // CAROUSEL CONTINUO - timing bilanciato
-                // Card 1: 5-35% (30% range)
-                // Card 2: 15-45% (30% range, same as card 1) ← ARRIVA PRIMA
-                // Card 3: 25-55% (30% range)
+                // CAROUSEL ULTRA-SEMPLICE - Zero scatti garantiti
+                // Ogni card ha 3 stati: nascosta sotto → preview 25% → main 100% → esce sopra
+                // Movimento SEMPRE verso l'alto, mai indietro
                 
-                // CARD 1
+                const baseY = 200; // Posizione base sotto
+                const centerY = 0; // Posizione centrale
+                const exitY = -200; // Posizione uscita sopra
+                
+                // CARD 1: 5-38%
                 if (eventCards[0]) {
-                    if (scrollProgress >= 0.05 && scrollProgress < 0.35) {
-                        const progress = (scrollProgress - 0.05) / 0.30;
-                        const opacity = progress < 0.15 ? progress / 0.15 : 
-                                       progress > 0.85 ? (1 - progress) / 0.15 : 1;
-                        const translateY = 150 - (progress * 300);
+                    if (scrollProgress >= 0.05 && scrollProgress < 0.38) {
+                        const t = (scrollProgress - 0.05) / 0.33; // 0-1
                         
-                        eventCards[0].style.opacity = Math.max(0, Math.min(1, opacity));
+                        // Movimento lineare: baseY → centerY → exitY
+                        const translateY = baseY - (t * (baseY - exitY));
+                        
+                        // Opacity: fade in → 1 → fade out
+                        let opacity;
+                        if (t < 0.1) opacity = t / 0.1;
+                        else if (t > 0.9) opacity = (1 - t) / 0.1;
+                        else opacity = 1;
+                        
                         eventCards[0].style.transform = `translateY(${translateY}px)`;
+                        eventCards[0].style.opacity = opacity;
                         eventCards[0].style.zIndex = '3';
                     } else {
                         eventCards[0].style.opacity = '0';
@@ -97,66 +106,60 @@
                     }
                 }
                 
-                // CARD 2 - ARRIVA PRIMA (15% invece di 20%)
+                // CARD 2: 12-50% (overlap con card 1)
                 if (eventCards[1]) {
-                    if (scrollProgress >= 0.15 && scrollProgress < 0.45) {
-                        const progress = (scrollProgress - 0.15) / 0.30; // stesso range di card 1
+                    if (scrollProgress >= 0.12 && scrollProgress < 0.50) {
+                        const t = (scrollProgress - 0.12) / 0.38;
                         
-                        let opacity, translateY;
-                        if (progress < 0.15) {
-                            // Entrata preview
-                            opacity = 0.25 * (progress / 0.15);
-                            translateY = 330 - (progress / 0.15) * 180;
-                        } else if (progress < 0.5) {
+                        const translateY = baseY - (t * (baseY - exitY));
+                        
+                        let opacity;
+                        if (t < 0.15) {
+                            // Preview fade in
+                            opacity = 0.25 * (t / 0.15);
+                        } else if (t < 0.4) {
                             // Preview → Main
-                            const mainProgress = (progress - 0.15) / 0.35;
-                            opacity = 0.25 + (0.75 * mainProgress);
-                            translateY = 150 - (mainProgress * 150);
-                        } else if (progress < 0.85) {
-                            // Main centrata (stesso tempo di card 1)
+                            const fadeProgress = (t - 0.15) / 0.25;
+                            opacity = 0.25 + (0.75 * fadeProgress);
+                        } else if (t < 0.85) {
+                            // Main
                             opacity = 1;
-                            translateY = 0;
                         } else {
-                            // Uscita
-                            const exitProgress = (progress - 0.85) / 0.15;
-                            opacity = 1 - exitProgress;
-                            translateY = -(exitProgress * 150);
+                            // Exit
+                            opacity = (1 - t) / 0.15;
                         }
                         
-                        eventCards[1].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[1].style.transform = `translateY(${translateY}px)`;
-                        eventCards[1].style.zIndex = progress > 0.5 ? '3' : '2';
+                        eventCards[1].style.opacity = opacity;
+                        eventCards[1].style.zIndex = t > 0.4 ? '3' : '2';
                     } else {
                         eventCards[1].style.opacity = '0';
                         eventCards[1].style.zIndex = '1';
                     }
                 }
                 
-                // CARD 3
+                // CARD 3: 24-62% (overlap con card 2)
                 if (eventCards[2]) {
-                    if (scrollProgress >= 0.25 && scrollProgress < 0.55) {
-                        const progress = (scrollProgress - 0.25) / 0.30;
+                    if (scrollProgress >= 0.24 && scrollProgress < 0.62) {
+                        const t = (scrollProgress - 0.24) / 0.38;
                         
-                        let opacity, translateY;
-                        if (progress < 0.15) {
-                            opacity = 0.25 * (progress / 0.15);
-                            translateY = 330 - (progress / 0.15) * 180;
-                        } else if (progress < 0.5) {
-                            const mainProgress = (progress - 0.15) / 0.35;
-                            opacity = 0.25 + (0.75 * mainProgress);
-                            translateY = 150 - (mainProgress * 150);
-                        } else if (progress < 0.85) {
+                        const translateY = baseY - (t * (baseY - exitY));
+                        
+                        let opacity;
+                        if (t < 0.15) {
+                            opacity = 0.25 * (t / 0.15);
+                        } else if (t < 0.4) {
+                            const fadeProgress = (t - 0.15) / 0.25;
+                            opacity = 0.25 + (0.75 * fadeProgress);
+                        } else if (t < 0.85) {
                             opacity = 1;
-                            translateY = 0;
                         } else {
-                            const exitProgress = (progress - 0.85) / 0.15;
-                            opacity = 1 - exitProgress;
-                            translateY = -(exitProgress * 150);
+                            opacity = (1 - t) / 0.15;
                         }
                         
-                        eventCards[2].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[2].style.transform = `translateY(${translateY}px)`;
-                        eventCards[2].style.zIndex = progress > 0.5 ? '3' : '2';
+                        eventCards[2].style.opacity = opacity;
+                        eventCards[2].style.zIndex = t > 0.4 ? '3' : '2';
                     } else {
                         eventCards[2].style.opacity = '0';
                         eventCards[2].style.zIndex = '1';
