@@ -82,39 +82,10 @@
             
             console.log('Scroll progress:', (scrollProgress * 100).toFixed(0) + '%');
             
-            // Calcola progresso scroll nella sezione 5
-            const sectionFiveHeight = sectionFive.offsetHeight;
+            // COLOR REVEAL DISABILITATO - solo macchina blu visibile
+            backgroundFiveGreen.style.clipPath = `inset(0 100% 0 0)`;
+            backgroundFiveOrange.style.clipPath = `inset(0 100% 0 0)`;
             
-            // Lo scroll progress parte da 0 quando sez 5 entra nello schermo
-            // e arriva a 1 quando sez 5 esce dallo schermo
-            const scrolled = windowHeight - sectionFiveTop;
-            const scrollProgress = Math.max(0, Math.min(1, scrolled / sectionFiveHeight));
-            
-            console.log('Section 5 top:', sectionFiveTop.toFixed(0));
-            console.log('Scrolled in section 5:', scrolled.toFixed(0));
-            console.log('Scroll progress:', (scrollProgress * 100).toFixed(0) + '%');
-            
-            // STEP-BASED transitions:
-            // 0-60%: Azzurra (molto più tempo)
-            // 60-80%: Verde (completa)
-            // 80-100%: Arancione (completa)
-            
-            if (scrollProgress < 0.6) {
-                // Azzurra - nascondi verde e arancione
-                backgroundFiveGreen.style.clipPath = `inset(0 100% 0 0)`;
-                backgroundFiveOrange.style.clipPath = `inset(0 100% 0 0)`;
-                console.log('Color: BLUE');
-            } else if (scrollProgress < 0.8) {
-                // Verde completa - mostra tutta verde
-                backgroundFiveGreen.style.clipPath = `inset(0 0% 0 0)`;
-                backgroundFiveOrange.style.clipPath = `inset(0 100% 0 0)`;
-                console.log('Color: GREEN');
-            } else {
-                // Arancione completa - mostra tutta arancione
-                backgroundFiveGreen.style.clipPath = `inset(0 0% 0 0)`;
-                backgroundFiveOrange.style.clipPath = `inset(0 0% 0 0)`;
-                console.log('Color: ORANGE');
-            }
         } else if (sectionFourTop < 0) {
             // Sezione 4 nera ha raggiunto il top → nascondi landing02, mostra nero
             backgroundFixed.classList.add('hidden');
