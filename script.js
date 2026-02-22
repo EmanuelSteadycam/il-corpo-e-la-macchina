@@ -62,27 +62,31 @@
                 // Usa l'intera altezza della sezione 5 (300svh)
                 const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / sectionFiveHeight));
                 
-                // Mostra header DOPO che sezione 4 è salita (più tardi)
+                // Mostra header elementi separatamente
                 if (scrollProgress > 0.05) {
-                    const eventsHeader = document.querySelector('.events-header');
-                    if (eventsHeader) eventsHeader.classList.add('show');
+                    const eventType = document.querySelector('.event-type');
+                    const btnSubscribe = document.querySelector('.btn-subscribe-header');
+                    if (eventType) eventType.classList.add('show');
+                    if (btnSubscribe) btnSubscribe.classList.add('show');
                 } else {
-                    const eventsHeader = document.querySelector('.events-header');
-                    if (eventsHeader) eventsHeader.classList.remove('show');
+                    const eventType = document.querySelector('.event-type');
+                    const btnSubscribe = document.querySelector('.btn-subscribe-header');
+                    if (eventType) eventType.classList.remove('show');
+                    if (btnSubscribe) btnSubscribe.classList.remove('show');
                 }
                 
-                // CAROUSEL CONTINUO - nessuna pausa, transizione fluida
-                // Card 1: 5-35% (sale continuamente)
-                // Card 2: 20-60% (preview→main continuamente)
-                // Card 3: 45-85% (preview→main continuamente)
+                // CAROUSEL CONTINUO - timing bilanciato
+                // Card 1: 5-35% (30% range)
+                // Card 2: 15-45% (30% range, same as card 1) ← ARRIVA PRIMA
+                // Card 3: 25-55% (30% range)
                 
-                // CARD 1 - sale e esce
+                // CARD 1
                 if (eventCards[0]) {
                     if (scrollProgress >= 0.05 && scrollProgress < 0.35) {
                         const progress = (scrollProgress - 0.05) / 0.30;
                         const opacity = progress < 0.15 ? progress / 0.15 : 
                                        progress > 0.85 ? (1 - progress) / 0.15 : 1;
-                        const translateY = 150 - (progress * 300); // da 150 a -150 (sale continuamente)
+                        const translateY = 150 - (progress * 300);
                         
                         eventCards[0].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[0].style.transform = `translateY(${translateY}px)`;
@@ -93,23 +97,23 @@
                     }
                 }
                 
-                // CARD 2 - entra come preview, diventa main, esce
+                // CARD 2 - ARRIVA PRIMA (15% invece di 20%)
                 if (eventCards[1]) {
-                    if (scrollProgress >= 0.20 && scrollProgress < 0.60) {
-                        const progress = (scrollProgress - 0.20) / 0.40;
+                    if (scrollProgress >= 0.15 && scrollProgress < 0.45) {
+                        const progress = (scrollProgress - 0.15) / 0.30; // stesso range di card 1
                         
                         let opacity, translateY;
                         if (progress < 0.15) {
                             // Entrata preview
                             opacity = 0.25 * (progress / 0.15);
-                            translateY = 330 - (progress / 0.15) * 180; // da 330 a 150
+                            translateY = 330 - (progress / 0.15) * 180;
                         } else if (progress < 0.5) {
-                            // Preview → Main (continua a salire)
+                            // Preview → Main
                             const mainProgress = (progress - 0.15) / 0.35;
                             opacity = 0.25 + (0.75 * mainProgress);
-                            translateY = 150 - (mainProgress * 150); // da 150 a 0
+                            translateY = 150 - (mainProgress * 150);
                         } else if (progress < 0.85) {
-                            // Main centrata
+                            // Main centrata (stesso tempo di card 1)
                             opacity = 1;
                             translateY = 0;
                         } else {
@@ -128,27 +132,23 @@
                     }
                 }
                 
-                // CARD 3 - entra come preview, diventa main
+                // CARD 3
                 if (eventCards[2]) {
-                    if (scrollProgress >= 0.45 && scrollProgress < 0.85) {
-                        const progress = (scrollProgress - 0.45) / 0.40;
+                    if (scrollProgress >= 0.25 && scrollProgress < 0.55) {
+                        const progress = (scrollProgress - 0.25) / 0.30;
                         
                         let opacity, translateY;
                         if (progress < 0.15) {
-                            // Entrata preview
                             opacity = 0.25 * (progress / 0.15);
                             translateY = 330 - (progress / 0.15) * 180;
                         } else if (progress < 0.5) {
-                            // Preview → Main
                             const mainProgress = (progress - 0.15) / 0.35;
                             opacity = 0.25 + (0.75 * mainProgress);
                             translateY = 150 - (mainProgress * 150);
                         } else if (progress < 0.85) {
-                            // Main centrata
                             opacity = 1;
                             translateY = 0;
                         } else {
-                            // Uscita
                             const exitProgress = (progress - 0.85) / 0.15;
                             opacity = 1 - exitProgress;
                             translateY = -(exitProgress * 150);

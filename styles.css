@@ -409,7 +409,7 @@ body {
     pointer-events: auto;
 }
 
-/* Header container - titolo e bottone affiancati */
+/* Header container - NO opacity fade, children animate separately */
 .events-header {
     position: absolute;
     top: 40px;
@@ -420,12 +420,6 @@ body {
     justify-content: space-between;
     gap: 15px;
     z-index: 20;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-}
-
-.events-header.show {
-    opacity: 1;
 }
 
 .event-type {
@@ -436,13 +430,48 @@ body {
     letter-spacing: 0.05em;
     line-height: 0.95;
     margin: 0;
+    opacity: 0;
+    transform: translateX(-50px); /* Entra da sinistra */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.event-type.show {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* Bottone header - più piccolo del titolo */
 .btn-subscribe-header {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(1.2rem, 4vw, 1.6rem); /* Più piccolo */
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
     color: #000000;
+    background: #ffd700;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1;
+    text-decoration: none;
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(50px); /* Entra da destra */
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s, background 0.3s ease; /* Delay 0.2s */
+}
+
+.btn-subscribe-header.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.btn-subscribe-header:hover {
+    background: #ffed4e;
+    transform: translateX(0) translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    text-decoration: none;
+}
     background: #ffd700;
     border: none;
     border-radius: 8px;
