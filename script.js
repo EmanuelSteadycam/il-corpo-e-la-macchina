@@ -18,6 +18,7 @@
     const sectionFive = document.querySelector('.section-five');
     
     // Elementi per animazioni entrata
+    const blueCarContent = document.querySelector('.blue-car-content');
     const eventType = document.querySelector('.event-type');
     const eventCards = document.querySelectorAll('.event-card-timeline');
     const btnSubscribe = document.querySelector('.btn-subscribe-single');
@@ -40,7 +41,7 @@
         
         // Determina quale background mostrare
         if (sectionFiveTop < windowHeight) {
-            // Sezione 5 visibile → mostra landing03
+            // Sezione 5 visibile → mostra landing03 + contenuti
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.remove('visible');
@@ -48,6 +49,7 @@
             backgroundFive.classList.add('visible');
             backgroundFiveGreen.classList.add('visible');
             backgroundFiveOrange.classList.add('visible');
+            if (blueCarContent) blueCarContent.classList.add('visible');
             
             // Le animazioni partono SOLO quando sezione 4 è completamente salita
             // (quando sectionFourTop è negativo per tutta la sua altezza)
@@ -119,6 +121,7 @@
             backgroundFive.classList.remove('visible');
             backgroundFiveGreen.classList.remove('visible');
             backgroundFiveOrange.classList.remove('visible');
+            if (blueCarContent) blueCarContent.classList.remove('visible');
         } else if (sectionThreeTop < windowHeight) {
             // Sezione 3 visibile → mostra landing02 + bottoni
             backgroundFixed.classList.add('hidden');
@@ -128,6 +131,7 @@
             backgroundFive.classList.remove('visible');
             backgroundFiveGreen.classList.remove('visible');
             backgroundFiveOrange.classList.remove('visible');
+            if (blueCarContent) blueCarContent.classList.remove('visible');
         } else {
             // Sezione 1 visibile → mostra landing01
             backgroundFixed.classList.remove('hidden');
@@ -137,6 +141,7 @@
             backgroundFive.classList.remove('visible');
             backgroundFiveGreen.classList.remove('visible');
             backgroundFiveOrange.classList.remove('visible');
+            if (blueCarContent) blueCarContent.classList.remove('visible');
         }
     }
     

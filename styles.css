@@ -389,11 +389,27 @@ body {
     object-position: center;
 }
 
-/* Contenuti macchina blu - INCONTRI PUBBLICI */
+/* Contenuti macchina blu - INCONTRI PUBBLICI - FIXED */
 .blue-car-content {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
     z-index: 10;
     padding: 40px 20px 60px 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.blue-car-content.visible {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .event-type {
@@ -594,6 +610,13 @@ body {
     
     /* Sezione 5 backgrounds centrati */
     .background-five {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    /* Blue car content centrato su desktop */
+    .blue-car-content {
         left: 50%;
         transform: translateX(-50%);
         max-width: 480px;
