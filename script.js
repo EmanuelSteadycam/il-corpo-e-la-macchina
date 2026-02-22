@@ -49,38 +49,62 @@
             backgroundFiveGreen.classList.add('visible');
             backgroundFiveOrange.classList.add('visible');
             
-            // Calcola progresso scroll nella sezione 5
-            const sectionFiveHeight = sectionFive.offsetHeight;
-            const scrolled = windowHeight - sectionFiveTop;
-            const scrollProgress = Math.max(0, Math.min(1, scrolled / sectionFiveHeight));
+            // Le animazioni partono SOLO quando sezione 4 è completamente salita
+            // (quando sectionFourTop è negativo per tutta la sua altezza)
+            const sectionFourHeight = sectionFourTransition.offsetHeight;
+            const sectionFourFullyScrolled = sectionFourTop <= -sectionFourHeight;
             
-            // Trigger animazioni eventi in base allo scroll
-            // 0% → INCONTRI PUBBLICI
-            if (scrollProgress > 0.05 && eventType) {
-                eventType.classList.add('show');
+            if (sectionFourFullyScrolled) {
+                // Calcola progresso scroll nella sezione 5 (DOPO che sez 4 è salita)
+                const sectionFiveHeight = sectionFive.offsetHeight;
+                const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
+                const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / (sectionFiveHeight * 0.5)));
+                
+                // Trigger animazioni eventi in base allo scroll (con rimozione quando si torna indietro)
+                // 5% → INCONTRI PUBBLICI
+                if (scrollProgress > 0.05 && eventType) {
+                    eventType.classList.add('show');
+                } else if (eventType) {
+                    eventType.classList.remove('show');
+                }
+                
+                // 15% → Scheda 1
+                if (scrollProgress > 0.15 && eventCards[0]) {
+                    eventCards[0].classList.add('show');
+                } else if (eventCards[0]) {
+                    eventCards[0].classList.remove('show');
+                }
+                
+                // 30% → Scheda 2
+                if (scrollProgress > 0.3 && eventCards[1]) {
+                    eventCards[1].classList.add('show');
+                } else if (eventCards[1]) {
+                    eventCards[1].classList.remove('show');
+                }
+                
+                // 45% → Scheda 3
+                if (scrollProgress > 0.45 && eventCards[2]) {
+                    eventCards[2].classList.add('show');
+                } else if (eventCards[2]) {
+                    eventCards[2].classList.remove('show');
+                }
+                
+                // 60% → Bottone
+                if (scrollProgress > 0.6 && btnSubscribe) {
+                    btnSubscribe.classList.add('show');
+                } else if (btnSubscribe) {
+                    btnSubscribe.classList.remove('show');
+                }
+                
+                console.log('Section 4 fully scrolled - Progress:', (scrollProgress * 100).toFixed(0) + '%');
+            } else {
+                // Sezione 4 non ancora completamente salita → nascondi tutto
+                if (eventType) eventType.classList.remove('show');
+                eventCards.forEach(card => card.classList.remove('show'));
+                if (btnSubscribe) btnSubscribe.classList.remove('show');
+                
+                console.log('Waiting for section 4 to fully scroll...');
             }
-            
-            // 10% → Scheda 1
-            if (scrollProgress > 0.1 && eventCards[0]) {
-                eventCards[0].classList.add('show');
-            }
-            
-            // 20% → Scheda 2
-            if (scrollProgress > 0.2 && eventCards[1]) {
-                eventCards[1].classList.add('show');
-            }
-            
-            // 30% → Scheda 3
-            if (scrollProgress > 0.3 && eventCards[2]) {
-                eventCards[2].classList.add('show');
-            }
-            
-            // 40% → Bottone
-            if (scrollProgress > 0.4 && btnSubscribe) {
-                btnSubscribe.classList.add('show');
-            }
-            
-            console.log('Scroll progress:', (scrollProgress * 100).toFixed(0) + '%');
             
             // COLOR REVEAL DISABILITATO - solo macchina blu visibile
             backgroundFiveGreen.style.clipPath = `inset(0 100% 0 0)`;
