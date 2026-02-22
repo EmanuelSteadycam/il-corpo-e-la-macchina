@@ -17,6 +17,12 @@
     const sectionFourTransition = document.querySelector('.section-four-transition');
     const sectionFive = document.querySelector('.section-five');
     
+    // Elementi per animazioni entrata
+    const eventType = document.querySelector('.event-type');
+    const eventCards = document.querySelectorAll('.event-card-timeline');
+    const btnSubscribe = document.querySelector('.btn-subscribe-single');
+    let animationsTriggered = false;
+    
     // Animazioni automatiche dopo 1 secondo
     setTimeout(function() {
         presentaLayer.classList.add('visible');
@@ -35,7 +41,7 @@
         
         // Determina quale background mostrare
         if (sectionFiveTop < windowHeight) {
-            // Sezione 5 visibile → mostra landing03 + color reveal
+            // Sezione 5 visibile → mostra landing03 + trigger animazioni
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.remove('visible');
@@ -43,6 +49,17 @@
             backgroundFive.classList.add('visible');
             backgroundFiveGreen.classList.add('visible');
             backgroundFiveOrange.classList.add('visible');
+            
+            // Trigger animazioni entrata (solo una volta)
+            if (!animationsTriggered) {
+                setTimeout(() => {
+                    if (eventType) eventType.classList.add('show');
+                    eventCards.forEach(card => card.classList.add('show'));
+                    if (btnSubscribe) btnSubscribe.classList.add('show');
+                    animationsTriggered = true;
+                    console.log('✓ Animazioni eventi triggerate');
+                }, 300); // Piccolo delay dopo che appare la macchina blu
+            }
             
             // Calcola progresso scroll nella sezione 5
             const sectionFiveHeight = sectionFive.offsetHeight;
