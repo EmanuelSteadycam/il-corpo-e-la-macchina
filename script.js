@@ -62,8 +62,8 @@
                 // Usa l'intera altezza della sezione 5 (300svh)
                 const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / sectionFiveHeight));
                 
-                // Mostra header (titolo + bottone)
-                if (scrollProgress > 0.01) {
+                // Mostra header DOPO che sezione 4 è salita (più tardi)
+                if (scrollProgress > 0.05) {
                     const eventsHeader = document.querySelector('.events-header');
                     if (eventsHeader) eventsHeader.classList.add('show');
                 } else {
@@ -71,23 +71,20 @@
                     if (eventsHeader) eventsHeader.classList.remove('show');
                 }
                 
-                // CAROUSEL CON PREVIEW - scheda successiva visibile al 10%
-                // Card 1: 0.01-0.30 (main), Card 2 preview dal 0.15
-                // Card 2: 0.30-0.55 (main), Card 3 preview dal 0.45
-                // Card 3: 0.55-0.80 (main)
+                // CAROUSEL CON PREVIEW FLUIDA - scheda successiva al 25% opacity
+                // Preview sale INSIEME alla scheda principale
                 
                 // CARD 1
                 if (eventCards[0]) {
-                    const card1Progress = (scrollProgress - 0.01) / 0.29;
-                    if (scrollProgress >= 0.01 && scrollProgress < 0.30) {
-                        // Scheda principale
+                    const card1Progress = (scrollProgress - 0.05) / 0.29;
+                    if (scrollProgress >= 0.05 && scrollProgress < 0.34) {
                         let opacity, translateY;
-                        if (card1Progress < 0.25) {
-                            const entranceProgress = card1Progress / 0.25;
+                        if (card1Progress < 0.2) {
+                            const entranceProgress = card1Progress / 0.2;
                             opacity = entranceProgress;
                             translateY = 150 - (entranceProgress * 150);
-                        } else if (card1Progress > 0.75) {
-                            const exitProgress = (card1Progress - 0.75) / 0.25;
+                        } else if (card1Progress > 0.8) {
+                            const exitProgress = (card1Progress - 0.8) / 0.2;
                             opacity = 1 - exitProgress;
                             translateY = -(exitProgress * 150);
                         } else {
@@ -105,21 +102,24 @@
                 
                 // CARD 2
                 if (eventCards[1]) {
-                    if (scrollProgress >= 0.15 && scrollProgress < 0.30) {
-                        // PREVIEW - visibile al 10% sotto card 1
-                        eventCards[1].style.opacity = '0.1';
-                        eventCards[1].style.transform = 'translateY(180px)';
-                        eventCards[1].style.zIndex = '1';
-                    } else if (scrollProgress >= 0.30 && scrollProgress < 0.55) {
-                        // MAIN - scheda principale
-                        const card2Progress = (scrollProgress - 0.30) / 0.25;
+                    if (scrollProgress >= 0.20 && scrollProgress < 0.34) {
+                        // PREVIEW FLUIDA - sale insieme a card 1, opacity 25%
+                        const previewProgress = (scrollProgress - 0.20) / 0.14;
+                        const baseTranslateY = 180;
+                        const translateY = baseTranslateY - (previewProgress * 30); // sale leggermente
+                        eventCards[1].style.opacity = '0.25';
+                        eventCards[1].style.transform = `translateY(${translateY}px)`;
+                        eventCards[1].style.zIndex = '2';
+                    } else if (scrollProgress >= 0.34 && scrollProgress < 0.60) {
+                        // MAIN - diventa principale
+                        const card2Progress = (scrollProgress - 0.34) / 0.26;
                         let opacity, translateY;
-                        if (card2Progress < 0.25) {
-                            const entranceProgress = card2Progress / 0.25;
-                            opacity = 0.1 + (entranceProgress * 0.9); // da 0.1 a 1
-                            translateY = 180 - (entranceProgress * 180); // da 180 a 0
-                        } else if (card2Progress > 0.75) {
-                            const exitProgress = (card2Progress - 0.75) / 0.25;
+                        if (card2Progress < 0.2) {
+                            const entranceProgress = card2Progress / 0.2;
+                            opacity = 0.25 + (entranceProgress * 0.75); // da 0.25 a 1
+                            translateY = 150 - (entranceProgress * 150);
+                        } else if (card2Progress > 0.8) {
+                            const exitProgress = (card2Progress - 0.8) / 0.2;
                             opacity = 1 - exitProgress;
                             translateY = -(exitProgress * 150);
                         } else {
@@ -137,21 +137,24 @@
                 
                 // CARD 3
                 if (eventCards[2]) {
-                    if (scrollProgress >= 0.45 && scrollProgress < 0.55) {
-                        // PREVIEW - visibile al 10% sotto card 2
-                        eventCards[2].style.opacity = '0.1';
-                        eventCards[2].style.transform = 'translateY(180px)';
-                        eventCards[2].style.zIndex = '1';
-                    } else if (scrollProgress >= 0.55 && scrollProgress < 0.80) {
-                        // MAIN - scheda principale
-                        const card3Progress = (scrollProgress - 0.55) / 0.25;
+                    if (scrollProgress >= 0.48 && scrollProgress < 0.60) {
+                        // PREVIEW FLUIDA - sale insieme a card 2, opacity 25%
+                        const previewProgress = (scrollProgress - 0.48) / 0.12;
+                        const baseTranslateY = 180;
+                        const translateY = baseTranslateY - (previewProgress * 30);
+                        eventCards[2].style.opacity = '0.25';
+                        eventCards[2].style.transform = `translateY(${translateY}px)`;
+                        eventCards[2].style.zIndex = '2';
+                    } else if (scrollProgress >= 0.60 && scrollProgress < 0.85) {
+                        // MAIN
+                        const card3Progress = (scrollProgress - 0.60) / 0.25;
                         let opacity, translateY;
-                        if (card3Progress < 0.25) {
-                            const entranceProgress = card3Progress / 0.25;
-                            opacity = 0.1 + (entranceProgress * 0.9);
-                            translateY = 180 - (entranceProgress * 180);
-                        } else if (card3Progress > 0.75) {
-                            const exitProgress = (card3Progress - 0.75) / 0.25;
+                        if (card3Progress < 0.2) {
+                            const entranceProgress = card3Progress / 0.2;
+                            opacity = 0.25 + (entranceProgress * 0.75);
+                            translateY = 150 - (entranceProgress * 150);
+                        } else if (card3Progress > 0.8) {
+                            const exitProgress = (card3Progress - 0.8) / 0.2;
                             opacity = 1 - exitProgress;
                             translateY = -(exitProgress * 150);
                         } else {
