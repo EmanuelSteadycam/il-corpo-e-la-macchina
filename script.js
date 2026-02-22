@@ -52,60 +52,76 @@
             if (blueCarContent) blueCarContent.classList.add('visible');
             
             // Le animazioni partono SOLO quando sezione 4 è completamente salita
-            // (quando sectionFourTop è negativo per tutta la sua altezza)
             const sectionFourHeight = sectionFourTransition.offsetHeight;
             const sectionFourFullyScrolled = sectionFourTop <= -sectionFourHeight;
             
             if (sectionFourFullyScrolled) {
-                // Calcola progresso scroll nella sezione 5 (DOPO che sez 4 è salita)
+                // Calcola progresso scroll nella sezione 5
                 const sectionFiveHeight = sectionFive.offsetHeight;
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
-                const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / (sectionFiveHeight * 0.5)));
+                const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / (sectionFiveHeight * 0.8)));
                 
-                // Trigger animazioni eventi in base allo scroll (con rimozione quando si torna indietro)
-                // 5% → INCONTRI PUBBLICI
-                if (scrollProgress > 0.05 && eventType) {
+                // Mostra titolo
+                if (scrollProgress > 0.02 && eventType) {
                     eventType.classList.add('show');
                 } else if (eventType) {
                     eventType.classList.remove('show');
                 }
                 
-                // 15% → Scheda 1
-                if (scrollProgress > 0.15 && eventCards[0]) {
-                    eventCards[0].classList.add('show');
-                } else if (eventCards[0]) {
-                    eventCards[0].classList.remove('show');
+                // ANIMAZIONE SCHEDE - una alla volta dal basso verso l'alto
+                // Ogni scheda occupa un range di scroll
+                // Scheda 1: 0.1 - 0.35 (appare → sale → scompare)
+                // Scheda 2: 0.35 - 0.6
+                // Scheda 3: 0.6 - 0.85
+                
+                if (eventCards[0]) {
+                    const card1Progress = (scrollProgress - 0.1) / 0.25; // 0-1 nel range 0.1-0.35
+                    if (scrollProgress >= 0.1 && scrollProgress < 0.35) {
+                        const opacity = card1Progress < 0.2 ? card1Progress * 5 : // fade in
+                                       card1Progress > 0.8 ? (1 - card1Progress) * 5 : 1; // fade out
+                        const translateY = 100 - (card1Progress * 120); // sale dal basso
+                        eventCards[0].style.opacity = Math.max(0, Math.min(1, opacity));
+                        eventCards[0].style.transform = `translateY(${translateY}px)`;
+                    } else {
+                        eventCards[0].style.opacity = 0;
+                    }
                 }
                 
-                // 30% → Scheda 2
-                if (scrollProgress > 0.3 && eventCards[1]) {
-                    eventCards[1].classList.add('show');
-                } else if (eventCards[1]) {
-                    eventCards[1].classList.remove('show');
+                if (eventCards[1]) {
+                    const card2Progress = (scrollProgress - 0.35) / 0.25;
+                    if (scrollProgress >= 0.35 && scrollProgress < 0.6) {
+                        const opacity = card2Progress < 0.2 ? card2Progress * 5 :
+                                       card2Progress > 0.8 ? (1 - card2Progress) * 5 : 1;
+                        const translateY = 100 - (card2Progress * 120);
+                        eventCards[1].style.opacity = Math.max(0, Math.min(1, opacity));
+                        eventCards[1].style.transform = `translateY(${translateY}px)`;
+                    } else {
+                        eventCards[1].style.opacity = 0;
+                    }
                 }
                 
-                // 45% → Scheda 3
-                if (scrollProgress > 0.45 && eventCards[2]) {
-                    eventCards[2].classList.add('show');
-                } else if (eventCards[2]) {
-                    eventCards[2].classList.remove('show');
+                if (eventCards[2]) {
+                    const card3Progress = (scrollProgress - 0.6) / 0.25;
+                    if (scrollProgress >= 0.6 && scrollProgress < 0.85) {
+                        const opacity = card3Progress < 0.2 ? card3Progress * 5 :
+                                       card3Progress > 0.8 ? (1 - card3Progress) * 5 : 1;
+                        const translateY = 100 - (card3Progress * 120);
+                        eventCards[2].style.opacity = Math.max(0, Math.min(1, opacity));
+                        eventCards[2].style.transform = `translateY(${translateY}px)`;
+                    } else {
+                        eventCards[2].style.opacity = 0;
+                    }
                 }
                 
-                // 60% → Bottone
-                if (scrollProgress > 0.6 && btnSubscribe) {
-                    btnSubscribe.classList.add('show');
-                } else if (btnSubscribe) {
-                    btnSubscribe.classList.remove('show');
-                }
-                
-                console.log('Section 4 fully scrolled - Progress:', (scrollProgress * 100).toFixed(0) + '%');
+                console.log('Scroll:', (scrollProgress * 100).toFixed(0) + '%');
             } else {
                 // Sezione 4 non ancora completamente salita → nascondi tutto
                 if (eventType) eventType.classList.remove('show');
-                eventCards.forEach(card => card.classList.remove('show'));
+                eventCards.forEach(card => {
+                    card.style.opacity = 0;
+                    card.style.transform = 'translateY(100px)';
+                });
                 if (btnSubscribe) btnSubscribe.classList.remove('show');
-                
-                console.log('Waiting for section 4 to fully scroll...');
             }
             
             // COLOR REVEAL DISABILITATO - solo macchina blu visibile
