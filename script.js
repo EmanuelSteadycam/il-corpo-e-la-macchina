@@ -71,10 +71,9 @@
                     if (eventsHeader) eventsHeader.classList.remove('show');
                 }
                 
-                // CAROUSEL CON PREVIEW FLUIDA - scheda successiva al 25% opacity
-                // Preview sale INSIEME alla scheda principale
+                // CAROUSEL SINCRONIZZATO - preview sale INSIEME alla main
                 
-                // CARD 1
+                // CARD 1 + CARD 2 PREVIEW (salgono insieme)
                 if (eventCards[0]) {
                     const card1Progress = (scrollProgress - 0.05) / 0.29;
                     if (scrollProgress >= 0.05 && scrollProgress < 0.34) {
@@ -94,30 +93,41 @@
                         eventCards[0].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[0].style.transform = `translateY(${translateY}px)`;
                         eventCards[0].style.zIndex = '3';
+                        
+                        // CARD 2 PREVIEW - sale INSIEME a card 1, sempre visibile
+                        if (eventCards[1]) {
+                            let previewOpacity, previewTranslateY;
+                            if (card1Progress < 0.2) {
+                                const entranceProgress = card1Progress / 0.2;
+                                previewOpacity = entranceProgress * 0.25;
+                                previewTranslateY = 150 + 180 - (entranceProgress * 150); // parte sotto, sale insieme
+                            } else if (card1Progress > 0.8) {
+                                const exitProgress = (card1Progress - 0.8) / 0.2;
+                                previewOpacity = 0.25;
+                                previewTranslateY = 180 - (exitProgress * 150); // continua a salire
+                            } else {
+                                previewOpacity = 0.25;
+                                previewTranslateY = 180; // posizione fissa sotto
+                            }
+                            eventCards[1].style.opacity = previewOpacity;
+                            eventCards[1].style.transform = `translateY(${previewTranslateY}px)`;
+                            eventCards[1].style.zIndex = '2';
+                        }
                     } else {
                         eventCards[0].style.opacity = '0';
                         eventCards[0].style.zIndex = '1';
                     }
                 }
                 
-                // CARD 2
+                // CARD 2 MAIN + CARD 3 PREVIEW (salgono insieme)
                 if (eventCards[1]) {
-                    if (scrollProgress >= 0.20 && scrollProgress < 0.34) {
-                        // PREVIEW FLUIDA - sale insieme a card 1, opacity 25%
-                        const previewProgress = (scrollProgress - 0.20) / 0.14;
-                        const baseTranslateY = 180;
-                        const translateY = baseTranslateY - (previewProgress * 30); // sale leggermente
-                        eventCards[1].style.opacity = '0.25';
-                        eventCards[1].style.transform = `translateY(${translateY}px)`;
-                        eventCards[1].style.zIndex = '2';
-                    } else if (scrollProgress >= 0.34 && scrollProgress < 0.60) {
-                        // MAIN - diventa principale
+                    if (scrollProgress >= 0.34 && scrollProgress < 0.60) {
                         const card2Progress = (scrollProgress - 0.34) / 0.26;
                         let opacity, translateY;
                         if (card2Progress < 0.2) {
                             const entranceProgress = card2Progress / 0.2;
                             opacity = 0.25 + (entranceProgress * 0.75); // da 0.25 a 1
-                            translateY = 150 - (entranceProgress * 150);
+                            translateY = 180 - (entranceProgress * 180); // continua da dove era
                         } else if (card2Progress > 0.8) {
                             const exitProgress = (card2Progress - 0.8) / 0.2;
                             opacity = 1 - exitProgress;
@@ -129,30 +139,44 @@
                         eventCards[1].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[1].style.transform = `translateY(${translateY}px)`;
                         eventCards[1].style.zIndex = '3';
+                        
+                        // CARD 3 PREVIEW - sale INSIEME a card 2
+                        if (eventCards[2]) {
+                            let previewOpacity, previewTranslateY;
+                            if (card2Progress < 0.2) {
+                                const entranceProgress = card2Progress / 0.2;
+                                previewOpacity = entranceProgress * 0.25;
+                                previewTranslateY = 180 + 180 - (entranceProgress * 180);
+                            } else if (card2Progress > 0.8) {
+                                const exitProgress = (card2Progress - 0.8) / 0.2;
+                                previewOpacity = 0.25;
+                                previewTranslateY = 180 - (exitProgress * 150);
+                            } else {
+                                previewOpacity = 0.25;
+                                previewTranslateY = 180;
+                            }
+                            eventCards[2].style.opacity = previewOpacity;
+                            eventCards[2].style.transform = `translateY(${previewTranslateY}px)`;
+                            eventCards[2].style.zIndex = '2';
+                        }
+                    } else if (scrollProgress < 0.34) {
+                        // Prima di diventare main, è già visibile come preview
+                        // (gestito nel blocco di card 1)
                     } else {
                         eventCards[1].style.opacity = '0';
                         eventCards[1].style.zIndex = '1';
                     }
                 }
                 
-                // CARD 3
+                // CARD 3 MAIN
                 if (eventCards[2]) {
-                    if (scrollProgress >= 0.48 && scrollProgress < 0.60) {
-                        // PREVIEW FLUIDA - sale insieme a card 2, opacity 25%
-                        const previewProgress = (scrollProgress - 0.48) / 0.12;
-                        const baseTranslateY = 180;
-                        const translateY = baseTranslateY - (previewProgress * 30);
-                        eventCards[2].style.opacity = '0.25';
-                        eventCards[2].style.transform = `translateY(${translateY}px)`;
-                        eventCards[2].style.zIndex = '2';
-                    } else if (scrollProgress >= 0.60 && scrollProgress < 0.85) {
-                        // MAIN
+                    if (scrollProgress >= 0.60 && scrollProgress < 0.85) {
                         const card3Progress = (scrollProgress - 0.60) / 0.25;
                         let opacity, translateY;
                         if (card3Progress < 0.2) {
                             const entranceProgress = card3Progress / 0.2;
                             opacity = 0.25 + (entranceProgress * 0.75);
-                            translateY = 150 - (entranceProgress * 150);
+                            translateY = 180 - (entranceProgress * 180);
                         } else if (card3Progress > 0.8) {
                             const exitProgress = (card3Progress - 0.8) / 0.2;
                             opacity = 1 - exitProgress;
@@ -164,6 +188,9 @@
                         eventCards[2].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[2].style.transform = `translateY(${translateY}px)`;
                         eventCards[2].style.zIndex = '3';
+                    } else if (scrollProgress < 0.60) {
+                        // Prima di diventare main, è già visibile come preview
+                        // (gestito nel blocco di card 2)
                     } else {
                         eventCards[2].style.opacity = '0';
                         eventCards[2].style.zIndex = '1';
