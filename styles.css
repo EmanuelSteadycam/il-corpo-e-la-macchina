@@ -429,14 +429,13 @@ body {
     transform: translateX(0);
 }
 
-/* Container per scheda singola - centrato verticalmente */
+/* Container per scheda singola - posizionate sotto la macchina */
 .event-cards-container {
     position: absolute;
-    top: 50%;
+    bottom: 25%; /* Nella parte bassa dello schermo, sotto la macchina */
     left: 0;
     width: 100%;
     padding: 0 20px;
-    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -453,7 +452,7 @@ body {
     border-radius: 12px;
     padding: 16px;
     opacity: 0;
-    transform: translateY(50px); /* Ridotto da 100px */
+    transform: translateY(150px); /* Inizia più sotto */
     transition: none; /* Controllato da JavaScript */
 }
 
@@ -550,8 +549,12 @@ body {
     font-size: 0.9em;
 }
 
-/* Bottone unico iscrizione */
+/* Bottone unico iscrizione - in basso fisso */
 .btn-subscribe-single {
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    right: 20px;
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(1.2rem, 4vw, 1.5rem);
     color: #000000;
@@ -560,23 +563,20 @@ body {
     border-radius: 12px;
     padding: 16px 40px;
     cursor: pointer;
-    transition: all 0.3s ease;
     letter-spacing: 0.1em;
-    width: 100%;
-    margin-top: 20px;
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s ease;
 }
 
 .btn-subscribe-single.show {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 0.6s ease 0.8s, transform 0.6s ease 0.8s, background 0.3s ease;
 }
 
 .btn-subscribe-single:hover {
     background: #ffed4e;
-    transform: translateY(-3px) scale(1);
+    transform: scale(1.02);
     box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
 }
 
