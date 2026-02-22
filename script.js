@@ -22,37 +22,48 @@
     const greenCarContent = document.querySelector('.green-car-content');
     const orangeCarContent = document.querySelector('.orange-car-content');
     
-    // Card BLU
-    const eventCards = document.querySelectorAll('.event-card-timeline:not(.green):not(.orange)');
-    // Card VERDE
-    const eventCardsGreen = document.querySelectorAll('.event-card-timeline.green');
-    // Card ARANCIONE
+    // Cards
+    const eventCards       = document.querySelectorAll('.event-card-timeline:not(.green):not(.orange)');
+    const eventCardsGreen  = document.querySelectorAll('.event-card-timeline.green');
     const eventCardsOrange = document.querySelectorAll('.event-card-timeline.orange');
+
+    // Header
+    const eventTypeBlu      = document.querySelector('.event-type:not(.green):not(.orange)');
+    const btnSubscribeBlu   = document.querySelector('.btn-subscribe-header:not(.green):not(.orange)');
+    const eventTypeGreen    = document.querySelector('.event-type.green');
+    const btnSubscribeGreen = document.querySelector('.btn-subscribe-header.green');
+    const eventTypeOrange    = document.querySelector('.event-type.orange');
+    const btnSubscribeOrange = document.querySelector('.btn-subscribe-header.orange');
+
+    // Init: green/orange COMPLETAMENTE nascosti con style inline (override CSS)
+    if (backgroundFiveGreen) {
+        backgroundFiveGreen.style.opacity  = '0';
+        backgroundFiveGreen.style.clipPath = 'inset(0 100% 0 0)';
+    }
+    if (backgroundFiveOrange) {
+        backgroundFiveOrange.style.opacity  = '0';
+        backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)';
+    }
     
-    // Animazioni automatiche dopo 1 secondo
+    // Animazioni intro
     setTimeout(function() {
-        presentaLayer.classList.add('visible');
-        titleGroup.classList.add('visible');
-        console.log('✓ Presenta e Titolo apparsi automaticamente');
+        if (presentaLayer) presentaLayer.classList.add('visible');
+        if (titleGroup)    titleGroup.classList.add('visible');
     }, 1000);
     
-    // ─── HELPERS ────────────────────────────────────────────────
-    
+    // ─── HELPERS ─────────────────────────────────────────────────
+
     function animateCarousel(cards, baseProgress, scrollProgress) {
         const baseY = 200;
         const exitY = -200;
 
-        // CARD 1: baseProgress + 0 → baseProgress + 30%
         const c1Start = baseProgress;
         const c1End   = baseProgress + 0.30;
         if (cards[0]) {
             if (scrollProgress >= c1Start && scrollProgress < c1End) {
                 const t = (scrollProgress - c1Start) / 0.30;
                 const translateY = baseY - (t * (baseY - exitY));
-                let opacity;
-                if (t < 0.1)      opacity = t / 0.1;
-                else if (t > 0.9) opacity = (1 - t) / 0.1;
-                else               opacity = 1;
+                const opacity = t < 0.1 ? t / 0.1 : (t > 0.9 ? (1 - t) / 0.1 : 1);
                 cards[0].style.transform = `translateY(${translateY}px)`;
                 cards[0].style.opacity   = opacity;
                 cards[0].style.zIndex    = '3';
@@ -62,7 +73,6 @@
             }
         }
 
-        // CARD 2: baseProgress + 15% → baseProgress + 45%
         const c2Start = baseProgress + 0.15;
         const c2End   = baseProgress + 0.45;
         const c2ZUp   = baseProgress + 0.28;
@@ -71,15 +81,10 @@
                 const t = (scrollProgress - c2Start) / 0.30;
                 const translateY = baseY - (t * (baseY - exitY));
                 let opacity;
-                if (t < 0.15) {
-                    opacity = 0.25 * (t / 0.15);
-                } else if (t < 0.35) {
-                    opacity = 0.25 + (0.75 * ((t - 0.15) / 0.20));
-                } else if (t < 0.85) {
-                    opacity = 1;
-                } else {
-                    opacity = (1 - t) / 0.15;
-                }
+                if (t < 0.15)      opacity = 0.25 * (t / 0.15);
+                else if (t < 0.35) opacity = 0.25 + (0.75 * ((t - 0.15) / 0.20));
+                else if (t < 0.85) opacity = 1;
+                else               opacity = (1 - t) / 0.15;
                 cards[1].style.transform = `translateY(${translateY}px)`;
                 cards[1].style.opacity   = opacity;
                 cards[1].style.zIndex    = scrollProgress > c2ZUp ? '3' : '2';
@@ -89,7 +94,6 @@
             }
         }
 
-        // CARD 3: baseProgress + 30% → baseProgress + 60%
         const c3Start = baseProgress + 0.30;
         const c3End   = baseProgress + 0.60;
         const c3ZUp   = baseProgress + 0.43;
@@ -98,15 +102,10 @@
                 const t = (scrollProgress - c3Start) / 0.30;
                 const translateY = baseY - (t * (baseY - exitY));
                 let opacity;
-                if (t < 0.15) {
-                    opacity = 0.25 * (t / 0.15);
-                } else if (t < 0.35) {
-                    opacity = 0.25 + (0.75 * ((t - 0.15) / 0.20));
-                } else if (t < 0.85) {
-                    opacity = 1;
-                } else {
-                    opacity = (1 - t) / 0.15;
-                }
+                if (t < 0.15)      opacity = 0.25 * (t / 0.15);
+                else if (t < 0.35) opacity = 0.25 + (0.75 * ((t - 0.15) / 0.20));
+                else if (t < 0.85) opacity = 1;
+                else               opacity = (1 - t) / 0.15;
                 cards[2].style.transform = `translateY(${translateY}px)`;
                 cards[2].style.opacity   = opacity;
                 cards[2].style.zIndex    = scrollProgress > c3ZUp ? '3' : '2';
@@ -125,7 +124,14 @@
         });
     }
 
-    // ─── MAIN SCROLL LOGIC ───────────────────────────────────────
+    function resetGreenOrange() {
+        backgroundFiveGreen.style.opacity   = '0';
+        backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)';
+        backgroundFiveOrange.style.opacity  = '0';
+        backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)';
+    }
+
+    // ─── MAIN ────────────────────────────────────────────────────
     
     function updateBackgrounds() {
         if (!sectionThree || !sectionFourTransition || !sectionFive) return;
@@ -136,71 +142,60 @@
         const windowHeight    = window.innerHeight;
         
         if (sectionFiveTop < windowHeight) {
-            // ── Sezione 5 visibile ──
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.remove('visible');
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
-            backgroundFive.classList.add('visible');
-            
-            const sectionFourHeight    = sectionFourTransition.offsetHeight;
+
+            const sectionFourHeight        = sectionFourTransition.offsetHeight;
             const sectionFourFullyScrolled = sectionFourTop <= -sectionFourHeight;
             
             if (sectionFourFullyScrolled) {
-                const sectionFiveHeight  = sectionFive.offsetHeight;
-                const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
-                const scrollProgress     = Math.max(0, Math.min(1.5, scrollInSectionFive / sectionFiveHeight));
+                backgroundFive.style.opacity = '1';
 
-                // ── VISIBILITY MANAGEMENT ──────────────────────────────────
-                // Soglie: blu 0-65%, verde 65-95%, arancione 95%+
+                const sectionFiveHeight   = sectionFive.offsetHeight;
+                const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
+                const scrollProgress      = Math.max(0, Math.min(1.5, scrollInSectionFive / sectionFiveHeight));
+
                 const showGreen  = scrollProgress >= 0.65;
                 const showOrange = scrollProgress >= 0.95;
 
+                // Visibility contenuti
                 if (showOrange) {
-                    // Solo arancione
                     if (blueCarContent)   blueCarContent.classList.remove('visible');
                     if (greenCarContent)  greenCarContent.classList.remove('visible');
                     if (orangeCarContent) orangeCarContent.classList.add('visible');
                 } else if (showGreen) {
-                    // Solo verde
                     if (blueCarContent)   blueCarContent.classList.remove('visible');
                     if (greenCarContent)  greenCarContent.classList.add('visible');
                     if (orangeCarContent) orangeCarContent.classList.remove('visible');
                 } else {
-                    // Solo blu
                     if (blueCarContent)   blueCarContent.classList.add('visible');
                     if (greenCarContent)  greenCarContent.classList.remove('visible');
                     if (orangeCarContent) orangeCarContent.classList.remove('visible');
                 }
 
-                // ── COLOR REVEAL (clip-path) ───────────────────────────────
-                // Verde appare scroll 65-95%
-                if (scrollProgress >= 0.95) {
-                    backgroundFiveGreen.classList.add('visible');
-                    backgroundFiveGreen.style.clipPath = 'inset(0 0% 0 0)';
-                } else if (scrollProgress >= 0.65) {
-                    backgroundFiveGreen.classList.add('visible');
-                    const greenProg = (scrollProgress - 0.65) / 0.30;
-                    backgroundFiveGreen.style.clipPath = `inset(0 ${(1 - greenProg) * 100}% 0 0)`;
+                // Color reveal — SOLO style inline, mai .visible su green/orange
+                if (scrollProgress >= 0.65) {
+                    const p = Math.min(1, (scrollProgress - 0.65) / 0.30);
+                    backgroundFiveGreen.style.opacity  = '1';
+                    backgroundFiveGreen.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
                 } else {
-                    backgroundFiveGreen.classList.remove('visible');
+                    backgroundFiveGreen.style.opacity  = '0';
                     backgroundFiveGreen.style.clipPath = 'inset(0 100% 0 0)';
                 }
 
-                // Arancione appare scroll 95-125%
                 if (scrollProgress >= 0.95) {
-                    backgroundFiveOrange.classList.add('visible');
-                    const orangeProg = Math.min(1, (scrollProgress - 0.95) / 0.30);
-                    backgroundFiveOrange.style.clipPath = `inset(0 ${(1 - orangeProg) * 100}% 0 0)`;
+                    const p = Math.min(1, (scrollProgress - 0.95) / 0.30);
+                    backgroundFiveOrange.style.opacity  = '1';
+                    backgroundFiveOrange.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
                 } else {
-                    backgroundFiveOrange.classList.remove('visible');
+                    backgroundFiveOrange.style.opacity  = '0';
                     backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)';
                 }
 
-                // ── HEADER ELEMENTI BLU ────────────────────────────────────
-                const eventTypeBlu   = document.querySelector('.event-type:not(.green):not(.orange)');
-                const btnSubscribeBlu = document.querySelector('.btn-subscribe-header:not(.green):not(.orange)');
-                if (!showGreen && !showOrange) {
+                // Header blu
+                if (!showGreen) {
                     if (scrollProgress > 0.05) {
                         if (eventTypeBlu)    eventTypeBlu.classList.add('show');
                         if (btnSubscribeBlu) btnSubscribeBlu.classList.add('show');
@@ -213,9 +208,7 @@
                     if (btnSubscribeBlu) btnSubscribeBlu.classList.remove('show');
                 }
 
-                // ── HEADER ELEMENTI VERDE ──────────────────────────────────
-                const eventTypeGreen    = document.querySelector('.event-type.green');
-                const btnSubscribeGreen = document.querySelector('.btn-subscribe-header.green');
+                // Header verde
                 if (showGreen && !showOrange) {
                     if (eventTypeGreen)    eventTypeGreen.classList.add('show');
                     if (btnSubscribeGreen) btnSubscribeGreen.classList.add('show');
@@ -224,9 +217,7 @@
                     if (btnSubscribeGreen) btnSubscribeGreen.classList.remove('show');
                 }
 
-                // ── HEADER ELEMENTI ARANCIONE ──────────────────────────────
-                const eventTypeOrange    = document.querySelector('.event-type.orange');
-                const btnSubscribeOrange = document.querySelector('.btn-subscribe-header.orange');
+                // Header arancione
                 if (showOrange) {
                     if (eventTypeOrange)    eventTypeOrange.classList.add('show');
                     if (btnSubscribeOrange) btnSubscribeOrange.classList.add('show');
@@ -235,48 +226,37 @@
                     if (btnSubscribeOrange) btnSubscribeOrange.classList.remove('show');
                 }
 
-                // ── CAROUSEL BLU (0-65%) ───────────────────────────────────
-                // Cards: 5-35%, 20-50%, 35-65% → baseProgress = 0.05
-                if (!showGreen && !showOrange) {
+                // Carousel
+                if (!showGreen) {
                     animateCarousel(eventCards, 0.05, scrollProgress);
                 } else {
                     hideCards(eventCards);
                 }
 
-                // ── CAROUSEL VERDE (65-95%) ────────────────────────────────
-                // Cards: 65-95%, 80-110%, 95-125% → baseProgress = 0.65
                 if (showGreen && !showOrange) {
                     animateCarousel(eventCardsGreen, 0.65, scrollProgress);
                 } else {
                     hideCards(eventCardsGreen);
                 }
 
-                // ── CAROUSEL ARANCIONE (95%+) ──────────────────────────────
-                // Cards: 95-125%, 110-140%, 125-155% → baseProgress = 0.95
                 if (showOrange) {
                     animateCarousel(eventCardsOrange, 0.95, scrollProgress);
                 } else {
                     hideCards(eventCardsOrange);
                 }
 
-                console.log(`Scroll: ${(scrollProgress * 100).toFixed(0)}%`);
-                
             } else {
-                // Sezione 4 non ancora salita → nascondi tutto
-                const eventTypeBlu    = document.querySelector('.event-type:not(.green):not(.orange)');
-                const btnSubscribeBlu = document.querySelector('.btn-subscribe-header:not(.green):not(.orange)');
+                // Sezione 4 non ancora completamente salita
+                backgroundFive.style.opacity = '1';
+                resetGreenOrange();
+                if (blueCarContent)   blueCarContent.classList.add('visible');
+                if (greenCarContent)  greenCarContent.classList.remove('visible');
+                if (orangeCarContent) orangeCarContent.classList.remove('visible');
                 if (eventTypeBlu)    eventTypeBlu.classList.remove('show');
                 if (btnSubscribeBlu) btnSubscribeBlu.classList.remove('show');
                 hideCards(eventCards);
                 hideCards(eventCardsGreen);
                 hideCards(eventCardsOrange);
-                if (blueCarContent)   blueCarContent.classList.add('visible');
-                if (greenCarContent)  greenCarContent.classList.remove('visible');
-                if (orangeCarContent) orangeCarContent.classList.remove('visible');
-                backgroundFiveGreen.classList.remove('visible');
-                backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)';
-                backgroundFiveOrange.classList.remove('visible');
-                backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)';
             }
 
         } else if (sectionFourTop < 0) {
@@ -284,9 +264,8 @@
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.remove('visible');
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
-            backgroundFive.classList.remove('visible');
-            backgroundFiveGreen.classList.remove('visible');
-            backgroundFiveOrange.classList.remove('visible');
+            backgroundFive.style.opacity = '0';
+            resetGreenOrange();
             if (blueCarContent)   blueCarContent.classList.remove('visible');
             if (greenCarContent)  greenCarContent.classList.remove('visible');
             if (orangeCarContent) orangeCarContent.classList.remove('visible');
@@ -296,9 +275,8 @@
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.add('visible');
             if (asphaltButtons) asphaltButtons.classList.add('visible');
-            backgroundFive.classList.remove('visible');
-            backgroundFiveGreen.classList.remove('visible');
-            backgroundFiveOrange.classList.remove('visible');
+            backgroundFive.style.opacity = '0';
+            resetGreenOrange();
             if (blueCarContent)   blueCarContent.classList.remove('visible');
             if (greenCarContent)  greenCarContent.classList.remove('visible');
             if (orangeCarContent) orangeCarContent.classList.remove('visible');
@@ -308,16 +286,14 @@
             overlayGradient.classList.remove('hidden');
             backgroundThree.classList.remove('visible');
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
-            backgroundFive.classList.remove('visible');
-            backgroundFiveGreen.classList.remove('visible');
-            backgroundFiveOrange.classList.remove('visible');
+            backgroundFive.style.opacity = '0';
+            resetGreenOrange();
             if (blueCarContent)   blueCarContent.classList.remove('visible');
             if (greenCarContent)  greenCarContent.classList.remove('visible');
             if (orangeCarContent) orangeCarContent.classList.remove('visible');
         }
     }
     
-    // Scroll listener ottimizzato
     let ticking = false;
     window.addEventListener('scroll', function() {
         if (!ticking) {
@@ -329,11 +305,7 @@
         }
     }, { passive: true });
     
-    // Esegui all'avvio
     updateBackgrounds();
     
-    console.log('✓ Animazioni automatiche attive');
-    console.log('✓ Carousel BLU + VERDE + ARANCIONE configurati');
-    console.log('✓ Color reveal attivo');
-    console.log('✓ Visibility management attivo');
+    console.log('✓ Script v3 attivo');
 })();
