@@ -394,7 +394,6 @@ body {
     position: relative;
     z-index: 10;
     padding: 40px 20px 60px 20px;
-    opacity: 1;
 }
 
 .event-type {
@@ -406,56 +405,58 @@ body {
     margin-bottom: 30px;
 }
 
-.event-card-detail {
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+/* Timeline card */
+.event-card-timeline {
+    background: rgba(0, 0, 0, 0.5); /* Più trasparente (era 0.75) */
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     padding: 20px;
-    margin-bottom: 20px;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 15px;
-    align-items: start;
+    margin-bottom: 15px;
 }
 
-.event-date {
+.event-date-inline {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 60px;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
 }
 
 .date-number {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    font-size: clamp(2.2rem, 7vw, 2.8rem);
     color: #ffd700;
     line-height: 1;
 }
 
 .date-month {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.8rem, 2.8vw, 1rem);
+    font-size: clamp(0.9rem, 3.2vw, 1.1rem);
     color: #ffd700;
     font-weight: 400;
-    margin-top: -5px;
 }
 
 .date-time {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    font-size: clamp(0.85rem, 3vw, 1rem);
     color: #ffd700;
     font-weight: 600;
-    margin-top: 5px;
 }
 
-.event-info {
-    flex: 1;
+.timeline-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, #ffd700 0%, rgba(255,215,0,0.3) 50%, transparent 100%);
+    margin-bottom: 15px;
+}
+
+.event-content {
+    width: 100%; /* Usa tutta la larghezza */
 }
 
 .event-title {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(1.1rem, 4vw, 1.4rem);
+    font-size: clamp(1.15rem, 4.2vw, 1.5rem);
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 8px;
@@ -464,7 +465,7 @@ body {
 
 .event-subtitle {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.85rem, 3vw, 1rem);
+    font-size: clamp(0.9rem, 3.2vw, 1.05rem);
     font-weight: 400;
     color: #e8e8e8;
     margin-bottom: 10px;
@@ -473,7 +474,7 @@ body {
 
 .event-speakers {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.75rem, 2.8vw, 0.9rem);
+    font-size: clamp(0.8rem, 2.9vw, 0.95rem);
     font-weight: 400;
     color: #cccccc;
     margin-bottom: 8px;
@@ -482,30 +483,33 @@ body {
 
 .event-location {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.75rem, 2.8vw, 0.9rem);
+    font-size: clamp(0.8rem, 2.9vw, 0.95rem);
     font-weight: 600;
     color: #ffd700;
     text-transform: uppercase;
     letter-spacing: 0.03em;
 }
 
-.btn-subscribe {
+/* Bottone unico iscrizione */
+.btn-subscribe-single {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(1rem, 3.5vw, 1.2rem);
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
     color: #000000;
     background: #ffd700;
     border: none;
-    border-radius: 8px;
-    padding: 12px 20px;
+    border-radius: 12px;
+    padding: 16px 40px;
     cursor: pointer;
     transition: all 0.3s ease;
-    letter-spacing: 0.05em;
-    align-self: center;
+    letter-spacing: 0.1em;
+    width: 100%;
+    margin-top: 20px;
 }
 
-.btn-subscribe:hover {
+.btn-subscribe-single:hover {
     background: #ffed4e;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
 }
 
 /* ========== FOOTER ========== */
