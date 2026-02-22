@@ -61,25 +61,41 @@
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
                 const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / (sectionFiveHeight * 0.8)));
                 
-                // Mostra titolo + prima scheda insieme
+                // Mostra titolo
                 if (scrollProgress > 0.02) {
                     if (eventType) eventType.classList.add('show');
                 } else {
                     if (eventType) eventType.classList.remove('show');
                 }
                 
-                // ANIMAZIONE SCHEDE - una alla volta
-                // Scheda 1: 0.02 - 0.35 (appare con titolo, resta centrata, poi scompare)
+                // ANIMAZIONE SCHEDE - entrano dal basso, escono verso l'alto
+                // Scheda 1: 0.02 - 0.35
                 // Scheda 2: 0.35 - 0.6
                 // Scheda 3: 0.6 - 0.85
                 
                 if (eventCards[0]) {
-                    const card1Progress = (scrollProgress - 0.02) / 0.33;
+                    const card1Progress = (scrollProgress - 0.02) / 0.33; // 0-1 nel range
                     if (scrollProgress >= 0.02 && scrollProgress < 0.35) {
-                        const opacity = card1Progress < 0.1 ? card1Progress * 10 : // fade in rapido
-                                       card1Progress > 0.9 ? (1 - card1Progress) * 10 : 1; // fade out
+                        let opacity, translateY;
+                        
+                        if (card1Progress < 0.3) {
+                            // Entrata dal basso (0-30%)
+                            const entranceProgress = card1Progress / 0.3; // 0-1
+                            opacity = entranceProgress;
+                            translateY = -100 + (entranceProgress * 100); // da -100 a 0
+                        } else if (card1Progress > 0.7) {
+                            // Uscita verso l'alto (70-100%)
+                            const exitProgress = (card1Progress - 0.7) / 0.3; // 0-1
+                            opacity = 1 - exitProgress;
+                            translateY = exitProgress * 100; // da 0 a +100
+                        } else {
+                            // Al centro (30-70%)
+                            opacity = 1;
+                            translateY = 0;
+                        }
+                        
                         eventCards[0].style.opacity = Math.max(0, Math.min(1, opacity));
-                        eventCards[0].style.transform = 'translateY(0)'; // Resta centrata
+                        eventCards[0].style.transform = `translateY(${translateY}px)`;
                     } else {
                         eventCards[0].style.opacity = 0;
                     }
@@ -88,10 +104,23 @@
                 if (eventCards[1]) {
                     const card2Progress = (scrollProgress - 0.35) / 0.25;
                     if (scrollProgress >= 0.35 && scrollProgress < 0.6) {
-                        const opacity = card2Progress < 0.1 ? card2Progress * 10 :
-                                       card2Progress > 0.9 ? (1 - card2Progress) * 10 : 1;
+                        let opacity, translateY;
+                        
+                        if (card2Progress < 0.3) {
+                            const entranceProgress = card2Progress / 0.3;
+                            opacity = entranceProgress;
+                            translateY = -100 + (entranceProgress * 100);
+                        } else if (card2Progress > 0.7) {
+                            const exitProgress = (card2Progress - 0.7) / 0.3;
+                            opacity = 1 - exitProgress;
+                            translateY = exitProgress * 100;
+                        } else {
+                            opacity = 1;
+                            translateY = 0;
+                        }
+                        
                         eventCards[1].style.opacity = Math.max(0, Math.min(1, opacity));
-                        eventCards[1].style.transform = 'translateY(0)';
+                        eventCards[1].style.transform = `translateY(${translateY}px)`;
                     } else {
                         eventCards[1].style.opacity = 0;
                     }
@@ -100,10 +129,23 @@
                 if (eventCards[2]) {
                     const card3Progress = (scrollProgress - 0.6) / 0.25;
                     if (scrollProgress >= 0.6 && scrollProgress < 0.85) {
-                        const opacity = card3Progress < 0.1 ? card3Progress * 10 :
-                                       card3Progress > 0.9 ? (1 - card3Progress) * 10 : 1;
+                        let opacity, translateY;
+                        
+                        if (card3Progress < 0.3) {
+                            const entranceProgress = card3Progress / 0.3;
+                            opacity = entranceProgress;
+                            translateY = -100 + (entranceProgress * 100);
+                        } else if (card3Progress > 0.7) {
+                            const exitProgress = (card3Progress - 0.7) / 0.3;
+                            opacity = 1 - exitProgress;
+                            translateY = exitProgress * 100;
+                        } else {
+                            opacity = 1;
+                            translateY = 0;
+                        }
+                        
                         eventCards[2].style.opacity = Math.max(0, Math.min(1, opacity));
-                        eventCards[2].style.transform = 'translateY(0)';
+                        eventCards[2].style.transform = `translateY(${translateY}px)`;
                     } else {
                         eventCards[2].style.opacity = 0;
                     }
@@ -115,7 +157,7 @@
                 if (eventType) eventType.classList.remove('show');
                 eventCards.forEach(card => {
                     card.style.opacity = 0;
-                    card.style.transform = 'translateY(50px)';
+                    card.style.transform = 'translateY(-100px)';
                 });
                 if (btnSubscribe) btnSubscribe.classList.remove('show');
             }
