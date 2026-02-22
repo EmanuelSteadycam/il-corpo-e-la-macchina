@@ -56,10 +56,11 @@
             const sectionFourFullyScrolled = sectionFourTop <= -sectionFourHeight;
             
             if (sectionFourFullyScrolled) {
-                // Calcola progresso scroll nella sezione 5 - MOLTO PIÙ LENTO (5x)
+                // CAROSELLO VERTICALE - calcolo più semplice
                 const sectionFiveHeight = sectionFive.offsetHeight;
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
-                const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / (sectionFiveHeight * 4))); // Era 2.4 (3x), ora 4 (5x più lento)
+                // Usa l'intera altezza della sezione 5 (300svh)
+                const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / sectionFiveHeight));
                 
                 // Mostra titolo
                 if (scrollProgress > 0.01) {
