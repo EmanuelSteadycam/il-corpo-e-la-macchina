@@ -75,12 +75,12 @@
                     if (btnSubscribe) btnSubscribe.classList.remove('show');
                 }
                 
-                // CAROUSEL - overlap ridotto per evitare sovrapposizioni
-                // Gap visivo tra schede: 20-30px
+                // CAROUSEL - spacing dimezzato
+                // Gap visivo tra schede ridotto
                 
-                const baseY = 400; // Posizione base molto sotto
+                const baseY = 200; // Dimezzato da 400
                 const centerY = 0; // Posizione centrale
-                const exitY = -250; // Uscita più alta per velocizzare
+                const exitY = -200; // Uscita alta
                 
                 // CARD 1: 5-35% (30% duration, più corto)
                 if (eventCards[0]) {
