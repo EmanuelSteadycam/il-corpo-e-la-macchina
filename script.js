@@ -175,7 +175,7 @@
                 }
                 
                 // Bottone appare alla fine
-                if (scrollProgress > 0.85 && btnSubscribe) {
+                if (scrollProgress > 0.70 && btnSubscribe) {
                     btnSubscribe.classList.add('show');
                 } else if (btnSubscribe) {
                     btnSubscribe.classList.remove('show');
@@ -185,7 +185,7 @@
                 const card1Visible = scrollProgress >= 0.01 && scrollProgress < 0.30;
                 const card2Visible = scrollProgress >= 0.30 && scrollProgress < 0.55;
                 const card3Visible = scrollProgress >= 0.55 && scrollProgress < 0.80;
-                const btnVisible = scrollProgress > 0.85;
+                const btnVisible = scrollProgress > 0.70;
                 console.log(`Scroll: ${(scrollProgress * 100).toFixed(0)}% | Card1:${card1Visible} Card2:${card2Visible} Card3:${card3Visible} BTN:${btnVisible}`);
             } else {
                 // Sezione 4 non ancora completamente salita → nascondi tutto
