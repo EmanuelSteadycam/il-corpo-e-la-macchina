@@ -304,15 +304,24 @@ body {
 
 /* Rimuovo i colori specifici - tutto bianco ora */
 
-/* ========== SEZIONE 4: TERZA IMMAGINE ========== */
+/* ========== SEZIONE 4: TRANSIZIONE NERA ========== */
 
-.section-four {
+.section-four-transition {
     position: relative;
-    min-height: 200svh; /* Più alta per avere spazio scroll (era 100svh) */
+    min-height: 100svh; /* Alta come sezione 1 */
+    background: #000000;
+    z-index: 4;
+}
+
+/* ========== SEZIONE 5: MACCHINA CON COLOR REVEAL ========== */
+
+.section-five {
+    position: relative;
+    min-height: 200svh; /* Più alta per avere spazio scroll */
 }
 
 /* Background immagine landing03 - fixed */
-.background-four {
+.background-five {
     position: fixed;
     top: 0;
     left: 0;
@@ -322,15 +331,15 @@ body {
     overflow: hidden;
     opacity: 0;
     transform: translateY(100%); /* Parte da sotto */
-    transition: opacity 0.5s ease, transform 0.8s ease; /* Slide transition */
+    transition: opacity 0.5s ease, transform 0.8s ease;
 }
 
-.background-four.visible {
+.background-five.visible {
     opacity: 1;
-    transform: translateY(0); /* Entra nella posizione normale */
+    transform: translateY(0);
 }
 
-.background-four img {
+.background-five img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -338,7 +347,7 @@ body {
 }
 
 /* Immagine verde - rivela da sinistra con clip-path */
-.background-four-green {
+.background-five-green {
     position: fixed;
     top: 0;
     left: 0;
@@ -347,15 +356,15 @@ body {
     z-index: 2;
     overflow: hidden;
     opacity: 0;
-    clip-path: inset(0 100% 0 0); /* Nascosta inizialmente */
-    transition: opacity 0.5s ease, clip-path 0.6s ease; /* Transizione fluida */
+    clip-path: inset(0 100% 0 0);
+    transition: opacity 0.5s ease, clip-path 0.6s ease;
 }
 
-.background-four-green.visible {
+.background-five-green.visible {
     opacity: 1;
 }
 
-.background-four-green img {
+.background-five-green img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -363,7 +372,7 @@ body {
 }
 
 /* Immagine arancione - rivela da sinistra con clip-path */
-.background-four-orange {
+.background-five-orange {
     position: fixed;
     top: 0;
     left: 0;
@@ -372,15 +381,15 @@ body {
     z-index: 3;
     overflow: hidden;
     opacity: 0;
-    clip-path: inset(0 100% 0 0); /* Nascosta inizialmente */
-    transition: opacity 0.5s ease, clip-path 0.6s ease; /* Transizione fluida */
+    clip-path: inset(0 100% 0 0);
+    transition: opacity 0.5s ease, clip-path 0.6s ease;
 }
 
-.background-four-orange.visible {
+.background-five-orange.visible {
     opacity: 1;
 }
 
-.background-four-orange img {
+.background-five-orange img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -430,20 +439,23 @@ body {
         max-width: 480px;
     }
     
-    /* Sezione 4 backgrounds centrati */
-    .background-four {
+    /* Sezione 5 backgrounds centrati */
+    .background-five {
+        left: 50%;
+        max-width: 480px;
+    }
+    
+    .background-five.visible {
+        transform: translate(-50%, 0);
+    }
+    
+    .background-five-green {
         left: 50%;
         transform: translateX(-50%);
         max-width: 480px;
     }
     
-    .background-four-green {
-        left: 50%;
-        transform: translateX(-50%);
-        max-width: 480px;
-    }
-    
-    .background-four-orange {
+    .background-five-orange {
         left: 50%;
         transform: translateX(-50%);
         max-width: 480px;

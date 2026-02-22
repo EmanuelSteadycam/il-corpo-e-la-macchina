@@ -10,11 +10,11 @@
     const overlayGradient = document.querySelector('.overlay-gradient');
     const backgroundThree = document.querySelector('.background-three');
     const asphaltButtons = document.querySelector('.asphalt-buttons');
-    const backgroundFour = document.querySelector('.background-four');
-    const backgroundFourGreen = document.querySelector('.background-four-green');
-    const backgroundFourOrange = document.querySelector('.background-four-orange');
+    const backgroundFive = document.querySelector('.background-five');
+    const backgroundFiveGreen = document.querySelector('.background-five-green');
+    const backgroundFiveOrange = document.querySelector('.background-five-orange');
     const sectionThree = document.querySelector('.section-three');
-    const sectionFour = document.querySelector('.section-four');
+    const sectionFive = document.querySelector('.section-five');
     
     // Animazioni automatiche dopo 1 secondo
     setTimeout(function() {
@@ -25,28 +25,28 @@
     
     // Switch tra background in base allo scroll
     function updateBackgrounds() {
-        if (!sectionThree || !sectionFour) return;
+        if (!sectionThree || !sectionFive) return;
         
         const sectionThreeTop = sectionThree.getBoundingClientRect().top;
-        const sectionFourTop = sectionFour.getBoundingClientRect().top;
+        const sectionFiveTop = sectionFive.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
         
         // Determina quale background mostrare
-        if (sectionFourTop < windowHeight) {
-            // Sezione 4 visibile → sez 3 scivola via, sez 4 entra
+        if (sectionFiveTop < windowHeight) {
+            // Sezione 5 visibile → mostra landing03 + color reveal
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
-            backgroundThree.classList.add('slide-up'); // Scivola via verso l'alto
+            backgroundThree.classList.add('slide-up');
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
-            backgroundFour.classList.add('visible');
-            backgroundFourGreen.classList.add('visible');
-            backgroundFourOrange.classList.add('visible');
+            backgroundFive.classList.add('visible');
+            backgroundFiveGreen.classList.add('visible');
+            backgroundFiveOrange.classList.add('visible');
             
-            // Calcola progresso scroll nella sezione 4
-            const sectionFourRect = sectionFour.getBoundingClientRect();
-            const sectionFourHeight = sectionFour.offsetHeight;
-            const scrolled = windowHeight - sectionFourRect.top;
-            const scrollProgress = Math.max(0, Math.min(1, scrolled / sectionFourHeight));
+            // Calcola progresso scroll nella sezione 5
+            const sectionFiveRect = sectionFive.getBoundingClientRect();
+            const sectionFiveHeight = sectionFive.offsetHeight;
+            const scrolled = windowHeight - sectionFiveRect.top;
+            const scrollProgress = Math.max(0, Math.min(1, scrolled / sectionFiveHeight));
             
             console.log('Scroll progress:', scrollProgress.toFixed(2));
             
@@ -57,18 +57,18 @@
             
             if (scrollProgress < 0.33) {
                 // Azzurra - nascondi verde e arancione
-                backgroundFourGreen.style.clipPath = `inset(0 100% 0 0)`;
-                backgroundFourOrange.style.clipPath = `inset(0 100% 0 0)`;
+                backgroundFiveGreen.style.clipPath = `inset(0 100% 0 0)`;
+                backgroundFiveOrange.style.clipPath = `inset(0 100% 0 0)`;
                 console.log('Color: BLUE');
             } else if (scrollProgress < 0.66) {
                 // Verde completa - mostra tutta verde
-                backgroundFourGreen.style.clipPath = `inset(0 0% 0 0)`;
-                backgroundFourOrange.style.clipPath = `inset(0 100% 0 0)`;
+                backgroundFiveGreen.style.clipPath = `inset(0 0% 0 0)`;
+                backgroundFiveOrange.style.clipPath = `inset(0 100% 0 0)`;
                 console.log('Color: GREEN');
             } else {
                 // Arancione completa - mostra tutta arancione
-                backgroundFourGreen.style.clipPath = `inset(0 0% 0 0)`;
-                backgroundFourOrange.style.clipPath = `inset(0 0% 0 0)`;
+                backgroundFiveGreen.style.clipPath = `inset(0 0% 0 0)`;
+                backgroundFiveOrange.style.clipPath = `inset(0 0% 0 0)`;
                 console.log('Color: ORANGE');
             }
         } else if (sectionThreeTop < windowHeight) {
@@ -76,20 +76,20 @@
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.add('visible');
-            backgroundThree.classList.remove('slide-up'); // Torna nella posizione
+            backgroundThree.classList.remove('slide-up');
             if (asphaltButtons) asphaltButtons.classList.add('visible');
-            backgroundFour.classList.remove('visible');
-            backgroundFourGreen.classList.remove('visible');
-            backgroundFourOrange.classList.remove('visible');
+            backgroundFive.classList.remove('visible');
+            backgroundFiveGreen.classList.remove('visible');
+            backgroundFiveOrange.classList.remove('visible');
         } else {
             // Sezione 1 visibile → mostra landing01
             backgroundFixed.classList.remove('hidden');
             overlayGradient.classList.remove('hidden');
             backgroundThree.classList.remove('visible');
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
-            backgroundFour.classList.remove('visible');
-            backgroundFourGreen.classList.remove('visible');
-            backgroundFourOrange.classList.remove('visible');
+            backgroundFive.classList.remove('visible');
+            backgroundFiveGreen.classList.remove('visible');
+            backgroundFiveOrange.classList.remove('visible');
         }
     }
     
