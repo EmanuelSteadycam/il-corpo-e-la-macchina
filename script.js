@@ -78,7 +78,7 @@
                 // CAROUSEL - con spaziatura aumentata
                 // La card successiva resta DIETRO fino a che la precedente non è quasi uscita
                 
-                const baseY = 220; // Posizione base sotto (era 200, +20px)
+                const baseY = 250; // Posizione base sotto (era 220, +30px = 50px totali)
                 const centerY = 0; // Posizione centrale
                 const exitY = -200; // Posizione uscita sopra
                 
