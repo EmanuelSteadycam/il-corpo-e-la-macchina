@@ -75,17 +75,17 @@
                     if (btnSubscribe) btnSubscribe.classList.remove('show');
                 }
                 
-                // CAROUSEL - spaziatura molto aumentata
-                // La card successiva resta DIETRO fino a che la precedente non è quasi uscita
+                // CAROUSEL - overlap ridotto per evitare sovrapposizioni
+                // Gap visivo tra schede: 20-30px
                 
-                const baseY = 350; // Posizione base sotto (+100px rispetto a prima)
+                const baseY = 400; // Posizione base molto sotto
                 const centerY = 0; // Posizione centrale
-                const exitY = -200; // Posizione uscita sopra
+                const exitY = -250; // Uscita più alta per velocizzare
                 
-                // CARD 1: 5-38%
+                // CARD 1: 5-35% (30% duration, più corto)
                 if (eventCards[0]) {
-                    if (scrollProgress >= 0.05 && scrollProgress < 0.38) {
-                        const t = (scrollProgress - 0.05) / 0.33;
+                    if (scrollProgress >= 0.05 && scrollProgress < 0.35) {
+                        const t = (scrollProgress - 0.05) / 0.30;
                         const translateY = baseY - (t * (baseY - exitY));
                         
                         let opacity;
@@ -95,24 +95,24 @@
                         
                         eventCards[0].style.transform = `translateY(${translateY}px)`;
                         eventCards[0].style.opacity = opacity;
-                        eventCards[0].style.zIndex = '3'; // SEMPRE davanti quando visibile
+                        eventCards[0].style.zIndex = '3';
                     } else {
                         eventCards[0].style.opacity = '0';
                         eventCards[0].style.zIndex = '1';
                     }
                 }
                 
-                // CARD 2: 12-50% - Resta DIETRO fino a 35%!
+                // CARD 2: 20-50% (30% duration, inizia più tardi) ← MENO OVERLAP
                 if (eventCards[1]) {
-                    if (scrollProgress >= 0.12 && scrollProgress < 0.50) {
-                        const t = (scrollProgress - 0.12) / 0.38;
+                    if (scrollProgress >= 0.20 && scrollProgress < 0.50) {
+                        const t = (scrollProgress - 0.20) / 0.30;
                         const translateY = baseY - (t * (baseY - exitY));
                         
                         let opacity;
                         if (t < 0.15) {
                             opacity = 0.25 * (t / 0.15);
-                        } else if (t < 0.4) {
-                            const fadeProgress = (t - 0.15) / 0.25;
+                        } else if (t < 0.35) {
+                            const fadeProgress = (t - 0.15) / 0.20;
                             opacity = 0.25 + (0.75 * fadeProgress);
                         } else if (t < 0.85) {
                             opacity = 1;
@@ -122,25 +122,24 @@
                         
                         eventCards[1].style.transform = `translateY(${translateY}px)`;
                         eventCards[1].style.opacity = opacity;
-                        // Passa davanti SOLO quando card 1 è quasi uscita (dopo 35% scroll)
-                        eventCards[1].style.zIndex = scrollProgress > 0.35 ? '3' : '2';
+                        eventCards[1].style.zIndex = scrollProgress > 0.33 ? '3' : '2';
                     } else {
                         eventCards[1].style.opacity = '0';
                         eventCards[1].style.zIndex = '1';
                     }
                 }
                 
-                // CARD 3: 24-62% - Resta DIETRO fino a 47%!
+                // CARD 3: 35-65% (30% duration) ← MENO OVERLAP
                 if (eventCards[2]) {
-                    if (scrollProgress >= 0.24 && scrollProgress < 0.62) {
-                        const t = (scrollProgress - 0.24) / 0.38;
+                    if (scrollProgress >= 0.35 && scrollProgress < 0.65) {
+                        const t = (scrollProgress - 0.35) / 0.30;
                         const translateY = baseY - (t * (baseY - exitY));
                         
                         let opacity;
                         if (t < 0.15) {
                             opacity = 0.25 * (t / 0.15);
-                        } else if (t < 0.4) {
-                            const fadeProgress = (t - 0.15) / 0.25;
+                        } else if (t < 0.35) {
+                            const fadeProgress = (t - 0.15) / 0.20;
                             opacity = 0.25 + (0.75 * fadeProgress);
                         } else if (t < 0.85) {
                             opacity = 1;
@@ -150,8 +149,7 @@
                         
                         eventCards[2].style.transform = `translateY(${translateY}px)`;
                         eventCards[2].style.opacity = opacity;
-                        // Passa davanti SOLO quando card 2 è quasi uscita (dopo 47% scroll)
-                        eventCards[2].style.zIndex = scrollProgress > 0.47 ? '3' : '2';
+                        eventCards[2].style.zIndex = scrollProgress > 0.48 ? '3' : '2';
                     } else {
                         eventCards[2].style.opacity = '0';
                         eventCards[2].style.zIndex = '1';
