@@ -303,7 +303,7 @@ body {
 
 .section-four-transition {
     position: relative;
-    min-height: 150svh; /* Più alta per dare più respiro (era 100svh) */
+    min-height: 125svh; /* Altezza ridotta (era 150svh) */
     background: #000000;
     z-index: 4;
 }

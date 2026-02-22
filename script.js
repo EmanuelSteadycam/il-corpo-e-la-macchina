@@ -53,16 +53,16 @@
             console.log('Scroll progress:', scrollProgress.toFixed(2));
             
             // STEP-BASED transitions:
-            // 0-33%: Azzurra
-            // 33-66%: Verde (completa)
-            // 66-100%: Arancione (completa)
+            // 0-60%: Azzurra (molto più tempo)
+            // 60-80%: Verde (completa)
+            // 80-100%: Arancione (completa)
             
-            if (scrollProgress < 0.33) {
+            if (scrollProgress < 0.6) {
                 // Azzurra - nascondi verde e arancione
                 backgroundFiveGreen.style.clipPath = `inset(0 100% 0 0)`;
                 backgroundFiveOrange.style.clipPath = `inset(0 100% 0 0)`;
                 console.log('Color: BLUE');
-            } else if (scrollProgress < 0.66) {
+            } else if (scrollProgress < 0.8) {
                 // Verde completa - mostra tutta verde
                 backgroundFiveGreen.style.clipPath = `inset(0 0% 0 0)`;
                 backgroundFiveOrange.style.clipPath = `inset(0 100% 0 0)`;
