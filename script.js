@@ -45,18 +45,16 @@
             backgroundFiveOrange.classList.add('visible');
             
             // Calcola progresso scroll nella sezione 5
-            // MA: inizia a contare SOLO dopo che sez 4 è completamente salita
-            const sectionFourHeight = sectionFourTransition.offsetHeight;
-            const sectionFiveRect = sectionFive.getBoundingClientRect();
             const sectionFiveHeight = sectionFive.offsetHeight;
             
-            // Scroll effettivo nella sezione 5 (escludendo sezione 4)
-            const scrollInSectionFive = Math.max(0, -sectionFourTop - sectionFourHeight);
-            const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / sectionFiveHeight));
+            // Lo scroll progress parte da 0 quando sez 5 entra nello schermo
+            // e arriva a 1 quando sez 5 esce dallo schermo
+            const scrolled = windowHeight - sectionFiveTop;
+            const scrollProgress = Math.max(0, Math.min(1, scrolled / sectionFiveHeight));
             
-            console.log('Section 4 top:', sectionFourTop.toFixed(0));
-            console.log('Scroll in section 5:', scrollInSectionFive.toFixed(0));
-            console.log('Scroll progress:', scrollProgress.toFixed(2));
+            console.log('Section 5 top:', sectionFiveTop.toFixed(0));
+            console.log('Scrolled in section 5:', scrolled.toFixed(0));
+            console.log('Scroll progress:', (scrollProgress * 100).toFixed(0) + '%');
             
             // STEP-BASED transitions:
             // 0-60%: Azzurra (molto più tempo)
