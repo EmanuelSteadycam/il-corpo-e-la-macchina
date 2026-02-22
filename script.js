@@ -21,7 +21,6 @@
     const eventType = document.querySelector('.event-type');
     const eventCards = document.querySelectorAll('.event-card-timeline');
     const btnSubscribe = document.querySelector('.btn-subscribe-single');
-    let animationsTriggered = false;
     
     // Animazioni automatiche dopo 1 secondo
     setTimeout(function() {
@@ -41,7 +40,7 @@
         
         // Determina quale background mostrare
         if (sectionFiveTop < windowHeight) {
-            // Sezione 5 visibile → mostra landing03 + trigger animazioni
+            // Sezione 5 visibile → mostra landing03
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.remove('visible');
@@ -50,16 +49,38 @@
             backgroundFiveGreen.classList.add('visible');
             backgroundFiveOrange.classList.add('visible');
             
-            // Trigger animazioni entrata (solo una volta)
-            if (!animationsTriggered) {
-                setTimeout(() => {
-                    if (eventType) eventType.classList.add('show');
-                    eventCards.forEach(card => card.classList.add('show'));
-                    if (btnSubscribe) btnSubscribe.classList.add('show');
-                    animationsTriggered = true;
-                    console.log('✓ Animazioni eventi triggerate');
-                }, 300); // Piccolo delay dopo che appare la macchina blu
+            // Calcola progresso scroll nella sezione 5
+            const sectionFiveHeight = sectionFive.offsetHeight;
+            const scrolled = windowHeight - sectionFiveTop;
+            const scrollProgress = Math.max(0, Math.min(1, scrolled / sectionFiveHeight));
+            
+            // Trigger animazioni eventi in base allo scroll
+            // 0% → INCONTRI PUBBLICI
+            if (scrollProgress > 0.05 && eventType) {
+                eventType.classList.add('show');
             }
+            
+            // 10% → Scheda 1
+            if (scrollProgress > 0.1 && eventCards[0]) {
+                eventCards[0].classList.add('show');
+            }
+            
+            // 20% → Scheda 2
+            if (scrollProgress > 0.2 && eventCards[1]) {
+                eventCards[1].classList.add('show');
+            }
+            
+            // 30% → Scheda 3
+            if (scrollProgress > 0.3 && eventCards[2]) {
+                eventCards[2].classList.add('show');
+            }
+            
+            // 40% → Bottone
+            if (scrollProgress > 0.4 && btnSubscribe) {
+                btnSubscribe.classList.add('show');
+            }
+            
+            console.log('Scroll progress:', (scrollProgress * 100).toFixed(0) + '%');
             
             // Calcola progresso scroll nella sezione 5
             const sectionFiveHeight = sectionFive.offsetHeight;
