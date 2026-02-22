@@ -127,7 +127,7 @@
                         if (card2Progress < 0.2) {
                             const entranceProgress = card2Progress / 0.2;
                             opacity = 0.25 + (entranceProgress * 0.75); // da 0.25 a 1
-                            translateY = 180 - (entranceProgress * 180); // continua da dove era
+                            translateY = 180 - (entranceProgress * 180); // CONTINUA da 180px, non riparte da 150!
                         } else if (card2Progress > 0.8) {
                             const exitProgress = (card2Progress - 0.8) / 0.2;
                             opacity = 1 - exitProgress;
@@ -176,7 +176,7 @@
                         if (card3Progress < 0.2) {
                             const entranceProgress = card3Progress / 0.2;
                             opacity = 0.25 + (entranceProgress * 0.75);
-                            translateY = 180 - (entranceProgress * 180);
+                            translateY = 180 - (entranceProgress * 180); // CONTINUA da 180px
                         } else if (card3Progress > 0.8) {
                             const exitProgress = (card3Progress - 0.8) / 0.2;
                             opacity = 1 - exitProgress;
