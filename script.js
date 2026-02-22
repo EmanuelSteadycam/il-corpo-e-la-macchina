@@ -180,7 +180,11 @@
                     btnSubscribe.classList.remove('show');
                 }
                 
-                console.log('Scroll:', (scrollProgress * 100).toFixed(0) + '%');
+                // DEBUG: mostra quali schede sono visibili
+                const card1Visible = scrollProgress >= 0.01 && scrollProgress < 0.30;
+                const card2Visible = scrollProgress >= 0.30 && scrollProgress < 0.55;
+                const card3Visible = scrollProgress >= 0.55 && scrollProgress < 0.80;
+                console.log(`Scroll: ${(scrollProgress * 100).toFixed(0)}% | Card1:${card1Visible} Card2:${card2Visible} Card3:${card3Visible}`);
             } else {
                 // Sezione 4 non ancora completamente salita → nascondi tutto
                 if (eventType) eventType.classList.remove('show');
