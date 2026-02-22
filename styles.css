@@ -432,7 +432,7 @@ body {
 /* Container per scheda singola - posizionate sotto la macchina */
 .event-cards-container {
     position: absolute;
-    bottom: 25%; /* Nella parte bassa dello schermo, sotto la macchina */
+    bottom: calc(25% + 30px); /* Alzate di 30px */
     left: 0;
     width: 100%;
     padding: 0 20px;
@@ -452,8 +452,9 @@ body {
     border-radius: 12px;
     padding: 16px;
     opacity: 0;
-    transform: translateY(150px); /* Inizia più sotto */
-    transition: none; /* Controllato da JavaScript */
+    transform: translateY(150px);
+    transition: none;
+    pointer-events: auto; /* Assicura visibilità */
 }
 
 /* Layout orizzontale: data box + contenuto */

@@ -97,8 +97,10 @@
                         
                         eventCards[0].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[0].style.transform = `translateY(${translateY}px)`;
+                        eventCards[0].style.zIndex = '2';
                     } else {
-                        eventCards[0].style.opacity = 0;
+                        eventCards[0].style.opacity = '0';
+                        eventCards[0].style.zIndex = '1';
                         if (scrollProgress < 0.01) {
                             eventCards[0].style.transform = 'translateY(150px)'; // sotto
                         } else {
@@ -127,8 +129,10 @@
                         
                         eventCards[1].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[1].style.transform = `translateY(${translateY}px)`;
+                        eventCards[1].style.zIndex = '2';
                     } else {
-                        eventCards[1].style.opacity = 0;
+                        eventCards[1].style.opacity = '0';
+                        eventCards[1].style.zIndex = '1';
                         if (scrollProgress < 0.30) {
                             eventCards[1].style.transform = 'translateY(150px)';
                         } else {
@@ -157,8 +161,10 @@
                         
                         eventCards[2].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[2].style.transform = `translateY(${translateY}px)`;
+                        eventCards[2].style.zIndex = '3';
                     } else {
-                        eventCards[2].style.opacity = 0;
+                        eventCards[2].style.opacity = '0';
+                        eventCards[2].style.zIndex = '1';
                         if (scrollProgress < 0.55) {
                             eventCards[2].style.transform = 'translateY(150px)';
                         } else {
