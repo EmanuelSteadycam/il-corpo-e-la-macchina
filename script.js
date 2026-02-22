@@ -36,7 +36,7 @@
             // Sezione 5 visibile → mostra landing03 + color reveal
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
-            backgroundThree.classList.add('slide-up');
+            backgroundThree.classList.remove('visible');
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
             backgroundFive.classList.add('visible');
             backgroundFiveGreen.classList.add('visible');
@@ -76,7 +76,6 @@
             backgroundFixed.classList.add('hidden');
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.add('visible');
-            backgroundThree.classList.remove('slide-up');
             if (asphaltButtons) asphaltButtons.classList.add('visible');
             backgroundFive.classList.remove('visible');
             backgroundFiveGreen.classList.remove('visible');
