@@ -61,27 +61,25 @@
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
                 const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / (sectionFiveHeight * 0.8)));
                 
-                // Mostra titolo
-                if (scrollProgress > 0.02 && eventType) {
-                    eventType.classList.add('show');
-                } else if (eventType) {
-                    eventType.classList.remove('show');
+                // Mostra titolo + prima scheda insieme
+                if (scrollProgress > 0.02) {
+                    if (eventType) eventType.classList.add('show');
+                } else {
+                    if (eventType) eventType.classList.remove('show');
                 }
                 
-                // ANIMAZIONE SCHEDE - una alla volta dal basso verso l'alto
-                // Ogni scheda occupa un range di scroll
-                // Scheda 1: 0.1 - 0.35 (appare → sale → scompare)
+                // ANIMAZIONE SCHEDE - una alla volta
+                // Scheda 1: 0.02 - 0.35 (appare con titolo, resta centrata, poi scompare)
                 // Scheda 2: 0.35 - 0.6
                 // Scheda 3: 0.6 - 0.85
                 
                 if (eventCards[0]) {
-                    const card1Progress = (scrollProgress - 0.1) / 0.25; // 0-1 nel range 0.1-0.35
-                    if (scrollProgress >= 0.1 && scrollProgress < 0.35) {
-                        const opacity = card1Progress < 0.2 ? card1Progress * 5 : // fade in
-                                       card1Progress > 0.8 ? (1 - card1Progress) * 5 : 1; // fade out
-                        const translateY = 100 - (card1Progress * 120); // sale dal basso
+                    const card1Progress = (scrollProgress - 0.02) / 0.33;
+                    if (scrollProgress >= 0.02 && scrollProgress < 0.35) {
+                        const opacity = card1Progress < 0.1 ? card1Progress * 10 : // fade in rapido
+                                       card1Progress > 0.9 ? (1 - card1Progress) * 10 : 1; // fade out
                         eventCards[0].style.opacity = Math.max(0, Math.min(1, opacity));
-                        eventCards[0].style.transform = `translateY(${translateY}px)`;
+                        eventCards[0].style.transform = 'translateY(0)'; // Resta centrata
                     } else {
                         eventCards[0].style.opacity = 0;
                     }
@@ -90,11 +88,10 @@
                 if (eventCards[1]) {
                     const card2Progress = (scrollProgress - 0.35) / 0.25;
                     if (scrollProgress >= 0.35 && scrollProgress < 0.6) {
-                        const opacity = card2Progress < 0.2 ? card2Progress * 5 :
-                                       card2Progress > 0.8 ? (1 - card2Progress) * 5 : 1;
-                        const translateY = 100 - (card2Progress * 120);
+                        const opacity = card2Progress < 0.1 ? card2Progress * 10 :
+                                       card2Progress > 0.9 ? (1 - card2Progress) * 10 : 1;
                         eventCards[1].style.opacity = Math.max(0, Math.min(1, opacity));
-                        eventCards[1].style.transform = `translateY(${translateY}px)`;
+                        eventCards[1].style.transform = 'translateY(0)';
                     } else {
                         eventCards[1].style.opacity = 0;
                     }
@@ -103,11 +100,10 @@
                 if (eventCards[2]) {
                     const card3Progress = (scrollProgress - 0.6) / 0.25;
                     if (scrollProgress >= 0.6 && scrollProgress < 0.85) {
-                        const opacity = card3Progress < 0.2 ? card3Progress * 5 :
-                                       card3Progress > 0.8 ? (1 - card3Progress) * 5 : 1;
-                        const translateY = 100 - (card3Progress * 120);
+                        const opacity = card3Progress < 0.1 ? card3Progress * 10 :
+                                       card3Progress > 0.9 ? (1 - card3Progress) * 10 : 1;
                         eventCards[2].style.opacity = Math.max(0, Math.min(1, opacity));
-                        eventCards[2].style.transform = `translateY(${translateY}px)`;
+                        eventCards[2].style.transform = 'translateY(0)';
                     } else {
                         eventCards[2].style.opacity = 0;
                     }
@@ -119,7 +115,7 @@
                 if (eventType) eventType.classList.remove('show');
                 eventCards.forEach(card => {
                     card.style.opacity = 0;
-                    card.style.transform = 'translateY(100px)';
+                    card.style.transform = 'translateY(50px)';
                 });
                 if (btnSubscribe) btnSubscribe.classList.remove('show');
             }

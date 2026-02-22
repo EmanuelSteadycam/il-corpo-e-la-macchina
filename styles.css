@@ -429,22 +429,22 @@ body {
     transform: translateX(0);
 }
 
-/* Container per scheda singola - posizionata in basso */
+/* Container per scheda singola - centrato verticalmente */
 .event-cards-container {
     position: absolute;
-    bottom: 0;
+    top: 50%;
     left: 0;
     width: 100%;
-    height: 40%; /* Parte inferiore dello schermo */
-    padding: 0 20px 30px 20px;
+    padding: 0 20px;
+    transform: translateY(-50%);
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Scheda evento - una sola visibile alla volta */
 .event-card-timeline {
     position: absolute;
-    bottom: 0;
     left: 20px;
     right: 20px;
     background: rgba(0, 0, 0, 0.65);
@@ -453,7 +453,7 @@ body {
     border-radius: 12px;
     padding: 16px;
     opacity: 0;
-    transform: translateY(100px); /* Parte da sotto */
+    transform: translateY(50px); /* Ridotto da 100px */
     transition: none; /* Controllato da JavaScript */
 }
 
