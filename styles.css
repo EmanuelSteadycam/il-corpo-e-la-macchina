@@ -350,7 +350,8 @@ body {
     overflow: hidden;
     opacity: 0;
     clip-path: inset(0 100% 0 0);
-    transition: opacity 0.5s ease, clip-path 0.6s ease;
+    /* clip-path gestito da JS - NO transition qui */
+    transition: opacity 0.3s ease;
 }
 
 .background-five-green.visible {
@@ -375,7 +376,8 @@ body {
     overflow: hidden;
     opacity: 0;
     clip-path: inset(0 100% 0 0);
-    transition: opacity 0.5s ease, clip-path 0.6s ease;
+    /* clip-path gestito da JS - NO transition qui */
+    transition: opacity 0.3s ease;
 }
 
 .background-five-orange.visible {
