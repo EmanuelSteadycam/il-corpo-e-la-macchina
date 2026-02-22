@@ -409,24 +409,54 @@ body {
     pointer-events: auto;
 }
 
-.event-type {
+/* Header container - titolo e bottone affiancati */
+.events-header {
     position: absolute;
-    top: 40px;
+    top: 30px;
+    left: 20px;
     right: 20px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2rem, 7vw, 3rem);
-    color: #ffd700;
-    text-align: right;
-    letter-spacing: 0.05em; /* Ridotto da 0.15em */
-    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    z-index: 20;
     opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.6s ease;
 }
 
-.event-type.show {
+.events-header.show {
     opacity: 1;
-    transform: translateX(0);
+}
+
+.event-type {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    color: #ffd700;
+    text-align: left;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin: 0;
+}
+
+/* Bottone header - più quadrato */
+.btn-subscribe-header {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    color: #000000;
+    background: #ffd700;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.btn-subscribe-header:hover {
+    background: #ffed4e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
 }
 
 /* Container per scheda singola - posizionate sotto la macchina */

@@ -62,65 +62,62 @@
                 // Usa l'intera altezza della sezione 5 (300svh)
                 const scrollProgress = Math.max(0, Math.min(1, scrollInSectionFive / sectionFiveHeight));
                 
-                // Mostra titolo + BOTTONE subito insieme
+                // Mostra header (titolo + bottone)
                 if (scrollProgress > 0.01) {
-                    if (eventType) eventType.classList.add('show');
-                    if (btnSubscribe) btnSubscribe.classList.add('show');
+                    const eventsHeader = document.querySelector('.events-header');
+                    if (eventsHeader) eventsHeader.classList.add('show');
                 } else {
-                    if (eventType) eventType.classList.remove('show');
-                    if (btnSubscribe) btnSubscribe.classList.remove('show');
+                    const eventsHeader = document.querySelector('.events-header');
+                    if (eventsHeader) eventsHeader.classList.remove('show');
                 }
                 
-                // ANIMAZIONE SCHEDE - MOLTO PIÙ LENTE
-                // Entrano dal BASSO (-150px), escono verso ALTO (+150px)
-                // Scheda 1: 0.01 - 0.30
-                // Scheda 2: 0.30 - 0.55
-                // Scheda 3: 0.55 - 0.80
+                // CAROUSEL CON PREVIEW - scheda successiva visibile al 10%
+                // Card 1: 0.01-0.30 (main), Card 2 preview dal 0.15
+                // Card 2: 0.30-0.55 (main), Card 3 preview dal 0.45
+                // Card 3: 0.55-0.80 (main)
                 
+                // CARD 1
                 if (eventCards[0]) {
                     const card1Progress = (scrollProgress - 0.01) / 0.29;
                     if (scrollProgress >= 0.01 && scrollProgress < 0.30) {
+                        // Scheda principale
                         let opacity, translateY;
-                        
                         if (card1Progress < 0.25) {
-                            // Entrata dal BASSO (0-25%)
                             const entranceProgress = card1Progress / 0.25;
                             opacity = entranceProgress;
-                            translateY = 150 - (entranceProgress * 150); // da +150 a 0 (dal basso)
+                            translateY = 150 - (entranceProgress * 150);
                         } else if (card1Progress > 0.75) {
-                            // Uscita verso ALTO (75-100%)
                             const exitProgress = (card1Progress - 0.75) / 0.25;
                             opacity = 1 - exitProgress;
-                            translateY = -(exitProgress * 150); // da 0 a -150 (verso alto)
+                            translateY = -(exitProgress * 150);
                         } else {
-                            // Al centro (25-75%)
                             opacity = 1;
                             translateY = 0;
                         }
-                        
                         eventCards[0].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[0].style.transform = `translateY(${translateY}px)`;
-                        eventCards[0].style.zIndex = '2';
+                        eventCards[0].style.zIndex = '3';
                     } else {
                         eventCards[0].style.opacity = '0';
                         eventCards[0].style.zIndex = '1';
-                        if (scrollProgress < 0.01) {
-                            eventCards[0].style.transform = 'translateY(150px)'; // sotto
-                        } else {
-                            eventCards[0].style.transform = 'translateY(-150px)'; // sopra
-                        }
                     }
                 }
                 
+                // CARD 2
                 if (eventCards[1]) {
-                    const card2Progress = (scrollProgress - 0.30) / 0.25;
-                    if (scrollProgress >= 0.30 && scrollProgress < 0.55) {
+                    if (scrollProgress >= 0.15 && scrollProgress < 0.30) {
+                        // PREVIEW - visibile al 10% sotto card 1
+                        eventCards[1].style.opacity = '0.1';
+                        eventCards[1].style.transform = 'translateY(180px)';
+                        eventCards[1].style.zIndex = '1';
+                    } else if (scrollProgress >= 0.30 && scrollProgress < 0.55) {
+                        // MAIN - scheda principale
+                        const card2Progress = (scrollProgress - 0.30) / 0.25;
                         let opacity, translateY;
-                        
                         if (card2Progress < 0.25) {
                             const entranceProgress = card2Progress / 0.25;
-                            opacity = entranceProgress;
-                            translateY = 150 - (entranceProgress * 150);
+                            opacity = 0.1 + (entranceProgress * 0.9); // da 0.1 a 1
+                            translateY = 180 - (entranceProgress * 180); // da 180 a 0
                         } else if (card2Progress > 0.75) {
                             const exitProgress = (card2Progress - 0.75) / 0.25;
                             opacity = 1 - exitProgress;
@@ -129,30 +126,30 @@
                             opacity = 1;
                             translateY = 0;
                         }
-                        
                         eventCards[1].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[1].style.transform = `translateY(${translateY}px)`;
-                        eventCards[1].style.zIndex = '2';
+                        eventCards[1].style.zIndex = '3';
                     } else {
                         eventCards[1].style.opacity = '0';
                         eventCards[1].style.zIndex = '1';
-                        if (scrollProgress < 0.30) {
-                            eventCards[1].style.transform = 'translateY(150px)';
-                        } else {
-                            eventCards[1].style.transform = 'translateY(-150px)';
-                        }
                     }
                 }
                 
+                // CARD 3
                 if (eventCards[2]) {
-                    const card3Progress = (scrollProgress - 0.55) / 0.25;
-                    if (scrollProgress >= 0.55 && scrollProgress < 0.80) {
+                    if (scrollProgress >= 0.45 && scrollProgress < 0.55) {
+                        // PREVIEW - visibile al 10% sotto card 2
+                        eventCards[2].style.opacity = '0.1';
+                        eventCards[2].style.transform = 'translateY(180px)';
+                        eventCards[2].style.zIndex = '1';
+                    } else if (scrollProgress >= 0.55 && scrollProgress < 0.80) {
+                        // MAIN - scheda principale
+                        const card3Progress = (scrollProgress - 0.55) / 0.25;
                         let opacity, translateY;
-                        
                         if (card3Progress < 0.25) {
                             const entranceProgress = card3Progress / 0.25;
-                            opacity = entranceProgress;
-                            translateY = 150 - (entranceProgress * 150);
+                            opacity = 0.1 + (entranceProgress * 0.9);
+                            translateY = 180 - (entranceProgress * 180);
                         } else if (card3Progress > 0.75) {
                             const exitProgress = (card3Progress - 0.75) / 0.25;
                             opacity = 1 - exitProgress;
@@ -161,28 +158,16 @@
                             opacity = 1;
                             translateY = 0;
                         }
-                        
                         eventCards[2].style.opacity = Math.max(0, Math.min(1, opacity));
                         eventCards[2].style.transform = `translateY(${translateY}px)`;
                         eventCards[2].style.zIndex = '3';
                     } else {
                         eventCards[2].style.opacity = '0';
                         eventCards[2].style.zIndex = '1';
-                        if (scrollProgress < 0.55) {
-                            eventCards[2].style.transform = 'translateY(150px)';
-                        } else {
-                            eventCards[2].style.transform = 'translateY(-150px)';
-                        }
                     }
                 }
                 
-                
-                // DEBUG: mostra quali schede sono visibili
-                const card1Visible = scrollProgress >= 0.01 && scrollProgress < 0.30;
-                const card2Visible = scrollProgress >= 0.30 && scrollProgress < 0.55;
-                const card3Visible = scrollProgress >= 0.55 && scrollProgress < 0.80;
-                const btnVisible = scrollProgress > 0.01;
-                console.log(`Scroll: ${(scrollProgress * 100).toFixed(0)}% | Card1:${card1Visible} Card2:${card2Visible} Card3:${card3Visible} BTN:${btnVisible}`);
+                console.log(`Scroll: ${(scrollProgress * 100).toFixed(0)}%`);
             } else {
                 // Sezione 4 non ancora completamente salita → nascondi tutto
                 if (eventType) eventType.classList.remove('show');
