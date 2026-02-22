@@ -75,10 +75,10 @@
                     if (btnSubscribe) btnSubscribe.classList.remove('show');
                 }
                 
-                // CAROUSEL - con spaziatura aumentata
+                // CAROUSEL - spaziatura molto aumentata
                 // La card successiva resta DIETRO fino a che la precedente non è quasi uscita
                 
-                const baseY = 250; // Posizione base sotto (era 220, +30px = 50px totali)
+                const baseY = 350; // Posizione base sotto (+100px rispetto a prima)
                 const centerY = 0; // Posizione centrale
                 const exitY = -200; // Posizione uscita sopra
                 
