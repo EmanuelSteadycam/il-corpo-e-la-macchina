@@ -14,6 +14,7 @@
     const backgroundFiveGreen = document.querySelector('.background-five-green');
     const backgroundFiveOrange = document.querySelector('.background-five-orange');
     const sectionThree = document.querySelector('.section-three');
+    const sectionFourTransition = document.querySelector('.section-four-transition');
     const sectionFive = document.querySelector('.section-five');
     
     // Animazioni automatiche dopo 1 secondo
@@ -25,9 +26,10 @@
     
     // Switch tra background in base allo scroll
     function updateBackgrounds() {
-        if (!sectionThree || !sectionFive) return;
+        if (!sectionThree || !sectionFourTransition || !sectionFive) return;
         
         const sectionThreeTop = sectionThree.getBoundingClientRect().top;
+        const sectionFourTop = sectionFourTransition.getBoundingClientRect().top;
         const sectionFiveTop = sectionFive.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
         
@@ -71,6 +73,15 @@
                 backgroundFiveOrange.style.clipPath = `inset(0 0% 0 0)`;
                 console.log('Color: ORANGE');
             }
+        } else if (sectionFourTop < 0) {
+            // Sezione 4 nera ha raggiunto il top → nascondi landing02, mostra nero
+            backgroundFixed.classList.add('hidden');
+            overlayGradient.classList.add('hidden');
+            backgroundThree.classList.remove('visible');
+            if (asphaltButtons) asphaltButtons.classList.remove('visible');
+            backgroundFive.classList.remove('visible');
+            backgroundFiveGreen.classList.remove('visible');
+            backgroundFiveOrange.classList.remove('visible');
         } else if (sectionThreeTop < windowHeight) {
             // Sezione 3 visibile → mostra landing02 + bottoni
             backgroundFixed.classList.add('hidden');
