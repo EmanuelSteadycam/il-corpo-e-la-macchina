@@ -75,10 +75,10 @@
                     if (btnSubscribe) btnSubscribe.classList.remove('show');
                 }
                 
-                // CAROUSEL ULTRA-SEMPLICE - z-index corretto
+                // CAROUSEL - con spaziatura aumentata
                 // La card successiva resta DIETRO fino a che la precedente non è quasi uscita
                 
-                const baseY = 200; // Posizione base sotto
+                const baseY = 220; // Posizione base sotto (era 200, +20px)
                 const centerY = 0; // Posizione centrale
                 const exitY = -200; // Posizione uscita sopra
                 
