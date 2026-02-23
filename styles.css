@@ -649,7 +649,7 @@ body {
 
 .quote-role {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+    font-size: clamp(0.85rem, 2.5vw, 0.85rem);
     color: #aaaaaa;
     font-style: italic;
     margin: 0 0 14px 0;
@@ -657,7 +657,7 @@ body {
 
 .quote-text {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    font-size: clamp(0.9rem, 2.5vw, 0.9rem);
     color: #dddddd;
     line-height: 1.7;
     margin: 0;
