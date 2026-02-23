@@ -31,8 +31,8 @@
     const eventTypeOrange   = document.querySelector('.event-type.orange');
     const btnSubscribeOrange = document.querySelector('.btn-subscribe-header.orange');
 
-    const GREEN_START  = 0.33;
-    const ORANGE_START = 0.66;
+    const GREEN_START  = 0.65;
+    const ORANGE_START = 0.82;
 
     if (backgroundFiveGreen)  { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
     if (backgroundFiveOrange) { backgroundFiveOrange.style.opacity = '0'; backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)'; }
