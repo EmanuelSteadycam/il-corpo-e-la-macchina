@@ -165,22 +165,18 @@
                     if (orangeCarContent) orangeCarContent.classList.remove('visible');
                 }
 
-                // ── COLOR REVEAL ────────────────────────────────────────
-                // Verde: parte a GREEN_START, completo in 0.30
+                // ── COLOR REVEAL - snap con CSS transition 0.6s ─────────
                 if (inGreen) {
-                    const p = Math.min(1, (scrollProgress - GREEN_START) / 0.30);
                     backgroundFiveGreen.style.opacity  = '1';
-                    backgroundFiveGreen.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
+                    backgroundFiveGreen.style.clipPath = 'inset(0 0% 0 0)';
                 } else {
                     backgroundFiveGreen.style.opacity  = '0';
                     backgroundFiveGreen.style.clipPath = 'inset(0 100% 0 0)';
                 }
 
-                // Arancione: parte a ORANGE_START, completo in 0.30
                 if (inOrange) {
-                    const p = Math.min(1, (scrollProgress - ORANGE_START) / 0.30);
                     backgroundFiveOrange.style.opacity  = '1';
-                    backgroundFiveOrange.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
+                    backgroundFiveOrange.style.clipPath = 'inset(0 0% 0 0)';
                 } else {
                     backgroundFiveOrange.style.opacity  = '0';
                     backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)';
