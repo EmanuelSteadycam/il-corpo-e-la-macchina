@@ -631,13 +631,18 @@ body {
 
 /* ── DATE ASFALTO ── */
 .asphalt-dates {
-    position: absolute;
-    bottom: 8%;
+    position: fixed;
+    bottom: 5%;
     left: 5%;
     display: flex;
-    gap: 28px;
+    flex-wrap: wrap;
+    gap: 20px 28px;
     z-index: 3;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    width: 90%;
 }
+.asphalt-dates.visible { opacity: 1; }
 .asphalt-date {
     display: flex;
     flex-direction: column;
@@ -663,6 +668,7 @@ body {
     font-size: clamp(2.5rem, 10vw, 4.5rem);
     color: #ffd700;
     line-height: 1.1;
+    width: 100%;
 }
 
 /* ── GREEN CAR CONTENT ── */
