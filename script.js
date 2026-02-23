@@ -34,7 +34,7 @@
     // scrollProgress va da 0 a 1 (tutta la sezione 5)
     // Dividiamo in 3 fasi uguali
     const GREEN_START  = 0.34;
-    const ORANGE_START = 0.67;
+    const ORANGE_START = 0.62;
 
     if (backgroundFiveGreen)  { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
     if (backgroundFiveOrange) { backgroundFiveOrange.style.opacity = '0'; backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)'; }
