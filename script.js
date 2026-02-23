@@ -1,7 +1,23 @@
 // Animazioni automatiche
 (function() {
     'use strict';
-    
+
+    // DEBUG - rimuovi dopo il test
+    window.addEventListener('scroll', function() {
+        const _sf = document.querySelector('.section-five');
+        const _s4 = document.querySelector('.section-four-transition');
+        if (!_sf || !_s4) return;
+        const _s4top    = _s4.getBoundingClientRect().top;
+        const _s4height = _s4.offsetHeight;
+        const _sfheight = _sf.offsetHeight;
+        const _scrollIn = Math.abs(_s4top + _s4height);
+        const _progress = Math.max(0, _scrollIn / _sfheight);
+        console.log('scrollProgress:', _progress.toFixed(3),
+                    '| GREEN_START: 0.635',
+                    '| ORANGE_START: 1.23');
+    });
+    // FINE DEBUG
+
     const presentaLayer = document.getElementById('presentaLayer');
     const titleGroup = document.getElementById('titleGroup');
     
