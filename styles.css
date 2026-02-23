@@ -633,14 +633,16 @@ body {
 .asphalt-dates {
     position: fixed;
     bottom: 5%;
-    left: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 440px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px 28px;
     z-index: 3;
     opacity: 0;
     transition: opacity 0.5s ease;
-    width: 90%;
 }
 .asphalt-dates.visible { opacity: 1; }
 .asphalt-date {
@@ -653,6 +655,7 @@ body {
     font-size: clamp(3.5rem, 13vw, 5.5rem);
     color: #ffd700;
     line-height: 1;
+    text-align: left;
 }
 .asphalt-month {
     font-family: 'Bebas Neue', sans-serif;
@@ -662,6 +665,7 @@ body {
     border-bottom: 2px solid #ffd700;
     padding-bottom: 4px;
     width: 100%;
+    text-align: left;
 }
 .asphalt-city {
     font-family: 'Bebas Neue', sans-serif;
