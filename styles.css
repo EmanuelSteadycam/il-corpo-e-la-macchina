@@ -640,13 +640,6 @@ body {
 
 /* ========== FOOTER ========== */
 
-.footer-spacer {
-    position: relative;
-    z-index: 0;
-    background: #ffffff;
-    height: 1200px;
-}
-
 
 /* ── GREEN CAR CONTENT ── */
 .green-car-content {
