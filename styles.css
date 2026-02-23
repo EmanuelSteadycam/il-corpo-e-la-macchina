@@ -647,6 +647,69 @@ body {
     height: 1200px;
 }
 
+
+/* ── GREEN CAR CONTENT ── */
+.green-car-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 10;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+.green-car-content.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ── ORANGE CAR CONTENT ── */
+.orange-car-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 10;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+.orange-car-content.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ── COLORI VERDE ── */
+.event-type.green { color: #88ea7a; }
+.btn-subscribe-header.green { border-color: #88ea7a; color: #88ea7a; }
+.btn-subscribe-header.green:hover { background: #88ea7a; color: #000; }
+.event-card-timeline.green .event-date-box {
+    background: rgba(136, 234, 122, 0.15);
+    border-color: rgba(136, 234, 122, 0.4);
+}
+.event-card-timeline.green .date-number,
+.event-card-timeline.green .date-month,
+.event-card-timeline.green .date-time,
+.event-card-timeline.green .event-location { color: #88ea7a; }
+
+/* ── COLORI ARANCIONE ── */
+.event-type.orange { color: #ef9033; }
+.btn-subscribe-header.orange { border-color: #ef9033; color: #ef9033; }
+.btn-subscribe-header.orange:hover { background: #ef9033; color: #000; }
+.event-card-timeline.orange .event-date-box {
+    background: rgba(239, 144, 51, 0.15);
+    border-color: rgba(239, 144, 51, 0.4);
+}
+.event-card-timeline.orange .date-number,
+.event-card-timeline.orange .date-month,
+.event-card-timeline.orange .date-time,
+.event-card-timeline.orange .event-location { color: #ef9033; }
+
 /* ========== DESKTOP ========== */
 
 @media (min-width: 769px) {
