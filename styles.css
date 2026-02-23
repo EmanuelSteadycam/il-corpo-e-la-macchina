@@ -633,10 +633,8 @@ body {
 .asphalt-dates {
     position: fixed;
     bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 440px;
+    left: calc(50% - 220px);
+    width: 120px;
     z-index: 3;
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -645,6 +643,13 @@ body {
 .asphalt-dates img {
     width: 100%;
     display: block;
+}
+
+@media (max-width: 768px) {
+    .asphalt-dates {
+        left: 5%;
+        width: 100px;
+    }
 }
 
 /* ── GREEN CAR CONTENT ── */
