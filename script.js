@@ -31,16 +31,9 @@
     const eventTypeOrange   = document.querySelector('.event-type.orange');
     const btnSubscribeOrange = document.querySelector('.btn-subscribe-header.orange');
 
-    // Soglie
-    // Blu:      carousel 0.05 → 0.65 (card3 finisce a 0.65, opacity 5% a 0.635)
-    // Verde:    reveal + header + carousel partono a 0.635
-    //           carousel verde: 0.635 → 0.635+0.60 = 1.235
-    //           card3 verde opacity 5% a: 0.635 + 0.595 = 1.23
-    // Arancione: reveal + header + carousel partono a 1.23
     const GREEN_START  = 0.635;
     const ORANGE_START = 1.23;
 
-    // Init
     if (backgroundFiveGreen)  { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
     if (backgroundFiveOrange) { backgroundFiveOrange.style.opacity = '0'; backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)'; }
     
@@ -49,13 +42,10 @@
         if (titleGroup)    titleGroup.classList.add('visible');
     }, 1000);
     
-    // ─── HELPERS ─────────────────────────────────────────────────
-
     function animateCarousel(cards, baseProgress, scrollProgress) {
-        const baseY = 600;
+        const baseY = 200;
         const exitY = -200;
 
-        // Card 1: base → base+0.30
         if (cards[0]) {
             const s = baseProgress, e = baseProgress + 0.30;
             if (scrollProgress >= s && scrollProgress < e) {
@@ -68,7 +58,6 @@
             }
         }
 
-        // Card 2: base+0.15 → base+0.45
         if (cards[1]) {
             const s = baseProgress + 0.15, e = baseProgress + 0.45, zUp = baseProgress + 0.28;
             if (scrollProgress >= s && scrollProgress < e) {
@@ -86,7 +75,6 @@
             }
         }
 
-        // Card 3: base+0.30 → base+0.60
         if (cards[2]) {
             const s = baseProgress + 0.30, e = baseProgress + 0.60, zUp = baseProgress + 0.43;
             if (scrollProgress >= s && scrollProgress < e) {
@@ -116,8 +104,6 @@
         backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)';
     }
 
-    // ─── MAIN ────────────────────────────────────────────────────
-    
     function updateBackgrounds() {
         if (!sectionThree || !sectionFourTransition || !sectionFive) return;
         
@@ -145,17 +131,12 @@
                 const inGreen  = scrollProgress >= GREEN_START;
                 const inOrange = scrollProgress >= ORANGE_START;
 
-                // ── VISIBILITY ──────────────────────────────────────────
-                // blueCarContent: visibile finché siamo in fase blu (prima di orange)
-                // greenCarContent: visibile da GREEN_START (sovrapposto al blu durante reveal)
-                // orangeCarContent: visibile da ORANGE_START
-
+                // Visibility
                 if (inOrange) {
                     if (blueCarContent)   blueCarContent.classList.remove('visible');
                     if (greenCarContent)  greenCarContent.classList.remove('visible');
                     if (orangeCarContent) orangeCarContent.classList.add('visible');
                 } else if (inGreen) {
-                    // Durante il reveal verde: blu nascosto, verde visibile
                     if (blueCarContent)   blueCarContent.classList.remove('visible');
                     if (greenCarContent)  greenCarContent.classList.add('visible');
                     if (orangeCarContent) orangeCarContent.classList.remove('visible');
@@ -165,7 +146,7 @@
                     if (orangeCarContent) orangeCarContent.classList.remove('visible');
                 }
 
-                // ── COLOR REVEAL - snap con CSS transition 0.6s ─────────
+                // Color reveal - snap con CSS transition 0.6s
                 if (inGreen) {
                     backgroundFiveGreen.style.opacity  = '1';
                     backgroundFiveGreen.style.clipPath = 'inset(0 0% 0 0)';
@@ -182,7 +163,7 @@
                     backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)';
                 }
 
-                // ── HEADER BLU ──────────────────────────────────────────
+                // Header blu
                 if (!inGreen) {
                     if (scrollProgress > 0.05) {
                         if (eventTypeBlu)    eventTypeBlu.classList.add('show');
@@ -196,7 +177,7 @@
                     if (btnSubscribeBlu) btnSubscribeBlu.classList.remove('show');
                 }
 
-                // ── HEADER VERDE ────────────────────────────────────────
+                // Header verde
                 if (inGreen && !inOrange) {
                     if (eventTypeGreen)    eventTypeGreen.classList.add('show');
                     if (btnSubscribeGreen) btnSubscribeGreen.classList.add('show');
@@ -205,7 +186,7 @@
                     if (btnSubscribeGreen) btnSubscribeGreen.classList.remove('show');
                 }
 
-                // ── HEADER ARANCIONE ────────────────────────────────────
+                // Header arancione
                 if (inOrange) {
                     if (eventTypeOrange)    eventTypeOrange.classList.add('show');
                     if (btnSubscribeOrange) btnSubscribeOrange.classList.add('show');
@@ -214,21 +195,19 @@
                     if (btnSubscribeOrange) btnSubscribeOrange.classList.remove('show');
                 }
 
-                // ── CAROUSEL BLU: 0.05 → 0.65 ──────────────────────────
+                // Carousel
                 if (!inGreen) {
                     animateCarousel(eventCards, 0.05, scrollProgress);
                 } else {
                     hideCards(eventCards);
                 }
 
-                // ── CAROUSEL VERDE: GREEN_START → GREEN_START+0.60 ──────
                 if (inGreen && !inOrange) {
                     animateCarousel(eventCardsGreen, GREEN_START, scrollProgress);
                 } else {
                     hideCards(eventCardsGreen);
                 }
 
-                // ── CAROUSEL ARANCIONE: ORANGE_START → ORANGE_START+0.60
                 if (inOrange) {
                     animateCarousel(eventCardsOrange, ORANGE_START, scrollProgress);
                 } else {
@@ -295,6 +274,5 @@
     }, { passive: true });
     
     updateBackgrounds();
-    
     console.log('✓ Script v4 attivo');
 })();
