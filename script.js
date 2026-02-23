@@ -36,7 +36,9 @@
     const GREEN_START  = 0.28;
     const ORANGE_START = 0.55;
 
-    if (backgroundFiveGreen)  { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
+    const sectionFooter = document.querySelector('.section-footer');
+
+      { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
     if (backgroundFiveOrange) { backgroundFiveOrange.style.opacity = '0'; backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)'; }
     
     setTimeout(function() {
@@ -116,6 +118,23 @@
 
     function updateBackgrounds() {
         if (!sectionThree || !sectionFourTransition || !sectionFive) return;
+        
+        // Se il footer è visibile, nascondi tutto
+        if (sectionFooter) {
+            const footerTop = sectionFooter.getBoundingClientRect().top;
+            if (footerTop < window.innerHeight) {
+                backgroundFixed.classList.add('hidden');
+                overlayGradient.classList.add('hidden');
+                backgroundThree.classList.remove('visible');
+                backgroundFive.style.opacity = '0';
+                resetGreenOrange();
+                if (blueCarContent)   blueCarContent.classList.remove('visible');
+                if (greenCarContent)  greenCarContent.classList.remove('visible');
+                if (orangeCarContent) orangeCarContent.classList.remove('visible');
+                if (asphaltButtons)   asphaltButtons.classList.remove('visible');
+                return;
+            }
+        }
         
         const sectionThreeTop = sectionThree.getBoundingClientRect().top;
         const sectionFourTop  = sectionFourTransition.getBoundingClientRect().top;
