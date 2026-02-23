@@ -750,6 +750,18 @@ body {
         transform: translateX(-50%);
         max-width: 480px;
     }
+
+    .green-car-content {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+
+    .orange-car-content {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
     
     .background-five-green {
         left: 50%;
