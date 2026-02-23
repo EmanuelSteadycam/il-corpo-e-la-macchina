@@ -246,7 +246,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center 20%;
 }
 
 /* Bottoni sulla striscia di asfalto - FISSI */
@@ -627,14 +627,45 @@ body {
     box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
 }
 
-/* ========== FOOTER ========== */
+/* ========== SEZIONE 4: BOTTONI ========== */
 
-/* ── DATE ASFALTO ── */
+.section-four-buttons {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    align-items: center;
+}
+
+.four-btn {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.four-btn-blue   { background: #ffd700; }
+.four-btn-green  { background: #88ea7a; }
+.four-btn-orange { background: #ef9033; }
+
+/* ========== FOOTER ========== */
 .asphalt-dates {
     position: fixed;
-    bottom: 5%;
+    bottom: 12%;
     left: calc(50% - 220px);
-    width: 120px;
+    width: 150px;
     z-index: 3;
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -648,7 +679,8 @@ body {
 @media (max-width: 768px) {
     .asphalt-dates {
         left: 5%;
-        width: 100px;
+        width: 130px;
+        bottom: 15%;
     }
 }
 

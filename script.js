@@ -310,4 +310,15 @@
     
     updateBackgrounds();
     console.log('✓ Script v5 attivo');
+
+    // Scroll alle sezioni della sez5 tramite bottoni sez4
+    window.scrollToSection = function(progress) {
+        const sectionFive = document.querySelector('.section-five');
+        const sectionFourTransition = document.querySelector('.section-four-transition');
+        if (!sectionFive || !sectionFourTransition) return;
+        const sectionFiveTop = sectionFive.getBoundingClientRect().top + window.scrollY;
+        const sectionFiveHeight = sectionFive.offsetHeight;
+        const targetScroll = sectionFiveTop + (sectionFiveHeight * progress);
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    };
 })();
