@@ -706,7 +706,7 @@ body {
     position: fixed;
     bottom: 12%;
     left: calc(50% - 220px);
-    width: 150px;
+    width: 180px;
     z-index: 3;
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -720,7 +720,7 @@ body {
 @media (max-width: 768px) {
     .asphalt-dates {
         left: 5%;
-        width: 130px;
+        width: 160px;
         bottom: 15%;
     }
 }
