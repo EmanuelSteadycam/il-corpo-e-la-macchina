@@ -5,7 +5,6 @@
     const presentaLayer = document.getElementById('presentaLayer');
     const titleGroup = document.getElementById('titleGroup');
     
-    // Elementi backgrounds
     const backgroundFixed = document.querySelector('.background-fixed');
     const overlayGradient = document.querySelector('.overlay-gradient');
     const backgroundThree = document.querySelector('.background-three');
@@ -17,35 +16,34 @@
     const sectionFourTransition = document.querySelector('.section-four-transition');
     const sectionFive = document.querySelector('.section-five');
     
-    // Contenuti carousel
     const blueCarContent = document.querySelector('.blue-car-content');
     const greenCarContent = document.querySelector('.green-car-content');
     const orangeCarContent = document.querySelector('.orange-car-content');
     
-    // Cards
     const eventCards       = document.querySelectorAll('.event-card-timeline:not(.green):not(.orange)');
     const eventCardsGreen  = document.querySelectorAll('.event-card-timeline.green');
     const eventCardsOrange = document.querySelectorAll('.event-card-timeline.orange');
 
-    // Header
     const eventTypeBlu      = document.querySelector('.event-type:not(.green):not(.orange)');
     const btnSubscribeBlu   = document.querySelector('.btn-subscribe-header:not(.green):not(.orange)');
     const eventTypeGreen    = document.querySelector('.event-type.green');
     const btnSubscribeGreen = document.querySelector('.btn-subscribe-header.green');
-    const eventTypeOrange    = document.querySelector('.event-type.orange');
+    const eventTypeOrange   = document.querySelector('.event-type.orange');
     const btnSubscribeOrange = document.querySelector('.btn-subscribe-header.orange');
 
-    // Init: green/orange COMPLETAMENTE nascosti con style inline (override CSS)
-    if (backgroundFiveGreen) {
-        backgroundFiveGreen.style.opacity  = '0';
-        backgroundFiveGreen.style.clipPath = 'inset(0 100% 0 0)';
-    }
-    if (backgroundFiveOrange) {
-        backgroundFiveOrange.style.opacity  = '0';
-        backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)';
-    }
+    // Soglie
+    // Blu:      carousel 0.05 → 0.65 (card3 finisce a 0.65, opacity 5% a 0.635)
+    // Verde:    reveal + header + carousel partono a 0.635
+    //           carousel verde: 0.635 → 0.635+0.60 = 1.235
+    //           card3 verde opacity 5% a: 0.635 + 0.595 = 1.23
+    // Arancione: reveal + header + carousel partono a 1.23
+    const GREEN_START  = 0.635;
+    const ORANGE_START = 1.23;
+
+    // Init
+    if (backgroundFiveGreen)  { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
+    if (backgroundFiveOrange) { backgroundFiveOrange.style.opacity = '0'; backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)'; }
     
-    // Animazioni intro
     setTimeout(function() {
         if (presentaLayer) presentaLayer.classList.add('visible');
         if (titleGroup)    titleGroup.classList.add('visible');
@@ -57,71 +55,58 @@
         const baseY = 200;
         const exitY = -200;
 
-        const c1Start = baseProgress;
-        const c1End   = baseProgress + 0.30;
+        // Card 1: base → base+0.30
         if (cards[0]) {
-            if (scrollProgress >= c1Start && scrollProgress < c1End) {
-                const t = (scrollProgress - c1Start) / 0.30;
-                const translateY = baseY - (t * (baseY - exitY));
-                const opacity = t < 0.1 ? t / 0.1 : (t > 0.9 ? (1 - t) / 0.1 : 1);
-                cards[0].style.transform = `translateY(${translateY}px)`;
-                cards[0].style.opacity   = opacity;
+            const s = baseProgress, e = baseProgress + 0.30;
+            if (scrollProgress >= s && scrollProgress < e) {
+                const t = (scrollProgress - s) / 0.30;
+                cards[0].style.transform = `translateY(${baseY - t * (baseY - exitY)}px)`;
+                cards[0].style.opacity   = t < 0.1 ? t / 0.1 : (t > 0.9 ? (1 - t) / 0.1 : 1);
                 cards[0].style.zIndex    = '3';
             } else {
-                cards[0].style.opacity = '0';
-                cards[0].style.zIndex  = '1';
+                cards[0].style.opacity = '0'; cards[0].style.zIndex = '1';
             }
         }
 
-        const c2Start = baseProgress + 0.15;
-        const c2End   = baseProgress + 0.45;
-        const c2ZUp   = baseProgress + 0.28;
+        // Card 2: base+0.15 → base+0.45
         if (cards[1]) {
-            if (scrollProgress >= c2Start && scrollProgress < c2End) {
-                const t = (scrollProgress - c2Start) / 0.30;
-                const translateY = baseY - (t * (baseY - exitY));
-                let opacity;
-                if (t < 0.15)      opacity = 0.25 * (t / 0.15);
-                else if (t < 0.35) opacity = 0.25 + (0.75 * ((t - 0.15) / 0.20));
-                else if (t < 0.85) opacity = 1;
-                else               opacity = (1 - t) / 0.15;
-                cards[1].style.transform = `translateY(${translateY}px)`;
-                cards[1].style.opacity   = opacity;
-                cards[1].style.zIndex    = scrollProgress > c2ZUp ? '3' : '2';
+            const s = baseProgress + 0.15, e = baseProgress + 0.45, zUp = baseProgress + 0.28;
+            if (scrollProgress >= s && scrollProgress < e) {
+                const t = (scrollProgress - s) / 0.30;
+                let op;
+                if (t < 0.15)      op = 0.25 * (t / 0.15);
+                else if (t < 0.35) op = 0.25 + 0.75 * ((t - 0.15) / 0.20);
+                else if (t < 0.85) op = 1;
+                else               op = (1 - t) / 0.15;
+                cards[1].style.transform = `translateY(${baseY - t * (baseY - exitY)}px)`;
+                cards[1].style.opacity   = op;
+                cards[1].style.zIndex    = scrollProgress > zUp ? '3' : '2';
             } else {
-                cards[1].style.opacity = '0';
-                cards[1].style.zIndex  = '1';
+                cards[1].style.opacity = '0'; cards[1].style.zIndex = '1';
             }
         }
 
-        const c3Start = baseProgress + 0.30;
-        const c3End   = baseProgress + 0.60;
-        const c3ZUp   = baseProgress + 0.43;
+        // Card 3: base+0.30 → base+0.60
         if (cards[2]) {
-            if (scrollProgress >= c3Start && scrollProgress < c3End) {
-                const t = (scrollProgress - c3Start) / 0.30;
-                const translateY = baseY - (t * (baseY - exitY));
-                let opacity;
-                if (t < 0.15)      opacity = 0.25 * (t / 0.15);
-                else if (t < 0.35) opacity = 0.25 + (0.75 * ((t - 0.15) / 0.20));
-                else if (t < 0.85) opacity = 1;
-                else               opacity = (1 - t) / 0.15;
-                cards[2].style.transform = `translateY(${translateY}px)`;
-                cards[2].style.opacity   = opacity;
-                cards[2].style.zIndex    = scrollProgress > c3ZUp ? '3' : '2';
+            const s = baseProgress + 0.30, e = baseProgress + 0.60, zUp = baseProgress + 0.43;
+            if (scrollProgress >= s && scrollProgress < e) {
+                const t = (scrollProgress - s) / 0.30;
+                let op;
+                if (t < 0.15)      op = 0.25 * (t / 0.15);
+                else if (t < 0.35) op = 0.25 + 0.75 * ((t - 0.15) / 0.20);
+                else if (t < 0.85) op = 1;
+                else               op = (1 - t) / 0.15;
+                cards[2].style.transform = `translateY(${baseY - t * (baseY - exitY)}px)`;
+                cards[2].style.opacity   = op;
+                cards[2].style.zIndex    = scrollProgress > zUp ? '3' : '2';
             } else {
-                cards[2].style.opacity = '0';
-                cards[2].style.zIndex  = '1';
+                cards[2].style.opacity = '0'; cards[2].style.zIndex = '1';
             }
         }
     }
 
     function hideCards(cards) {
-        cards.forEach(card => {
-            card.style.opacity   = '0';
-            card.style.zIndex    = '1';
-            card.style.transform = 'translateY(200px)';
-        });
+        cards.forEach(c => { c.style.opacity = '0'; c.style.zIndex = '1'; c.style.transform = 'translateY(200px)'; });
     }
 
     function resetGreenOrange() {
@@ -155,17 +140,22 @@
 
                 const sectionFiveHeight   = sectionFive.offsetHeight;
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
-                const scrollProgress      = Math.max(0, Math.min(1.5, scrollInSectionFive / sectionFiveHeight));
+                const scrollProgress      = Math.max(0, scrollInSectionFive / sectionFiveHeight);
 
-                const showGreen  = scrollProgress >= 0.635;
-                const showOrange = scrollProgress >= 0.935;
+                const inGreen  = scrollProgress >= GREEN_START;
+                const inOrange = scrollProgress >= ORANGE_START;
 
-                // Visibility contenuti
-                if (showOrange) {
+                // ── VISIBILITY ──────────────────────────────────────────
+                // blueCarContent: visibile finché siamo in fase blu (prima di orange)
+                // greenCarContent: visibile da GREEN_START (sovrapposto al blu durante reveal)
+                // orangeCarContent: visibile da ORANGE_START
+
+                if (inOrange) {
                     if (blueCarContent)   blueCarContent.classList.remove('visible');
                     if (greenCarContent)  greenCarContent.classList.remove('visible');
                     if (orangeCarContent) orangeCarContent.classList.add('visible');
-                } else if (showGreen) {
+                } else if (inGreen) {
+                    // Durante il reveal verde: blu nascosto, verde visibile
                     if (blueCarContent)   blueCarContent.classList.remove('visible');
                     if (greenCarContent)  greenCarContent.classList.add('visible');
                     if (orangeCarContent) orangeCarContent.classList.remove('visible');
@@ -175,9 +165,10 @@
                     if (orangeCarContent) orangeCarContent.classList.remove('visible');
                 }
 
-                // Color reveal — SOLO style inline, mai .visible su green/orange
-                if (scrollProgress >= 0.635) {
-                    const p = Math.min(1, (scrollProgress - 0.635) / 0.30);
+                // ── COLOR REVEAL ────────────────────────────────────────
+                // Verde: parte a GREEN_START, completo in 0.30
+                if (inGreen) {
+                    const p = Math.min(1, (scrollProgress - GREEN_START) / 0.30);
                     backgroundFiveGreen.style.opacity  = '1';
                     backgroundFiveGreen.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
                 } else {
@@ -185,8 +176,9 @@
                     backgroundFiveGreen.style.clipPath = 'inset(0 100% 0 0)';
                 }
 
-                if (scrollProgress >= 0.935) {
-                    const p = Math.min(1, (scrollProgress - 0.935) / 0.30);
+                // Arancione: parte a ORANGE_START, completo in 0.30
+                if (inOrange) {
+                    const p = Math.min(1, (scrollProgress - ORANGE_START) / 0.30);
                     backgroundFiveOrange.style.opacity  = '1';
                     backgroundFiveOrange.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
                 } else {
@@ -194,8 +186,8 @@
                     backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)';
                 }
 
-                // Header blu
-                if (!showGreen) {
+                // ── HEADER BLU ──────────────────────────────────────────
+                if (!inGreen) {
                     if (scrollProgress > 0.05) {
                         if (eventTypeBlu)    eventTypeBlu.classList.add('show');
                         if (btnSubscribeBlu) btnSubscribeBlu.classList.add('show');
@@ -208,8 +200,8 @@
                     if (btnSubscribeBlu) btnSubscribeBlu.classList.remove('show');
                 }
 
-                // Header verde
-                if (showGreen && !showOrange) {
+                // ── HEADER VERDE ────────────────────────────────────────
+                if (inGreen && !inOrange) {
                     if (eventTypeGreen)    eventTypeGreen.classList.add('show');
                     if (btnSubscribeGreen) btnSubscribeGreen.classList.add('show');
                 } else {
@@ -217,8 +209,8 @@
                     if (btnSubscribeGreen) btnSubscribeGreen.classList.remove('show');
                 }
 
-                // Header arancione
-                if (showOrange) {
+                // ── HEADER ARANCIONE ────────────────────────────────────
+                if (inOrange) {
                     if (eventTypeOrange)    eventTypeOrange.classList.add('show');
                     if (btnSubscribeOrange) btnSubscribeOrange.classList.add('show');
                 } else {
@@ -226,27 +218,28 @@
                     if (btnSubscribeOrange) btnSubscribeOrange.classList.remove('show');
                 }
 
-                // Carousel
-                if (!showGreen) {
+                // ── CAROUSEL BLU: 0.05 → 0.65 ──────────────────────────
+                if (!inGreen) {
                     animateCarousel(eventCards, 0.05, scrollProgress);
                 } else {
                     hideCards(eventCards);
                 }
 
-                if (showGreen && !showOrange) {
-                    animateCarousel(eventCardsGreen, 0.635, scrollProgress);
+                // ── CAROUSEL VERDE: GREEN_START → GREEN_START+0.60 ──────
+                if (inGreen && !inOrange) {
+                    animateCarousel(eventCardsGreen, GREEN_START, scrollProgress);
                 } else {
                     hideCards(eventCardsGreen);
                 }
 
-                if (showOrange) {
-                    animateCarousel(eventCardsOrange, 0.935, scrollProgress);
+                // ── CAROUSEL ARANCIONE: ORANGE_START → ORANGE_START+0.60
+                if (inOrange) {
+                    animateCarousel(eventCardsOrange, ORANGE_START, scrollProgress);
                 } else {
                     hideCards(eventCardsOrange);
                 }
 
             } else {
-                // Sezione 4 non ancora completamente salita
                 backgroundFive.style.opacity = '1';
                 resetGreenOrange();
                 if (blueCarContent)   blueCarContent.classList.add('visible');
@@ -307,5 +300,5 @@
     
     updateBackgrounds();
     
-    console.log('✓ Script v3 attivo');
+    console.log('✓ Script v4 attivo');
 })();
