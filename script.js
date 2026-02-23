@@ -1,23 +1,7 @@
 // Animazioni automatiche
 (function() {
     'use strict';
-
-    // DEBUG - rimuovi dopo il test
-    window.addEventListener('scroll', function() {
-        const _sf = document.querySelector('.section-five');
-        const _s4 = document.querySelector('.section-four-transition');
-        if (!_sf || !_s4) return;
-        const _s4top    = _s4.getBoundingClientRect().top;
-        const _s4height = _s4.offsetHeight;
-        const _sfheight = _sf.offsetHeight;
-        const _scrollIn = Math.abs(_s4top + _s4height);
-        const _progress = Math.max(0, _scrollIn / _sfheight);
-        console.log('scrollProgress:', _progress.toFixed(3),
-                    '| GREEN_START: 0.635',
-                    '| ORANGE_START: 1.23');
-    });
-    // FINE DEBUG
-
+    
     const presentaLayer = document.getElementById('presentaLayer');
     const titleGroup = document.getElementById('titleGroup');
     
@@ -47,8 +31,8 @@
     const eventTypeOrange   = document.querySelector('.event-type.orange');
     const btnSubscribeOrange = document.querySelector('.btn-subscribe-header.orange');
 
-    const GREEN_START  = 0.635;
-    const ORANGE_START = 1.23;
+    const GREEN_START  = 0.33;
+    const ORANGE_START = 0.66;
 
     if (backgroundFiveGreen)  { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
     if (backgroundFiveOrange) { backgroundFiveOrange.style.opacity = '0'; backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)'; }
