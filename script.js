@@ -138,7 +138,6 @@
                 const sectionFiveHeight   = sectionFive.offsetHeight;
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
                 const scrollProgress      = Math.max(0, scrollInSectionFive / sectionFiveHeight);
-                console.log('progress:', scrollProgress.toFixed(3), '| max arancione needed:', (0.62 + 0.33).toFixed(2));
 
                 const inGreen  = scrollProgress >= GREEN_START;
                 const inOrange = scrollProgress >= ORANGE_START;
