@@ -32,7 +32,7 @@
     const btnSubscribeOrange = document.querySelector('.btn-subscribe-header.orange');
 
     const GREEN_START  = 0.65;
-    const ORANGE_START = 0.82;
+    const ORANGE_START = 1.25;
 
     if (backgroundFiveGreen)  { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
     if (backgroundFiveOrange) { backgroundFiveOrange.style.opacity = '0'; backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)'; }

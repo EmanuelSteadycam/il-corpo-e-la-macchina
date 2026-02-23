@@ -312,7 +312,7 @@ body {
 
 .section-five {
     position: relative;
-    min-height: 700svh; /* Allungata per contenere tutti e 3 i carousel */
+    min-height: 1300svh; /* Allungata per contenere tutti e 3 i carousel */
 }
 
 /* Background immagine landing03 - fixed */
