@@ -251,21 +251,7 @@ body {
 
 /* Bottoni sulla striscia di asfalto - FISSI */
 .asphalt-buttons {
-    position: fixed; /* Fissi anche scrollando */
-    top: calc(48% + 40px); /* Abbassati di 40px totali (20+20) */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 440px;
-    display: flex;
-    gap: 10px;
-    z-index: 3;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.asphalt-buttons.visible {
-    opacity: 1;
+    display: none;
 }
 
 .asphalt-btn {
@@ -645,16 +631,13 @@ body {
 
 /* ── DATE ASFALTO ── */
 .asphalt-dates {
-    position: fixed;
+    position: absolute;
     bottom: 8%;
     left: 5%;
     display: flex;
     gap: 28px;
     z-index: 3;
-    opacity: 0;
-    transition: opacity 0.5s ease;
 }
-.asphalt-dates.visible { opacity: 1; }
 .asphalt-date {
     display: flex;
     flex-direction: column;
