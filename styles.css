@@ -692,7 +692,7 @@ body {
 
 /* ── COLORI ARANCIONE ── */
 .event-type.orange { color: #ef9033; }
-.btn-subscribe-header.orange { border-color: #ef9033; color: #ef9033; }
+.btn-subscribe-header.orange { background: #ef9033; border-color: #ef9033; color: #ffffff; }
 .btn-subscribe-header.orange:hover { background: #ef9033; color: #000; }
 .event-card-timeline.orange .event-date-box {
     background: rgba(239, 144, 51, 0.15);
