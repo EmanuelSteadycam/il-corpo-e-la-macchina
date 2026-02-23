@@ -103,7 +103,7 @@ body {
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.03em;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+
 }
 
 /* Titolo + Sottotitolo - basso a sinistra, entra da sinistra dopo 1s */
@@ -128,7 +128,7 @@ body {
     color: #ffffff;
     line-height: 0.9;
     letter-spacing: 0.02em;
-    text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
+
     margin-bottom: 12px;
 }
 
@@ -138,7 +138,7 @@ body {
     font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.02em;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+
 }
 
 /* ========== SEZIONE 2: DESCRIZIONE PROGETTO ========== */
@@ -639,23 +639,6 @@ body {
 }
 
 /* ========== FOOTER ========== */
-
-.section-footer {
-    position: relative;
-    z-index: 10; /* Sale sopra la sezione 5 */
-    background: #ffffff;
-    padding: 60px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 24px 24px 0 0; /* Angoli arrotondati in alto */
-}
-
-.footer-loghi-img {
-    width: 100%;
-    max-width: 340px;
-    display: block;
-}
 
 
 /* ── GREEN CAR CONTENT ── */
