@@ -31,8 +31,10 @@
     const eventTypeOrange   = document.querySelector('.event-type.orange');
     const btnSubscribeOrange = document.querySelector('.btn-subscribe-header.orange');
 
-    const GREEN_START  = 0.65;
-    const ORANGE_START = 1.25;
+    // scrollProgress va da 0 a 1 (tutta la sezione 5)
+    // Dividiamo in 3 fasi uguali
+    const GREEN_START  = 0.34;
+    const ORANGE_START = 0.67;
 
     if (backgroundFiveGreen)  { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
     if (backgroundFiveOrange) { backgroundFiveOrange.style.opacity = '0'; backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)'; }
@@ -42,14 +44,18 @@
         if (titleGroup)    titleGroup.classList.add('visible');
     }, 1000);
     
+    // Ogni fase occupa 0.33 del progress totale (0-1)
+    // Le schede si animano nelle frazioni interne alla fase
     function animateCarousel(cards, baseProgress, scrollProgress) {
         const baseY = 200;
         const exitY = -200;
+        const span  = 0.33;
 
         if (cards[0]) {
-            const s = baseProgress, e = baseProgress + 0.30;
+            const s = baseProgress + span * 0.00;
+            const e = baseProgress + span * 0.50;
             if (scrollProgress >= s && scrollProgress < e) {
-                const t = (scrollProgress - s) / 0.30;
+                const t = (scrollProgress - s) / (e - s);
                 cards[0].style.transform = `translateY(${baseY - t * (baseY - exitY)}px)`;
                 cards[0].style.opacity   = t < 0.1 ? t / 0.1 : (t > 0.9 ? (1 - t) / 0.1 : 1);
                 cards[0].style.zIndex    = '3';
@@ -59,9 +65,11 @@
         }
 
         if (cards[1]) {
-            const s = baseProgress + 0.15, e = baseProgress + 0.45, zUp = baseProgress + 0.28;
+            const s   = baseProgress + span * 0.25;
+            const e   = baseProgress + span * 0.75;
+            const zUp = baseProgress + span * 0.47;
             if (scrollProgress >= s && scrollProgress < e) {
-                const t = (scrollProgress - s) / 0.30;
+                const t = (scrollProgress - s) / (e - s);
                 let op;
                 if (t < 0.15)      op = 0.25 * (t / 0.15);
                 else if (t < 0.35) op = 0.25 + 0.75 * ((t - 0.15) / 0.20);
@@ -76,9 +84,11 @@
         }
 
         if (cards[2]) {
-            const s = baseProgress + 0.30, e = baseProgress + 0.60, zUp = baseProgress + 0.43;
+            const s   = baseProgress + span * 0.50;
+            const e   = baseProgress + span * 1.00;
+            const zUp = baseProgress + span * 0.72;
             if (scrollProgress >= s && scrollProgress < e) {
-                const t = (scrollProgress - s) / 0.30;
+                const t = (scrollProgress - s) / (e - s);
                 let op;
                 if (t < 0.15)      op = 0.25 * (t / 0.15);
                 else if (t < 0.35) op = 0.25 + 0.75 * ((t - 0.15) / 0.20);
@@ -124,9 +134,10 @@
             if (sectionFourFullyScrolled) {
                 backgroundFive.style.opacity = '1';
 
+                // scrollProgress: 0 = inizio sezione5, 1 = fine sezione5
                 const sectionFiveHeight   = sectionFive.offsetHeight;
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
-                const scrollProgress      = Math.max(0, scrollInSectionFive / sectionFiveHeight);
+                const scrollProgress      = Math.min(1, Math.max(0, scrollInSectionFive / sectionFiveHeight));
 
                 const inGreen  = scrollProgress >= GREEN_START;
                 const inOrange = scrollProgress >= ORANGE_START;
@@ -146,7 +157,7 @@
                     if (orangeCarContent) orangeCarContent.classList.remove('visible');
                 }
 
-                // Color reveal - snap con CSS transition 0.6s
+                // Color reveal
                 if (inGreen) {
                     backgroundFiveGreen.style.opacity  = '1';
                     backgroundFiveGreen.style.clipPath = 'inset(0 0% 0 0)';
@@ -165,7 +176,7 @@
 
                 // Header blu
                 if (!inGreen) {
-                    if (scrollProgress > 0.05) {
+                    if (scrollProgress > 0.02) {
                         if (eventTypeBlu)    eventTypeBlu.classList.add('show');
                         if (btnSubscribeBlu) btnSubscribeBlu.classList.add('show');
                     } else {
@@ -197,7 +208,7 @@
 
                 // Carousel
                 if (!inGreen) {
-                    animateCarousel(eventCards, 0.05, scrollProgress);
+                    animateCarousel(eventCards, 0.01, scrollProgress);
                 } else {
                     hideCards(eventCards);
                 }
@@ -274,5 +285,5 @@
     }, { passive: true });
     
     updateBackgrounds();
-    console.log('✓ Script v4 attivo');
+    console.log('✓ Script v5 attivo');
 })();
