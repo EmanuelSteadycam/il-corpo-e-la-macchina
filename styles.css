@@ -1,0 +1,804 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    background: #1a1a1a;
+    min-height: 100vh;
+}
+
+.phone-container {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #000;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ========== SEZIONE 1: LANDING ========== */
+
+.section-one {
+    position: relative;
+    min-height: 100svh; /* Solo una schermata - usa svh per mobile */
+}
+
+/* Background fisso - alzato tagliando parte superiore */
+.background-fixed {
+    position: fixed;
+    top: -15%; /* Alza immagine tagliando parte superiore */
+    left: 0;
+    width: 100%;
+    height: 115svh; /* svh = small viewport height (esclude barra browser) */
+    z-index: 1;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.background-fixed.hidden {
+    opacity: 0;
+}
+
+.background-fixed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Overlay gradient - leggero solo in basso */
+.overlay-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) 60%,
+        rgba(0,0,0,0.4) 85%,
+        rgba(0,0,0,0.6) 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.overlay-gradient.hidden {
+    opacity: 0;
+}
+
+/* Content overlay */
+.content-overlay {
+    position: relative;
+    z-index: 3;
+    min-height: 100svh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* "Il Centro Steadycam presenta" - all'altezza della testa dell'uomo */
+.presenta-layer {
+    position: absolute;
+    bottom: 200px; /* All'altezza della fine della testa dell'uomo */
+    left: 20px;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+.presenta-layer.visible {
+    opacity: 1;
+}
+
+.presenta-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+
+}
+
+/* Titolo + Sottotitolo - basso a sinistra, entra da sinistra dopo 1s */
+.title-group {
+    position: absolute;
+    bottom: 60px; /* Abbassato di 20px (era 80px) */
+    left: 20px;
+    transform: translateX(-100vw);
+    opacity: 0;
+    transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.title-group.visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.main-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.4rem, 10vw, 4rem);
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+
+}
+
+/* ========== SEZIONE 2: DESCRIZIONE PROGETTO ========== */
+
+.section-two {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Ridotto a 400px (era 600px) */
+    background: #000000;
+    z-index: 4;
+    padding: 60px 30px 60px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-two-content {
+    position: relative;
+    z-index: 5;
+    max-width: 100%;
+}
+
+.description-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem); /* Più piccolo: era 1.1rem-4.5vw-1.4rem */
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.7;
+    text-align: center;
+    letter-spacing: 0.01em;
+}
+
+/* ========== SEZIONE 3: SECONDA IMMAGINE + BOTTONI ========== */
+
+.section-three {
+    position: relative;
+    min-height: 100svh;
+}
+
+/* Striscia bottoni - posizionata nella fascia di asfalto */
+.buttons-strip {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    margin-top: 45vh; /* Posizionata nella striscia di asfalto */
+}
+
+.info-button {
+    flex: 1;
+    max-width: 140px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px 12px;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+}
+
+.info-button:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.button-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 8vw, 3rem);
+    color: #ffd700;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.button-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.75rem, 3vw, 0.9rem);
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+}
+
+/* Background immagine landing02 - fixed come landing01 */
+.background-three {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.background-three.visible {
+    opacity: 1;
+}
+
+.background-three img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Bottoni sulla striscia di asfalto - FISSI */
+.asphalt-buttons {
+    position: fixed; /* Fissi anche scrollando */
+    top: calc(48% + 40px); /* Abbassati di 40px totali (20+20) */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 440px;
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.asphalt-buttons.visible {
+    opacity: 1;
+}
+
+.asphalt-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 12px 8px; /* Altezza bottoni invariata */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.asphalt-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+}
+
+.btn-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.85rem, 3.2vw, 1.1rem); /* Più grande: era 0.75rem-2.8vw-0.95rem */
+    font-weight: 600;
+    color: #ffffff; /* Tutto bianco */
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+}
+
+/* Rimuovo i colori specifici - tutto bianco ora */
+
+/* ========== SEZIONE 4: TRANSIZIONE NERA ========== */
+
+.section-four-transition {
+    position: relative;
+    min-height: 125svh; /* Altezza ridotta (era 150svh) */
+    background: #000000;
+    z-index: 4;
+}
+
+/* ========== SEZIONE 5: MACCHINA CON COLOR REVEAL ========== */
+
+.section-five {
+    position: relative;
+    min-height: 500svh; /* Spazio abbondante per tutti e 3 i carousel */
+}
+
+/* Background immagine landing03 - fixed */
+.background-five {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: 100svh;
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.background-five.visible {
+    opacity: 1;
+}
+
+.background-five img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Immagine verde - rivela da sinistra con clip-path */
+.background-five-green {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 2;
+    overflow: hidden;
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transition: opacity 0.5s ease, clip-path 0.6s ease;
+}
+
+.background-five-green.visible {
+    opacity: 1;
+}
+
+.background-five-green img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Immagine arancione - rivela da sinistra con clip-path */
+.background-five-orange {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 3;
+    overflow: hidden;
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transition: opacity 0.5s ease, clip-path 0.6s ease;
+}
+
+.background-five-orange.visible {
+    opacity: 1;
+}
+
+.background-five-orange img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Contenuti macchina blu - NUOVO LAYOUT */
+.blue-car-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 10;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.blue-car-content.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Header container - NO opacity fade, children animate separately */
+.events-header {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    z-index: 20;
+}
+
+.event-type {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    color: #ffd700;
+    text-align: left;
+    letter-spacing: 0.05em;
+    line-height: 0.95;
+    margin: 0;
+    opacity: 0;
+    transform: translateX(-50px); /* Entra da sinistra */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.event-type.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Bottone header - più piccolo del titolo */
+.btn-subscribe-header {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: #000000;
+    background: #ffd700;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1;
+    text-decoration: none;
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(50px); /* Entra da destra */
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s, background 0.3s ease; /* Delay 0.2s */
+}
+
+.btn-subscribe-header.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.btn-subscribe-header:hover {
+    background: #ffed4e;
+    transform: translateX(0) translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    text-decoration: none;
+}
+    background: #ffd700;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    line-height: 1;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-subscribe-header:hover {
+    background: #ffed4e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    text-decoration: none;
+}
+
+/* Container per scheda singola - posizionate sotto la macchina */
+.event-cards-container {
+    position: absolute;
+    bottom: calc(25% + 60px); /* Alzate di 60px totali */
+    left: 0;
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Scheda evento - una sola visibile alla volta */
+.event-card-timeline {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    opacity: 0;
+    transform: translateY(150px);
+    transition: none;
+    pointer-events: auto; /* Assicura visibilità */
+}
+
+/* Layout orizzontale: data box + contenuto */
+.event-date-inline {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Date box */
+.event-date-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 65px;
+    padding: 10px;
+    background: rgba(255, 215, 0, 0.15);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    flex-shrink: 0;
+}
+
+.date-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 2.8rem); /* Mobile: 2.2→2.5rem */
+    color: #ffd700;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.date-month {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.85rem, 2.8vw, 0.9rem); /* Mobile: 0.75→0.85rem */
+    color: #ffd700;
+    font-weight: 500;
+    text-transform: lowercase;
+    margin-top: 2px;
+}
+
+.date-time {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.8rem, 2.5vw, 0.85rem); /* Mobile: 0.7→0.8rem */
+    color: #ffd700;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.event-content {
+    flex: 1;
+}
+
+.event-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1rem, 3.8vw, 1.3rem);
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px; /* Spazio aumentato: 5→8px */
+    line-height: 1.2;
+}
+
+.event-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.9rem, 2.9vw, 0.95rem); /* Mobile: 0.8→0.9rem */
+    font-weight: 400;
+    color: #e8e8e8;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.event-speakers {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.8rem, 2.6vw, 0.82rem); /* Mobile: 0.72→0.8rem */
+    font-weight: 400;
+    color: #cccccc;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.event-location {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.72rem, 2.6vw, 0.82rem);
+    font-weight: 600;
+    color: #ffd700;
+    letter-spacing: 0.03em;
+}
+
+/* Bottone unico iscrizione - in basso fisso */
+.btn-subscribe-single {
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    right: 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    color: #000000;
+    background: #ffd700;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 40px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s ease;
+    z-index: 20; /* Sopra tutto */
+}
+
+.btn-subscribe-single.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.btn-subscribe-single:hover {
+    background: #ffed4e;
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+/* ========== FOOTER ========== */
+
+
+/* ── GREEN CAR CONTENT ── */
+.green-car-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 10;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+.green-car-content.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ── ORANGE CAR CONTENT ── */
+.orange-car-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 10;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+.orange-car-content.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ── COLORI VERDE ── */
+.event-type.green { color: #88ea7a; }
+.btn-subscribe-header.green { background: #88ea7a; border-color: #88ea7a; color: #ffffff; }
+.btn-subscribe-header.green:hover { background: #6fd45e; color: #ffffff; }
+.event-card-timeline.green .event-date-box {
+    background: rgba(136, 234, 122, 0.15);
+    border-color: rgba(136, 234, 122, 0.4);
+}
+.event-card-timeline.green .date-number,
+.event-card-timeline.green .date-month,
+.event-card-timeline.green .date-time,
+.event-card-timeline.green .event-location { color: #88ea7a; }
+
+/* ── COLORI ARANCIONE ── */
+.event-type.orange { color: #ef9033; }
+.btn-subscribe-header.orange { background: #ef9033; border-color: #ef9033; color: #ffffff; }
+.btn-subscribe-header.orange:hover { background: #ef9033; color: #000; }
+.event-card-timeline.orange .event-date-box {
+    background: rgba(239, 144, 51, 0.15);
+    border-color: rgba(239, 144, 51, 0.4);
+}
+.event-card-timeline.orange .date-number,
+.event-card-timeline.orange .date-month,
+.event-card-timeline.orange .date-time,
+.event-card-timeline.orange .event-location { color: #ef9033; }
+
+/* ========== FOOTER ========== */
+
+.section-footer {
+    position: relative;
+    z-index: 20;
+    background: #ffffff;
+    padding: 60px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px 24px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.footer-loghi-img {
+    width: 100%;
+    max-width: 340px;
+    display: block;
+}
+
+/* ========== DESKTOP ========== */
+
+@media (min-width: 769px) {
+    .phone-container {
+        box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    }
+    
+    .background-fixed {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+        top: -15%;
+    }
+    
+    .overlay-gradient {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    /* Sezione 3 background centrato */
+    .background-three {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    /* Sezione 5 backgrounds centrati */
+    .background-five {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    /* Blue car content centrato su desktop */
+    .blue-car-content {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+
+    .green-car-content {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+
+    .orange-car-content {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    .background-five-green {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    .background-five-orange {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 480px;
+    }
+    
+    /* Bottoni asfalto centrati su desktop */
+    .asphalt-buttons {
+        max-width: 440px;
+    }
+    
+    /* Abbassa titolo su desktop */
+    .title-group {
+        bottom: 30px; /* Più basso su desktop (mobile resta 60px) */
+    }
+}
