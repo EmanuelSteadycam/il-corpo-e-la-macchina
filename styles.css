@@ -640,6 +640,23 @@ body {
 
 /* ========== FOOTER ========== */
 
+.section-footer {
+    position: relative;
+    z-index: 10; /* Sale sopra la sezione 5 */
+    background: #ffffff;
+    padding: 60px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px 24px 0 0; /* Angoli arrotondati in alto */
+}
+
+.footer-loghi-img {
+    width: 100%;
+    max-width: 340px;
+    display: block;
+}
+
 
 /* ── GREEN CAR CONTENT ── */
 .green-car-content {
