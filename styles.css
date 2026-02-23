@@ -312,7 +312,7 @@ body {
 
 .section-five {
     position: relative;
-    min-height: 300svh; /* Molto più alta (era 200svh) per carosello */
+    min-height: 440svh; /* Allungata per permettere scroll verde/arancione */
 }
 
 /* Background immagine landing03 - fixed */
@@ -350,8 +350,7 @@ body {
     overflow: hidden;
     opacity: 0;
     clip-path: inset(0 100% 0 0);
-    /* clip-path gestito da JS - NO transition qui */
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease, clip-path 0.6s ease;
 }
 
 .background-five-green.visible {
@@ -376,8 +375,7 @@ body {
     overflow: hidden;
     opacity: 0;
     clip-path: inset(0 100% 0 0);
-    /* clip-path gestito da JS - NO transition qui */
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease, clip-path 0.6s ease;
 }
 
 .background-five-orange.visible {
@@ -642,18 +640,11 @@ body {
 
 /* ========== FOOTER ========== */
 
-.footer-logos {
+.footer-spacer {
     position: relative;
     z-index: 5;
     background: #ffffff;
-    padding: 15px 0;
-}
-
-.footer-image {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    display: block;
+    height: 1200px;
 }
 
 /* ========== DESKTOP ========== */
