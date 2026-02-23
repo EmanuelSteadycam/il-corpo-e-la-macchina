@@ -703,6 +703,27 @@ body {
 .event-card-timeline.orange .date-time,
 .event-card-timeline.orange .event-location { color: #ef9033; }
 
+/* ========== FOOTER ========== */
+
+.section-footer {
+    position: relative;
+    z-index: 20;
+    background: #ffffff;
+    padding: 60px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px 24px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.footer-loghi-img {
+    width: 100%;
+    max-width: 340px;
+    display: block;
+}
+
 /* ========== DESKTOP ========== */
 
 @media (min-width: 769px) {
