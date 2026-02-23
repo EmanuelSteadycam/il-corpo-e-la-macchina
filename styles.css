@@ -686,8 +686,8 @@ body {
 
 /* ── COLORI VERDE ── */
 .event-type.green { color: #88ea7a; }
-.btn-subscribe-header.green { border-color: #88ea7a; color: #88ea7a; }
-.btn-subscribe-header.green:hover { background: #88ea7a; color: #000; }
+.btn-subscribe-header.green { background: #88ea7a; border-color: #88ea7a; color: #ffffff; }
+.btn-subscribe-header.green:hover { background: #6fd45e; color: #ffffff; }
 .event-card-timeline.green .event-date-box {
     background: rgba(136, 234, 122, 0.15);
     border-color: rgba(136, 234, 122, 0.4);
