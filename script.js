@@ -9,6 +9,7 @@
     const overlayGradient = document.querySelector('.overlay-gradient');
     const backgroundThree = document.querySelector('.background-three');
     const asphaltButtons = document.querySelector('.asphalt-buttons');
+    const asphaltDates = document.querySelector('.asphalt-dates');
     const backgroundFive = document.querySelector('.background-five');
     const backgroundFiveGreen = document.querySelector('.background-five-green');
     const backgroundFiveOrange = document.querySelector('.background-five-orange');
@@ -146,6 +147,7 @@
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.remove('visible');
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
+                if (asphaltDates) asphaltDates.classList.remove('visible');
 
             const sectionFourHeight        = sectionFourTransition.offsetHeight;
             const sectionFourFullyScrolled = sectionFourTop <= -sectionFourHeight;
@@ -262,6 +264,7 @@
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.remove('visible');
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
+                if (asphaltDates) asphaltDates.classList.remove('visible');
             backgroundFive.style.opacity = '0';
             resetGreenOrange();
             if (blueCarContent)   blueCarContent.classList.remove('visible');
@@ -273,6 +276,7 @@
             overlayGradient.classList.add('hidden');
             backgroundThree.classList.add('visible');
             if (asphaltButtons) asphaltButtons.classList.add('visible');
+                if (asphaltDates) asphaltDates.classList.add('visible');
             backgroundFive.style.opacity = '0';
             resetGreenOrange();
             if (blueCarContent)   blueCarContent.classList.remove('visible');
@@ -284,6 +288,7 @@
             overlayGradient.classList.remove('hidden');
             backgroundThree.classList.remove('visible');
             if (asphaltButtons) asphaltButtons.classList.remove('visible');
+                if (asphaltDates) asphaltDates.classList.remove('visible');
             backgroundFive.style.opacity = '0';
             resetGreenOrange();
             if (blueCarContent)   blueCarContent.classList.remove('visible');
