@@ -137,7 +137,7 @@
                 // scrollProgress: 0 = inizio sezione5, 1 = fine sezione5
                 const sectionFiveHeight   = sectionFive.offsetHeight;
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
-                const scrollProgress      = Math.min(1, Math.max(0, scrollInSectionFive / sectionFiveHeight));
+                const scrollProgress      = Math.max(0, scrollInSectionFive / sectionFiveHeight);
 
                 const inGreen  = scrollProgress >= GREEN_START;
                 const inOrange = scrollProgress >= ORANGE_START;
