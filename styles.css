@@ -642,7 +642,7 @@ body {
 
 .footer-spacer {
     position: relative;
-    z-index: 5;
+    z-index: 0;
     background: #ffffff;
     height: 1200px;
 }
