@@ -52,7 +52,7 @@
     // ─── HELPERS ─────────────────────────────────────────────────
 
     function animateCarousel(cards, baseProgress, scrollProgress) {
-        const baseY = 200;
+        const baseY = 600;
         const exitY = -200;
 
         // Card 1: base → base+0.30
