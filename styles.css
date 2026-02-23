@@ -123,7 +123,7 @@ body {
 
 .main-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 9vw, 3.5rem); /* Ancora più piccolo: era 2.8rem-11vw-4.5rem */
+    font-size: clamp(3.5rem, 12vw, 5rem); /* Ancora più piccolo: era 2.8rem-11vw-4.5rem */
     font-weight: 400;
     color: #ffffff;
     line-height: 0.9;
