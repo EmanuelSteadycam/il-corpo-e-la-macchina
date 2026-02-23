@@ -34,7 +34,7 @@
     // scrollProgress va da 0 a 1 (tutta la sezione 5)
     // Dividiamo in 3 fasi uguali
     const GREEN_START  = 0.34;
-    const ORANGE_START = 0.62;
+    const ORANGE_START = 0.67;
 
     if (backgroundFiveGreen)  { backgroundFiveGreen.style.opacity  = '0'; backgroundFiveGreen.style.clipPath  = 'inset(0 100% 0 0)'; }
     if (backgroundFiveOrange) { backgroundFiveOrange.style.opacity = '0'; backgroundFiveOrange.style.clipPath = 'inset(0 100% 0 0)'; }
@@ -138,6 +138,7 @@
                 const sectionFiveHeight   = sectionFive.offsetHeight;
                 const scrollInSectionFive = Math.abs(sectionFourTop + sectionFourHeight);
                 const scrollProgress      = Math.max(0, scrollInSectionFive / sectionFiveHeight);
+                console.log('progress:', scrollProgress.toFixed(3), '| max arancione needed:', (0.62 + 0.33).toFixed(2));
 
                 const inGreen  = scrollProgress >= GREEN_START;
                 const inOrange = scrollProgress >= ORANGE_START;
