@@ -812,6 +812,7 @@ body {
     background: #ffffff;
     padding: 60px 30px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 24px 24px 0 0;
@@ -848,6 +849,44 @@ body {
 }
 .posti-limitati.green  { color: #88ea7a; }
 .posti-limitati.orange { color: #ef9033; }
+
+.section-four-contact {
+    padding: 20px 30px 50px;
+}
+
+.section-four-contact-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    color: #ffffff;
+    margin: 0;
+}
+
+.section-four-contact-text a {
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+
+.footer-info {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.footer-info-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    color: #444444;
+    margin: 0;
+}
+
+.footer-info-text a, .footer-info-link {
+    color: #444444;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(68,68,68,0.4);
+}
 
 /* ========== DESKTOP ========== */
 
