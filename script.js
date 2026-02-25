@@ -31,6 +31,8 @@
     const btnSubscribeGreen = document.querySelector('.btn-subscribe-header.green');
     const eventTypeOrange   = document.querySelector('.event-type.orange');
     const btnSubscribeOrange = document.querySelector('.btn-subscribe-header.orange');
+    const postiGreen  = document.querySelector('.posti-limitati.green');
+    const postiOrange = document.querySelector('.posti-limitati.orange');
 
     // scrollProgress va da 0 a 1 (tutta la sezione 5)
     // Dividiamo in 3 fasi uguali
@@ -196,18 +198,22 @@
                 if (inGreen && !inOrange) {
                     if (eventTypeGreen)    eventTypeGreen.classList.add('show');
                     if (btnSubscribeGreen) btnSubscribeGreen.classList.add('show');
+                    if (postiGreen)        postiGreen.classList.add('show');
                 } else {
                     if (eventTypeGreen)    eventTypeGreen.classList.remove('show');
                     if (btnSubscribeGreen) btnSubscribeGreen.classList.remove('show');
+                    if (postiGreen)        postiGreen.classList.remove('show');
                 }
 
                 // Header arancione
                 if (inOrange) {
                     if (eventTypeOrange)    eventTypeOrange.classList.add('show');
                     if (btnSubscribeOrange) btnSubscribeOrange.classList.add('show');
+                    if (postiOrange)        postiOrange.classList.add('show');
                 } else {
                     if (eventTypeOrange)    eventTypeOrange.classList.remove('show');
                     if (btnSubscribeOrange) btnSubscribeOrange.classList.remove('show');
+                    if (postiOrange)        postiOrange.classList.remove('show');
                 }
 
                 // Carousel
